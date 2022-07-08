@@ -108,7 +108,7 @@
                                 <td>
                                     @if(count($question->get_question_category))
                                     @foreach($question->get_question_category as $k => $v)
-                                    {{get_category($v->topic_id)->name}} ,
+                                    {{isset(get_category($v->topic_id)->name)?get_category($v->topic_id)->name:''}} ,
                                     @endforeach
                                     @endif
                                 </td>

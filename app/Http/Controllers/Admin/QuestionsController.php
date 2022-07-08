@@ -16,6 +16,7 @@ class QuestionsController extends Controller
 
     public function index()
     {
+        ini_set('max_execution_time', '300');
         $questions = Questions::all();
         return view('backend.questions.index', compact('questions'));
     }

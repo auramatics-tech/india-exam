@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\DiscussionsController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\SubcategoriesController;
 use App\Http\Controllers\Frontend\QuestionsAnswerController;
@@ -73,6 +75,21 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin'], function () {
     Route::get('/discussion', [DiscussionsController::class, 'index'])->name('admin.discussion');
     Route::get('/discussion/{id}', [DiscussionsController::class, 'approved'])->name('admin.approved');
     Route::get('/discussion-delete/{id}', [DiscussionsController::class, 'delete'])->name('admin.discussion-delete');
+    
+    // Blogs
+    Route::get('/blogs', [BlogController::class, 'index'])->name('admin.blogs');
+    Route::get('/blog/add_edit/{blog_id?}', [BlogController::class, 'add_edit'])->name('admin.blogs.add_edit');
+    Route::get('/blog/delete/{blog_id?}', [BlogController::class, 'delete'])->name('admin.blogs.delete');
+    Route::post('/blog/save', [BlogController::class, 'blog_save'])->name('admin.blogs.save');
+    Route::post('/blog/active-update', [BlogController::class, 'active_update'])->name('admin.blog_active_update');
+
+    // announcement
+    Route::get('/announcements', [AnnouncementController::class, 'index'])->name('admin.announcements');
+    Route::get('/announcement/add_edit/{blog_id?}', [AnnouncementController::class, 'add_edit'])->name('admin.announcements.add_edit');
+    Route::get('/announcement/delete/{blog_id?}', [AnnouncementController::class, 'delete'])->name('admin.announcements.delete');
+    Route::post('/announcement/save', [AnnouncementController::class, 'announcement_save'])->name('admin.announcements.save');
+    Route::post('/announcement/active-update', [AnnouncementController::class, 'active_update'])->name('admin.announcement_active_update');
+    
     //Ckeditor
     Route::post('/ck-image', [CategoriesController::class, 'ckeditor_image'])->name('admin.ck_image');
 
