@@ -195,12 +195,6 @@ i {
 	padding: 0px 1px 0px 1px;
 }
 
-.container_padding {
-
-	width: 1170px;
-
-}
-
 
 
 .navbar_padding1 {
@@ -1774,5 +1768,122 @@ a.footer_text_clr {
 
 }
 
+
+/* new csssssssssssssssssssssss */
+.si_floating{
+	float: right;
+}
+.si_hr_div{
+	margin-top: 24px !important;
+    margin-bottom: 24px !important;
+    border-top: 1px solid #474649 !important;
+}
+.si_left_styling{
+	margin-left: 30px;
+}
+body {
+	background: #F9F9F9;
+  }
+  
+  .myaccordion .card,
+  .myaccordion .card:last-child .card-header {
+	border: none;
+  }
+  
+  .myaccordion .card-header {
+	border-bottom-color: #EDEFF0;
+	background: transparent;
+  }
+  
+  .myaccordion .fa-stack {
+	font-size: 18px;
+  }
+  
+  .myaccordion .btn {
+	width: 100%;
+	font-weight: bold;
+	color: #fff !important;
+	padding: 0;
+  }
+  
+  .myaccordion .btn-link:hover,
+  .myaccordion .btn-link:focus {
+	text-decoration: none;
+  }
+  
+  .myaccordion li + li {
+	margin-top: 10px;
+  }
+  .si_border1 {
+
+	background-color: #0067ac;
+
+	padding: 4px;
+
+	height: 45px;
+
+	white-space: nowrap;
+
+	overflow: hidden;
+
+	text-overflow: ellipsis;
+
+	display: block;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* new typing test */
+.textmarq {
+    display: block;
+    height: 38px;
+    width: 150px;
+    margin-top: 1px;
+    background-color: #ffcc33;
+    text-shadow: 0 0 2px #002147;
+    margin-left: -15px;
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 20px;
+    line-height: 2em;
+    -webkit-animation: exit 3s ease-in-out infinite;
+    animation: exit 3s ease-in-out infinite;
+}
+.textmarqmob {
+    display: none;
+}
+.textmarq:after {
+    border-left: 20px solid #ffcc33;
+    content: "";
+    border-bottom: 19px solid transparent;
+    border-top: 19px solid transparent;
+    height: 0px;
+    width: 0px;
+    margin-right: -20px;
+    right: 0;
+    top: 0;
+}
+.marq1{
+	background-color: #002147;
+	height: 40px;
+	margin-top:20px;
+}
+.si_marq_style{
+	font-weight: bold;
+	color: #fff;
+	margin-top:10px;
+}
 
 
