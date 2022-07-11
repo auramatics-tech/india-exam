@@ -113,6 +113,8 @@ Route::post('/check-ans', [QuestionsAnswerController::class, 'check_ans'])->name
 Route::post('/discussions_form_save', [DiscussionController::class, 'form_save'])->name('discussions_form_save');
 //typing
 Route::get('/typing-test', [TypingtestController::class, 'typing_test'])->name('home.typing_test');
+Route::get('/test-box', [TypingtestController::class, 'test_box'])->name('test_box');
+
 
 // search
 Route::get('/search', [SubcategoriesController::class, 'search'])->name('search');

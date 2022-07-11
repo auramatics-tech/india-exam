@@ -1857,7 +1857,7 @@ body {
     font-size: 15px;
     font-weight: bold;
     padding-left: 20px;
-    line-height: 2em;
+    line-height: 2.3em;
     -webkit-animation: exit 3s ease-in-out infinite;
     animation: exit 3s ease-in-out infinite;
 }
@@ -1865,15 +1865,14 @@ body {
     display: none;
 }
 .textmarq:after {
-    border-left: 20px solid #ffcc33;
+	border-left: 20px solid #ffcc33;
     content: "";
+    position: absolute;
     border-bottom: 19px solid transparent;
     border-top: 19px solid transparent;
-    height: 0px;
+    height: 10px;
     width: 0px;
-    margin-right: -20px;
-    right: 0;
-    top: 0;
+    margin-left: 7px;
 }
 .marq1{
 	background-color: #002147;
@@ -1884,6 +1883,27 @@ body {
 	font-weight: bold;
 	color: #fff;
 	margin-top:10px;
+}
+.si_announce_style{
+	background-color: #0067ac;
+	overflow: hidden;
+}
+.si_marq_style a{
+	color: #fff !important;
+}
+.si_width_announce{
+	width: 180px;
+}
+.si_typing_test img{
+	width: 50px;
+	height: 50px;
+	border: 1px solid black;
+}
+.si_typing_test p{
+	background-color: #0067ac;
+    height: 26px;
+    padding: 0px 11px;
+    margin: 12px 15px 12px 26px;
 }
 
 

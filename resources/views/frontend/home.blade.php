@@ -1,14 +1,29 @@
 @extends('frontend.layouts.master')
 @section('content')
-<section class="pt-4">
+<section class="pt-2">
     <div class="marq1">
-        <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex">
+        <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex si_announce_style">
+            <div class="si_width_announce">
             <div class="textmarq">Announcements</div>
             <div class="textmarqmob">Announcements</div>
-            <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
-                <h4 class="si_marq_style">
-                    <font><a href="https://earnmoneyjobs.com/kendriya-vidyalaya-patiala-rectuitment-2022/">Kendriya Vidyalaya Patiala Recruitment 2022</a> | <a href="https://earnmoneyjobs.com/district-session-court-faridkot-recruitment-2022-peon-process-server/">District Court Faridkot Recruitment</a> | <a href="https://earnmoneyjobs.com/rbi-assistant-recruitment-2022-rbi-950-assistant-vacancies-feb-march-2022/">RBI 950 Assistant Vacancies</a> </font>
-                </h4>
+            </div>
+         <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
+                <h5 class="si_marq_style">
+                    <font class=""><a href="https://earnmoneyjobs.com/kendriya-vidyalaya-patiala-rectuitment-2022/">Kendriya Vidyalaya Patiala Recruitment 2022</a> | <a href="https://earnmoneyjobs.com/district-session-court-faridkot-recruitment-2022-peon-process-server/">District Court Faridkot Recruitment</a> | <a href="https://earnmoneyjobs.com/rbi-assistant-recruitment-2022-rbi-950-assistant-vacancies-feb-march-2022/">RBI 950 Assistant Vacancies</a> </font>
+                </h5>
+            </marquee>
+        </div>
+    </div>
+    <div class="marq1">
+        <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex si_announce_style">
+            <div class="si_width_announce">
+            <div class="textmarq">Announcements</div>
+            <div class="textmarqmob">Announcements</div>
+            </div>
+         <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
+                <h5 class="si_marq_style">
+                    <font class=""><a href="https://earnmoneyjobs.com/kendriya-vidyalaya-patiala-rectuitment-2022/">Kendriya Vidyalaya Patiala Recruitment 2022</a> | <a href="https://earnmoneyjobs.com/district-session-court-faridkot-recruitment-2022-peon-process-server/">District Court Faridkot Recruitment</a> | <a href="https://earnmoneyjobs.com/rbi-assistant-recruitment-2022-rbi-950-assistant-vacancies-feb-march-2022/">RBI 950 Assistant Vacancies</a> </font>
+                </h5>
             </marquee>
         </div>
     </div>

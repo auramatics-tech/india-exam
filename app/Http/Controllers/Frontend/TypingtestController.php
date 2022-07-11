@@ -14,4 +14,7 @@ class TypingtestController extends Controller
         // echo "here";die;
         return view('frontend.typing_test');
     }   
+    public function test_box(){
+        return view('frontend.test_box');
+    }
 }

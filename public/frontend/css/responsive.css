@@ -216,6 +216,9 @@
 	.si_center_style img{
 		width: auto;
 	}
+	.si_width_announce {
+		width: 220px;
+	}
 }
 @media (max-width: 991px) {
 
@@ -486,6 +489,9 @@
 	.su_height {
 		padding: 14px 0px;
 	}
+	.si_width_announce{
+		width: 240px;
+	}
 }
 
 @media(max-width: 428px) {
@@ -507,6 +513,7 @@
 	.su_shift_ques p  {
 		height: auto !important;
 	}
+
 }
 
 @media (max-width: 426px) {
@@ -525,6 +532,9 @@
 	}
 	.su_make_border {
 		padding: 45px 10px 0px 7px;
+	}
+	.si_width_announce{
+		width: 100%;
 	}
 }
 
