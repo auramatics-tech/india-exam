@@ -48,53 +48,55 @@
   @include('frontend.layouts.header')
   @yield('content')
   @include('frontend.layouts.footer')
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-3.4.1.min.js"> </script>
   <script src="{{asset('frontend/js/custom.js')}}"></script>
   <script src="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <script>
     // take body to change the content
-    const body = document.getElementsByTagName('body');
-    // stop keyboard shortcuts
-    window.addEventListener("keydown", (event) => {
+    // const body = document.getElementsByTagName('body');
+    // // stop keyboard shortcuts
+    // window.addEventListener("keydown", (event) => {
 
-      if (event.ctrlKey && (event.key === "I" || event.key === "i")) {
-        event.preventDefault();
-        body[0].innerHTML = "sorry, you can't do this";
-      }
-    });
-    // stop right click
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    });
+    //   if (event.ctrlKey && (event.key === "I" || event.key === "i")) {
+    //     event.preventDefault();
+    //     body[0].innerHTML = "sorry, you can't do this";
+    //   }
+    // });
+    // // stop right click
+    // document.addEventListener('contextmenu', function(e) {
+    //   e.preventDefault();
+    // });
   </script>
   <script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
+    // document.addEventListener('contextmenu', event => event.preventDefault());
 
-    // Disable key down
-    document.onkeydown = disableSelectCopy;
+    // // Disable key down
+    // document.onkeydown = disableSelectCopy;
 
-    // Disable mouse down
-    // document.onmousedown = dMDown;
+    // // Disable mouse down
+    // // document.onmousedown = dMDown;
 
-    // Disable click
-    document.onclick = dOClick;
+    // // Disable click
+    // document.onclick = dOClick;
 
-    function dMDown(e) {
-      return false;
-    }
+    // function dMDown(e) {
+    //   return false;
+    // }
 
-    function dOClick() {
-      return true;
-    }
+    // function dOClick() {
+    //   return true;
+    // }
 
-    function disableSelectCopy(e) {
-      // current pressed key
-      var pressedKey = String.fromCharCode(e.keyCode).toLowerCase();
-      if ((e.ctrlKey && (pressedKey == "c" || pressedKey == "x" || pressedKey == "v" || pressedKey == "a" || pressedKey == "u")) || e.keyCode == 123) {
-        return false;
-      }
+    // function disableSelectCopy(e) {
+    //   // current pressed key
+    //   var pressedKey = String.fromCharCode(e.keyCode).toLowerCase();
+    //   if ((e.ctrlKey && (pressedKey == "c" || pressedKey == "x" || pressedKey == "v" || pressedKey == "a" || pressedKey == "u")) || e.keyCode == 123) {
+    //     return false;
+    //   }
 
-    }
+    // }
   </script>
 
   @yield('script')

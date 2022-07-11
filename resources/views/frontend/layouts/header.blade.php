@@ -53,7 +53,7 @@
                     <?php $drop_act = []; ?>
                     @if (count(get_all_category()))
                         @foreach (get_all_category() as $key => $val)
-                            @if ($key < 6)
+                            @if ($key < 4)
                                 <li
                                     class="nav-item @if((isset(request()->category1) && request()->category1 == $val->slug)) active @endif">
                                     <a class="nav-link su_navitem_clr"
@@ -64,14 +64,14 @@
                         @endforeach
                     @endif
 
-                    @if (count(get_all_category()) > 6)
+                    @if (count(get_all_category()) > 4)
                         <div class="dropdown su_postion su_more_nav">
                             <a class="dropdown-toggle su_navitem_clr2" href="#" role="button" id="dropdownMenuLink"
                                 data-bs-toggle="dropdown" aria-expanded="false"> More
                             </a>
                             <ul class="dropdown-menu su_drop_width2" aria-labelledby="dropdownMenuLink">
                                 @foreach (get_all_category() as $key => $val)
-                                    @if ($key > 5)
+                                    @if ($key > 4)
                                         <li><a id="nav_cat{{ isset(request()->category1) ? request()->category1 : '' }}"
                                                 class="dropdown-item su_more" @if (isset(request()->category1) && !in_array(request()->category1, $drop_act)) data-id="1" @else data-id="0" @endif
                                                 href="{{ next_url($val) }}">{{ ucfirst($val->name) }}</a>
@@ -81,6 +81,10 @@
                             </ul>
                         </div>
                     @endif
+                    <li class="nav-item su_nav_change">
+                        <a class="nav-link su_navitem_clr" href="{{ route('home.typing_test') }}"> Typing Test</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </div>

@@ -21,6 +21,7 @@ use App\Http\Controllers\Frontend\SubcategoriesController;
 use App\Http\Controllers\Frontend\QuestionsAnswerController;
 use App\Http\Controllers\Frontend\DiscussionController;
 use App\Http\Controllers\Frontend\SearchController;
+use App\Http\Controllers\Frontend\TypingtestController;
 
 
 
@@ -147,6 +148,9 @@ Route::get('/questions/{id}', [QuestionsAnswerController::class, 'index'])->name
 Route::get('/discussions/{question_id}', [DiscussionController::class, 'index'])->name('discussions');
 Route::post('/check-ans', [QuestionsAnswerController::class, 'check_ans'])->name('check_ans');
 Route::post('/discussions_form_save', [DiscussionController::class, 'form_save'])->name('discussions_form_save');
+//typing
+Route::get('/typing-test', [TypingtestController::class, 'typing_test'])->name('home.typing_test');
+Route::get('/test-box', [TypingtestController::class, 'test_box'])->name('test_box');
 
 
 // search
@@ -155,3 +159,7 @@ Route::get('/Terms_and_condition', [SubcategoriesController::class, 'Terms_and_c
 Route::get('/Privacy_Policy', [SubcategoriesController::class, 'Privacy_Policy'])->name('Privacy_Policy');
 Route::get('/searchindex', [SearchController::class, 'index'])->name('searchindex');
 Route::get('/{category1}/{category2?}/{category3?}/{category4?}/{category5?}', [HomeController::class, 'categories'])->name('home.data');
+
+
+
+
