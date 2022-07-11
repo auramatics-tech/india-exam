@@ -59,14 +59,14 @@
                 <div class="card card-custom">
                     <div class="card-header flex-wrap border-0 pt-6 pb-0">
                         <div class="card-title">
-                            <h3 class="card-label"> Blogs
+                            <h3 class="card-label"> Importart Dates
                                 <!-- <span class="d-block text-muted pt-2 font-size-sm">Edit categories details and delete
                                     categories</span> -->
                             </h3>
                         </div>
                         <div class="card-toolbar">
                             <!--begin::Button-->
-                            <a href="{{ route('admin.blogs.add_edit') }}" class="new_record btn btn-primary font-weight-bolder">
+                            <a href="{{ route('admin.important_dates.add_edit') }}" class="new_record btn btn-primary font-weight-bolder">
                                 <span class="svg-icon svg-icon-md">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -125,39 +125,37 @@
                                 <thead>
                                     <tr>
                                         <th title="Field #1">Sr no</th>
-                                        <th title="Field #2">Title</th>
-                                        <th title="Field #2">Thumbnail Description</th>
+                                        <th title="Field #2">Text</th>
                                         <th title="Field #3">Created at</th>
                                         <th title="Field #6">Action</th>
                                         <th title="Field #6">Active/Deactive</th>
                                     </tr>
                                 </thead>
                                 <tbody id="sortable">
-                                    @if (isset($blogs[0]) && count($blogs))
-                                        @foreach ($blogs as $key => $blog)
-                                            <tr data-id="{{ $blog->id }}" class="sort-tr">
+                                    @if (isset($important_dates[0]) && count($important_dates))
+                                        @foreach ($important_dates as $key => $important_date)
+                                            <tr data-id="{{ $important_date->id }}" class="sort-tr">
                                                 <td>{{ ++$key }}</td>
                                                 <td>
                                                     <label class="ml-3">
-                                                        {{ $blog->title }}
+                                                        {{ $important_date->text }}
                                                     </label>
                                                 </td>
-                                                <td>{{ substr($blog->thumbnail_description,0,30) }}</td>
-                                                <td>{{ $blog->created_at }}</td>
+                                                <td>{{ $important_date->created_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.blogs.add_edit', $blog->id) }}"
+                                                    <a href="{{ route('admin.important_dates.add_edit', $important_date->id) }}"
                                                         style="text-decoration: none; color:green;">
                                                         <i class="far fa-edit"></i>
                                                     </a>
-                                                        <a class="deleteRecord" rel="{{$blog->id}}" rel1="blog-delete" href="java-script:" style="text-decoration: none; color:green;">
+                                                        <a class="deleteRecord" rel="{{$important_date->id}}" rel1="important-date-delete" href="java-script:" style="text-decoration: none; color:green;">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                 </td>
                                                 <td class="">
                                                     <div class="form-check form-switch">
                                                         <input class="form-check-input act" type="checkbox" role="switch"
-                                                            id="flexSwitchCheckChecked" @if (isset($blog->active) && $blog->active == '1') data-status="0" @else data-status="1" @endif @if (isset($blog->active) && $blog->active == '1')
-                                                        checked @endif value="{{ $blog->id }}" >
+                                                            id="flexSwitchCheckChecked" @if (isset($important_date->active) && $important_date->active == '1') data-status="0" @else data-status="1" @endif @if (isset($important_date->active) && $important_date->active == '1')
+                                                        checked @endif value="{{ $important_date->id }}" >
                                                         <label class="form-check-label"
                                                             for="flexSwitchCheckChecked"></label>
                                                     </div>
@@ -188,14 +186,14 @@
     <script type="text/javascript" src="jquery-1.3.2.js"> </script>
     <script>
         $(document).on('click', '.act', function() {
-            var blog_id = $(this).val();
+            var important_date_id = $(this).val();
             var status = $(this).attr('data-status');
             
             $.ajax({ //create an ajax request to display.php
                 type: "POST",
-                url: "{{ route('admin.blog_active_update') }}",
+                url: "{{ route('admin.important_date_active_update') }}",
                 data: {
-                    blog_id: blog_id,
+                    important_date_id: important_date_id,
                     status: status,
                     "_token": "{{ csrf_token() }}",
                 },

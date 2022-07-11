@@ -96,6 +96,16 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div class="">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Thumbnail Description</label>
+                                        <textarea class="form-control" name="thumbnail_description" >{{ isset($blog->thumbnail_description) ? $blog->thumbnail_description : '' }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -106,6 +116,7 @@
                                 </div>
                             </div>
                             
+
                             <div class="">
                                 <div class="col-md-12">
                                     <div class="form-group">

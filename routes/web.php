@@ -13,7 +13,9 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\MockCategoriesController;
 use App\Http\Controllers\Admin\AnnouncementController;
+use App\Http\Controllers\Admin\ImportantDateController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\SubcategoriesController;
 use App\Http\Controllers\Frontend\QuestionsAnswerController;
@@ -79,17 +81,35 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin'], function () {
     // Blogs
     Route::get('/blogs', [BlogController::class, 'index'])->name('admin.blogs');
     Route::get('/blog/add_edit/{blog_id?}', [BlogController::class, 'add_edit'])->name('admin.blogs.add_edit');
-    Route::get('/blog/delete/{blog_id?}', [BlogController::class, 'delete'])->name('admin.blogs.delete');
+    Route::get('/blog-delete/{blog_id?}', [BlogController::class, 'delete'])->name('admin.blogs.delete');
     Route::post('/blog/save', [BlogController::class, 'blog_save'])->name('admin.blogs.save');
     Route::post('/blog/active-update', [BlogController::class, 'active_update'])->name('admin.blog_active_update');
 
     // announcement
     Route::get('/announcements', [AnnouncementController::class, 'index'])->name('admin.announcements');
-    Route::get('/announcement/add_edit/{blog_id?}', [AnnouncementController::class, 'add_edit'])->name('admin.announcements.add_edit');
-    Route::get('/announcement/delete/{blog_id?}', [AnnouncementController::class, 'delete'])->name('admin.announcements.delete');
+    Route::get('/announcement/add_edit/{announcement_id?}', [AnnouncementController::class, 'add_edit'])->name('admin.announcements.add_edit');
+    Route::get('/announcement-delete/{announcement_id?}', [AnnouncementController::class, 'delete'])->name('admin.announcements.delete');
     Route::post('/announcement/save', [AnnouncementController::class, 'announcement_save'])->name('admin.announcements.save');
     Route::post('/announcement/active-update', [AnnouncementController::class, 'active_update'])->name('admin.announcement_active_update');
     
+    //mock categories
+    Route::get('/mock-categories', [MockCategoriesController::class, 'index'])->name('admin.mock_categories');
+    Route::get('/mock/create', [MockCategoriesController::class, 'create'])->name('admin.mock.create');
+    Route::post('/mock/store', [MockCategoriesController::class, 'store'])->name('admin.mock.store');
+    Route::get('/mock/edit/{id}', [MockCategoriesController::class, 'edit'])->name('admin.mock.edit');
+    Route::get('/mock-categories/{type}/{id?}/{q?}', [MockCategoriesController::class, 'categories'])->name("mock.category_data");
+    Route::post('/mock-active-update', [MockCategoriesController::class, 'mock_active_update'])->name('admin.mock_active_update');
+    Route::get('/mock-test/{id}', [MockCategoriesController::class, 'mock_test'])->name('admin.mock_test');
+    Route::post('/mock-test/save', [MockCategoriesController::class, 'mock_test_save'])->name('admin.mock_test.save');
+    Route::get('/mock-test-delete/{id}', [MockCategoriesController::class, 'mock_test_delete'])->name('admin.mock_test.delete');
+
+    // important-dates
+    Route::get('/important-dates', [ImportantDateController::class, 'index'])->name('admin.important_dates');
+    Route::get('/important-date/add-edit/{important_date_id?}', [ImportantDateController::class, 'add_edit'])->name('admin.important_dates.add_edit');
+    Route::get('/important-date-delete/{important_date_id?}', [ImportantDateController::class, 'delete'])->name('admin.important_dates.delete');
+    Route::post('/important-date/save', [ImportantDateController::class, 'important_date_save'])->name('admin.important_dates.save');
+    Route::post('/important-date/active-update', [ImportantDateController::class, 'active_update'])->name('admin.important_date_active_update');
+
     //Ckeditor
     Route::post('/ck-image', [CategoriesController::class, 'ckeditor_image'])->name('admin.ck_image');
 

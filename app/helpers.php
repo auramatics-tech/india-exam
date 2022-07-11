@@ -3,6 +3,7 @@
 use App\Models\Category;
 use App\Models\Questioncategories;
 use App\Models\Setting;
+use App\Models\MockTest;
 
 function productImagePath($image_name)
 {
@@ -69,6 +70,22 @@ function next_question_id($ques_id, $topic_id, $next = '>')
     $id = isset($question->question_id) ? $question->question_id : '';
     return $id;
 }
+
+function next_mock_test_id($mock_test_td, $subcat, $next = '>')
+{
+    $mock_test = MockTest::where(['id' => $mock_test_td, 'sub_cat_id' => $subcat])->first();
+    if (isset($mock_test->id)) {
+        if ($next == '>')
+            $order = 'asc';
+        else
+            $order = 'desc';
+
+        $mock_test = MockTest::where('sub_cat_id', $subcat)->where('id', $next, $mock_test->id)->orderby('id', $order)->first();
+    }
+    $id = isset($mock_test->id) ? $mock_test->id : '';
+    return $id;
+}
+
 function facebook_google_link()
 {
     $data = array();

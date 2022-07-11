@@ -59,14 +59,14 @@
                 <div class="card card-custom">
                     <div class="card-header flex-wrap border-0 pt-6 pb-0">
                         <div class="card-title">
-                            <h3 class="card-label"> Blogs
+                            <h3 class="card-label">Mock {{ isset($top_cat->name) ? $top_cat->name : 'Categories' }}
                                 <!-- <span class="d-block text-muted pt-2 font-size-sm">Edit categories details and delete
                                     categories</span> -->
                             </h3>
                         </div>
                         <div class="card-toolbar">
                             <!--begin::Button-->
-                            <a href="{{ route('admin.blogs.add_edit') }}" class="new_record btn btn-primary font-weight-bolder">
+                            <a href="{{ route('admin.mock.create') }}" class="new_record btn btn-primary font-weight-bolder">
                                 <span class="svg-icon svg-icon-md">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -121,43 +121,65 @@
                         <!--end::Search Form-->
                         <!--begin: Datatable-->
                         <div class="">
-                            <table class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
+                            <table class="table table-responsive cat_table">
                                 <thead>
                                     <tr>
                                         <th title="Field #1">Sr no</th>
-                                        <th title="Field #2">Title</th>
-                                        <th title="Field #2">Thumbnail Description</th>
+                                        <th title="Field #2">Name</th>
+                                        <th title="Field #2">Type</th>
                                         <th title="Field #3">Created at</th>
                                         <th title="Field #6">Action</th>
                                         <th title="Field #6">Active/Deactive</th>
                                     </tr>
                                 </thead>
                                 <tbody id="sortable">
-                                    @if (isset($blogs[0]) && count($blogs))
-                                        @foreach ($blogs as $key => $blog)
-                                            <tr data-id="{{ $blog->id }}" class="sort-tr">
+                                    @if (count($categories))
+                                        @foreach ($categories as $key => $category)
+                                            <tr data-id="{{ $category->id }}" class="sort-tr">
                                                 <td>{{ ++$key }}</td>
                                                 <td>
                                                     <label class="ml-3">
-                                                        {{ $blog->title }}
+                                                        {{ $category->name }}
                                                     </label>
                                                 </td>
-                                                <td>{{ substr($blog->thumbnail_description,0,30) }}</td>
-                                                <td>{{ $blog->created_at }}</td>
+                                                <td>{{ $category->type }}</td>
+                                                <td>{{ $category->created_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.blogs.add_edit', $blog->id) }}"
+                                                    <a href="{{ route('admin.mock.edit', $category->id) }}"
                                                         style="text-decoration: none; color:green;">
                                                         <i class="far fa-edit"></i>
                                                     </a>
-                                                        <a class="deleteRecord" rel="{{$blog->id}}" rel1="blog-delete" href="java-script:" style="text-decoration: none; color:green;">
-                                                            <i class="fa fa-trash"></i>
+                                                    @if (request()->type == 'Category')
+                                                        @php
+                                                            $type = 'Subcategory';
+                                                            $id = $category->id;
+                                                        @endphp
+                                                        
+                                                    @elseif (request()->type == 'Subcategory')
+                                                        @php
+                                                            $type = 'Questions';
+                                                            $id = $category->id;
+                                                        @endphp
+                                                    @endif
+                                                    @if (isset($type) && $type == 'Questions')
+                                                        @php
+                                                            $question = $category->first_question;
+                                                        @endphp
+                                                        <a href="{{ route('admin.mock_test', $category->id) }}{{ isset($question->id) ? "?mock_test_id=$question->id" : '' }}"><i
+                                                                class="fa fa-eye" aria-hidden="true"></i>
                                                         </a>
+                                                    @else
+                                                        <a href="{{ route('mock.category_data', ['type' => $type, 'id' => $id]) }}"
+                                                            style="text-decoration: none; color:green;">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    @endif
                                                 </td>
                                                 <td class="">
                                                     <div class="form-check form-switch">
                                                         <input class="form-check-input act" type="checkbox" role="switch"
-                                                            id="flexSwitchCheckChecked" @if (isset($blog->active) && $blog->active == '1') data-status="0" @else data-status="1" @endif @if (isset($blog->active) && $blog->active == '1')
-                                                        checked @endif value="{{ $blog->id }}" >
+                                                            id="flexSwitchCheckChecked" @if (isset($category->active) && $category->active == '1') data-status="0" @else data-status="1" @endif @if (isset($category->active) && $category->active == '1')
+                                                        checked @endif value="{{ $category->id }}" >
                                                         <label class="form-check-label"
                                                             for="flexSwitchCheckChecked"></label>
                                                     </div>
@@ -186,16 +208,41 @@
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="{{ asset('backend/assets/js/pages/crud/ktdatatable/base/html-table.js') }}"></script>
     <script type="text/javascript" src="jquery-1.3.2.js"> </script>
+
+    <script type="text/javascript">
+        $(document).on('click', '.nav_check', function() {
+            var ids = $(this).val();
+            var cat_show = $(this).attr('data-status');
+            $.ajax({ //create an ajax request to display.php
+                type: "GET",
+                url: "{{ route('admin.save_for_nav') }}",
+                data: {
+                    ids: ids,
+                    cat_show: cat_show,
+                    "_token": "{{ csrf_token() }}",
+                },
+                dataType: "html", //expect html to be returned                
+                success: function(response) {
+                    $("#responsecontainer").html(response);
+                    //alert(response);
+                }
+
+            });
+        });
+
+    </script>
     <script>
         $(document).on('click', '.act', function() {
-            var blog_id = $(this).val();
+            var cat_id = $(this).val();
             var status = $(this).attr('data-status');
+
+
             
             $.ajax({ //create an ajax request to display.php
                 type: "POST",
-                url: "{{ route('admin.blog_active_update') }}",
+                url: "{{ route('admin.mock_active_update') }}",
                 data: {
-                    blog_id: blog_id,
+                    cat_id: cat_id,
                     status: status,
                     "_token": "{{ csrf_token() }}",
                 },
@@ -206,5 +253,37 @@
 
             });
         });
+
     </script>
+    <!--end::Page Scripts-->
+
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <!--end::Page Scripts-->
+    <script>
+        $(function() {
+            $("#sortable").sortable({
+                update: function(event, ui) {
+                    var page_id_array = new Array();
+                    $('.sort-tr').each(function(i) {
+                        page_id_array.push($(this).attr("data-id"));
+                        $(this).children('td').first().html(parseInt(i) + 1)
+                    });
+                    console.log(page_id_array)
+
+                    $.ajax({
+                        url: "{{ route('admin.cat_drag_drop') }}",
+                        method: "POST",
+                        data: {
+                            page_id_array: page_id_array,
+                            "_token": "{{ csrf_token() }}",
+                        },
+                        success: function(data) {
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
+
 @endsection

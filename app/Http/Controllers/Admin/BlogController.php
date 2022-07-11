@@ -34,6 +34,7 @@ class BlogController extends Controller
         $this->validate($request,[
             'title' => 'required',
             'description' => 'required',
+            'thumbnail_description' => 'required',
             'blog_pdf' => 'max:10000|mimes:doc,docx,pdf',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10000',
          ]);
@@ -46,6 +47,7 @@ class BlogController extends Controller
             $blog = new Blog;
         }
         $blog->title = isset($request->title)?$request->title:'';
+        $blog->thumbnail_description = isset($request->thumbnail_description)?$request->thumbnail_description:'';
         $blog->description = isset($request->description)?$request->description:'';
         if($request->hasFile('blog_pdf'))
         {
@@ -67,8 +69,8 @@ class BlogController extends Controller
             {
                 $blog_links = new BlogLink;
                 $blog_links->blog_id = $blog->id;
-                $blog_links->title = $link_title;
-                $blog_links->link = $request->link[$key];
+                $blog_links->title = isset($link_title)?$link_title:'';
+                $blog_links->link = isset($request->link[$key])?$request->link[$key]:'';
                 $blog_links->save();
             }
         }

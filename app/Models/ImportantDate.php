@@ -7,25 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class Blog extends Model
+class ImportantDate extends Model
 {  
     use SoftDeletes;
-    protected $table = 'blogs';
+    protected $table = 'important_dates';
     protected $fillable = [
-        'title',
-        'thumbnail_description',
-        'description',
-        'blog_pdf',
-        'image'
+        'text',
+        'active'
     ];
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-
-    public function get_links()
-    {
-        return $this->hasMany(BlogLink::class, 'blog_id', 'id');
-    }
-
 }

@@ -147,8 +147,7 @@
                                                         style="text-decoration: none; color:green;">
                                                         <i class="far fa-edit"></i>
                                                     </a>
-                                                        <a href="{{ route('admin.announcements.delete', $announcement->id) }}"
-                                                            style="text-decoration: none; color:green;">
+                                                        <a class="deleteRecord" rel="{{$announcement->id}}" rel1="announcement-delete" href="java-script:" style="text-decoration: none; color:green;">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                 </td>

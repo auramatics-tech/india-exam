@@ -31,4 +31,9 @@ class MockTestCategory extends Model
     {
         return $this->hasOne(MockTestCategory::class, 'id', 'parent_id');
     }
+
+    public function first_question()
+    {
+        return $this->hasOne(MockTest::class, 'sub_cat_id', 'id')->orderby('mock_test.id','asc');
+    }
 }
