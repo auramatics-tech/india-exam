@@ -79,53 +79,26 @@
                         <div class="si_heading pb-4">
                             <h5 class="si_border shadow mb-2 mx-auto text-center">GOVERNMENT JOBS</h5>
                             <h5 class="py-2 mx-auto text-center border-bottom text-dark">LATEST</h5>
+                            @if(count($blogs))
+                            @foreach($blogs as $blog)
                             <div class="row pt-3">
                                 <div class="col-lg-4 col-md-4 col-sm-12 si_center_style">
-                                    <a href=""> <img src="{{ asset('frontend/images/psssb_logo.png') }}" alt=""> </a>
+                                    <a href=""> <img src="{{asset('blog/images/'.$blog->image )}}" alt="" class="si_blog_image"> </a>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-12 si_center_style">
                                     <a href="">
-                                        <h5>PSSSB RECRUITMENT JULY 2022 | GROUP-C VACANCIES IN VARIOUS DEPARTMENTS</h5>
+                                        <h4>{{ $blog->title }}</h4>
                                     </a>
-                                    <span class="text-muted"><a href="" class="text-primary">EarnMoneyJobs.com</a> | July 2, 2022</span>
-                                    <p class="mt-2 text-dark">PSSSB Recruitment 2022 PSSSB vacancies 2022 | Punjab Subordinate Service Selection Board (PSSSB) recruitment for various Group C vacancies. All eligible candidates can apply online before the given</p>
+                                    <span class="text-muted"><a href="" class="text-primary">{{date('d M Y',strtotime( $blog->created_at)) }}</span>
+                                    <p class="mt-2 si-text-dark">{{ substr($blog->thumbnail_description ,0,400) }}...</p>
                                 </div>
                                 <div> <a href="">
                                         <p class="text-primary si_floating">Read More</p>
                                     </a></div>
                             </div>
                             <hr class="si_hr_div">
-                            <div class="row pt-3">
-                                <div class="col-lg-4 col-md-4 col-sm-12 si_center_style">
-                                    <a href=""> <img src="{{ asset('frontend/images/psssb_logo.png') }}" alt=""> </a>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-12 si_center_style">
-                                    <a href="">
-                                        <h5>IBPS CLERK RECRUITMENT 2022 | NOTIFICATION OUT FOR 7000+ VACANCIES</h5>
-                                    </a>
-                                    <span class="text-muted"><a href="" class="text-primary">EarnMoneyJobs.com</a> | July 2, 2022</span>
-                                    <p class="mt-2 text-dark">IBPS Clerk Recruitment 2022 IBPS Clerk vacancies 2022 | Institute of Banking Personnel Selection (IBPS) recruitment notification released for the post of CWE Clerk-XII to fill 7000+ vacancies. All</p>
-                                </div>
-                                <div> <a href="">
-                                        <p class="text-primary si_floating">Read More</p>
-                                    </a></div>
-                            </div>
-                            <hr class="si_hr_div">
-                            <div class="row pt-3">
-                                <div class="col-lg-4 col-md-4 col-sm-12 si_center_style">
-                                    <a href=""> <img src="{{ asset('frontend/images/psssb_logo.png') }}" alt=""> </a>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-12 si_center_style">
-                                    <a href="">
-                                        <h5>PSSSB CLERK RECRUITMENT 2022 | PSSSB 735 CLERK, CLERK IT, CLERK ACCOUNTS VACANCIES</h5>
-                                    </a>
-                                    <span class="text-muted"><a href="" class="text-primary">EarnMoneyJobs.com</a> | July 2, 2022</span>
-                                    <p class="mt-2 text-dark">PSSSB Clerk Recruitment 2022 PSSSB Clerk IT, Clerk Accounts vacancies 2022 | Punjab Subordinate Service Selection Board (PSSSB) recruitment for 704 Clerk, 10 Clerk (IT), 21 Clerk (Accounts)</p>
-                                </div>
-                                <div> <a href="">
-                                        <p class="text-primary si_floating">Read More</p>
-                                    </a></div>
-                            </div>
+                            @endforeach
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 py-1 ">
@@ -133,7 +106,7 @@
                             <h5 class="si_border shadow mb-2 mx-auto text-center">SEARCH GOVT JOBS HERE</h5>
                         </div>
                         <div class="si_left_styling">
-                            <h5 class="pt-3">RECENT POSTS</h5>
+                            <h5 class="pt-3">IMPORTANT DATES</h5>
                             <div class="d-flex">
                                 <div class="input-icon">
                                     <input type="text" class="form-control search_radius" value="" name="" placeholder="Search..." id="" />
@@ -146,39 +119,13 @@
                                 </div>
                             </div>
                             <ul class="list-unstyled">
+                                @if(count($important_dates))
+                                @foreach($important_dates as $important_date)
                                 <a href="">
-                                    <li class="py-2">PSSSB Recruitment July 2022 | Group-C Vacancies in Various Departments</li>
+                                    <li class="py-2">{!! $important_date->text !!}</li>
                                 </a>
-                                <a href="">
-                                    <li class="py-2">IBPS Clerk Recruitment 2022 | Notification out for 7000+ Vacancies</li>
-                                </a>
-                                <a href="">
-                                    <li class="py-2">PSSSB Clerk Recruitment 2022 | PSSSB 735 Clerk, Clerk IT, Clerk Accounts Vacancies</li>
-                                </a>
-                                <a href="">
-                                    <li class="py-2">PPSC Senior Assistant Recruitment 2022 |198 Senior Assistant Vacancies</li>
-                                </a>
-                                <a href="">
-                                    <li class="py-2">PPSC Building Inspector Recruitment 2022 | Apply for 157 vacancies</li>
-                                </a>
-                                <a href="">
-                                    <li class="py-2">Army Agnipath Agniveer Recruitment Notification Released 2022</li>
-                                </a>
-                                <a href="">
-                                    <li class="py-2">PPSC Draftsman Recruitment 2022 | PPSC 119 Draftsman</li>
-                                </a>
-                                <a href="">
-                                    <li class="py-2">PPSC Draftsman Recruitment 2022 | PPSC 119 Draftsman</li>
-                                </a>
-                                <a href="">
-                                    <li class="py-2">PPSC Draftsman Recruitment 2022 | PPSC 119 Draftsman</li>
-                                </a>
-                                <a href="">
-                                    <li class="py-2">PPSC Draftsman Recruitment 2022 | PPSC 119 Draftsman</li>
-                                </a>
-                                <a href="">
-                                    <li class="py-2">PPSC Draftsman Recruitment 2022 | PPSC 119 Draftsman</li>
-                                </a>
+                                @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>

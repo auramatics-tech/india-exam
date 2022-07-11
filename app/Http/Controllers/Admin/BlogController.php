@@ -30,14 +30,20 @@ class BlogController extends Controller
 
     public function blog_save(Request $request)
     {
+        if($request->id){
+            $this->validate($request,[
+                'title' => 'required',
+                'thumbnail_description' => 'required',
+             ]);
+        }else{
+            $this->validate($request,[
+                'title' => 'required',
+                'thumbnail_description' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10000',
+             ]);
+        }
         
-        $this->validate($request,[
-            'title' => 'required',
-            'description' => 'required',
-            'thumbnail_description' => 'required',
-            'blog_pdf' => 'max:10000|mimes:doc,docx,pdf',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10000',
-         ]);
+       
         if($request->id)
         {
             $blog = Blog::find($request->id);

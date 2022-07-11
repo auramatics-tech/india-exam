@@ -1767,15 +1767,22 @@ a.footer_text_clr {
 	font-weight: 500;
 
 }
+
 /* new csssssssssssssssssssssss */
 .si_floating {
 	float: right;
 }
-
+.si_blog_image{
+	width: 100%;
+}
 .si_hr_div {
 	margin-top: 24px !important;
 	margin-bottom: 24px !important;
 	border-top: 1px solid #474649 !important;
+}
+
+.si-text-dark {
+	color: #000000 !important;
 }
 
 .si_left_styling {

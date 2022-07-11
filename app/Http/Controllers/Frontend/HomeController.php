@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Questions;
 use App\Models\Questioncategories;
+use App\Models\ImportantDate;
 
 
 class HomeController extends Controller
@@ -19,7 +21,10 @@ class HomeController extends Controller
             $query->where('type', 'Category');
         })
             ->where('active', 1)->orderby("sort", 'asc')->get();
-        return view('frontend.home', compact('categories'));
+
+        $blogs = Blog::where('active',1)->get();
+        $important_dates=ImportantDate::where('active',1)->get();
+        return view('frontend.home', compact('categories','blogs','important_dates'));
     }
 
     public function categories(Request $request)
