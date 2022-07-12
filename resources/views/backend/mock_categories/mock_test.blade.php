@@ -74,17 +74,17 @@
                 <a class="deleteRecord" rel="{{ $mock_test->id }}" rel1="mock-test-delete"
                     href="java-script:" style="text-decoration: none;"><button type="button"
                         class="btn btn-danger mr-2 mb-2">Delete</button></a>
-                        @if(next_mock_test_id($mock_test->id, $subcategory->id, '<'))
-                        <a href="{{ isset($mock_test->id) ? route('admin.mock_test', ['id' => $sub_category_id, 'mock_test_id' => next_mock_test_id($mock_test->id, $subcategory->id, '<')]) : '' }}"
+                        @if(next_mock_test_id($mock_test->id, $category->id, '<'))
+                        <a href="{{ isset($mock_test->id) ? route('admin.mock_test', ['id' => $category_id, 'mock_test_id' => next_mock_test_id($mock_test->id, $category->id, '<')]) : '' }}"
                     class="si_padding"><button type="button"
                         class="btn btn-primary mr-2 mb-2">Previous</button></a>
                         @endif
-                @if(next_mock_test_id($mock_test->id,$subcategory->id, '>'))
-                <a href="{{ isset($mock_test->id) ? route('admin.mock_test', ['id' => $sub_category_id, 'mock_test_id' => next_mock_test_id($mock_test->id, $subcategory->id, '>')]) : '' }}"
+                @if(next_mock_test_id($mock_test->id,$category->id, '>'))
+                <a href="{{ isset($mock_test->id) ? route('admin.mock_test', ['id' => $category_id, 'mock_test_id' => next_mock_test_id($mock_test->id, $category->id, '>')]) : '' }}"
                     class="si_padding"><button type="button"
                         class="btn btn-primary mr-2 mb-2">Next</button></a>
                 @endif
-                <a href="{{ route('admin.mock_test', $sub_category_id) }}" class="si_padding"><button
+                <a href="{{ route('admin.mock_test', $category_id) }}" class="si_padding"><button
                         type="button" class="btn btn-primary mr-2 mb-2">Add</button></a>
                 <select class="form-control jump_btn mb-2" name="jump_to" id="jump_to">
                     <option selected value="">Jump To</option>
@@ -107,6 +107,11 @@
                 <div class="card card-custom gutter-b example example-compact">
                     <form action="{{ route('admin.mock_test.save') }}" method="post">
                         @csrf
+                        @if(session()->has('success'))
+                            <div class="alert alert-success">
+                                {{ session()->get('success') }}
+                            </div>
+                        @endif
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
                                 <ul>
@@ -120,7 +125,7 @@
                                     <div class="form-group">
                                         <label>Text<span class="text-danger">*</span></label>
                                         <input type="hidden" name="id" value="{{ isset($mock_test->id) ? $mock_test->id : '' }}">
-                                        <input type="hidden" name="subcategory_id" value="{{ isset($sub_category_id) ? $sub_category_id : '' }}">
+                                        <input type="hidden" name="category_id" value="{{ isset($category_id) ? $category_id : '' }}">
                                         <textarea class="form-control" name="text">{{ isset($mock_test->text) ? $mock_test->text : '' }}</textarea>
                                     </div>
                                 </div>
@@ -169,7 +174,7 @@
         
         $(document).on('change', '#jump_to', function() {
             var mock_test_id = $(this).val();
-            window.location.href = HOST_URL + '/mock-test/{{$sub_category_id}}?mock_test_id=' + mock_test_id;
+            window.location.href = HOST_URL + '/mock-test/{{$category_id}}?mock_test_id=' + mock_test_id;
         })
     </script>
 @endsection

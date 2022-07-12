@@ -73,14 +73,14 @@ function next_question_id($ques_id, $topic_id, $next = '>')
 
 function next_mock_test_id($mock_test_td, $subcat, $next = '>')
 {
-    $mock_test = MockTest::where(['id' => $mock_test_td, 'sub_cat_id' => $subcat])->first();
+    $mock_test = MockTest::where(['id' => $mock_test_td, 'cat_id' => $subcat])->first();
     if (isset($mock_test->id)) {
         if ($next == '>')
             $order = 'asc';
         else
             $order = 'desc';
 
-        $mock_test = MockTest::where('sub_cat_id', $subcat)->where('id', $next, $mock_test->id)->orderby('id', $order)->first();
+        $mock_test = MockTest::where('cat_id', $subcat)->where('id', $next, $mock_test->id)->orderby('id', $order)->first();
     }
     $id = isset($mock_test->id) ? $mock_test->id : '';
     return $id;
