@@ -36,11 +36,12 @@
                     <div class="py-3 si_heading1">
                         <h1 style="display: none">&nbsp;</h1>
                         <h5 class="su_clr_heading">Welcome to IndiaExamJunction.com !</h5>
-                        <p class="text-dark">Here, you can practice Multiple Choice Questions for Competitive Exams.
+                        <p class="text-dark">Here, you can read blogs information in brief.
                         </p>
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 py-1 pb-4">
                         @if (count($categories))
+
                         <div id="accordion" class="">
                             @foreach ($categories as $k => $category)
                             @if (count($category->get_subcategory))
@@ -70,36 +71,50 @@
                             </div>
                             @endif
                             @endforeach
+
                         </div>
                         @endif
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 py-1">
                         <div class="si_heading pb-4">
                             <h5 class="si_border shadow mb-2 mx-auto text-center">GOVERNMENT JOBS</h5>
-                            <h5 class="py-2 mx-auto text-center border-bottom text-dark">LATEST</h5>
-                            @if(count($blogs))
-                            @foreach($blogs as $blog)
-                            <div class="row pt-3">
-                                <div class="col-lg-4 col-md-4 col-sm-12 si_center_style">
-                                    <a href=""> <img src="{{asset('blog/images/'.$blog->image )}}" alt="" class="si_blog_image"> </a>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-12 si_center_style">
-                                    <a href="">
-                                        <h4>{{ $blog->title }}</h4>
-                                    </a>
-                                    <span class="text-muted"><a href="" class="text-primary">{{date('d M Y',strtotime( $blog->created_at)) }}</span>
-                                    <p class="mt-2 si-text-dark">{{ substr($blog->thumbnail_description ,0,200) }}...</p>
-                                </div>
-                                <div> <a href="{{route('blog_detail_page', $blog->id)}}">
-                                        <p class="text-primary si_floating">Read More</p>
-                                    </a></div>
+                            <h5 class="py-2 mx-auto text-center border-bottom text-dark">{{$blogs->title}}</h5>
+                            <div class="pt-3 text-dark">
+                                <p class="text-muted"><a href="">{{date('d M Y',strtotime( $blogs->created_at)) }}</p>
+                                <h4 class="pt-3 text-dark">{{$blogs->title}}</h4>
+                                <p class="pt-2 text-dark">{{$blogs->thumbnail_description}}</p>
+                                <p class="pt-2 text-dark">{{$blogs->description}}</p>
                             </div>
-                            <hr class="si_hr_div">
-                            @endforeach
-                            @endif
+                            <div class="pt-3 text-dark">
+                                @if(isset($blogs->blog_pdf))
+                                <p class="text-center si_bg_light"><b>Official Notification</b></p>
+                                <div class="py-3 text-center">
+                                    <a href=""><button class="si_mock_btn bg-danger border none rounded p-1" type="submit">Download <i class="fa fa-download" aria-hidden="true"></i></button></a>
+                                </div>
+                                @endif
+                                <div class="py-3 text-dark">
+                                    <p class="text-center si_bg_light"><b>Important Links</b></p>
+                                </div>
+                                <div class="py-2 border p-3 text-dark">
+                                    <p class="pt-2">IMPORTANT LINKS :</p>
+                                    <a class="pt-2" href="">
+                                        <p><u>PSSSB Senior Assistant Vacancies 2022</u></p>
+                                    </a>
+                                    <a class="pt-2" href="">
+                                        <p><u>PPSC Building Inspector Vacancies 2022</u></p>
+                                    </a>
+                                    <a class="pt-2" href="">
+                                        <p><u>IBPS clerk recruitment 2022</u></p>
+                                    </a>
+                                    <a class="pt-2" href="">
+                                        <p><u>Army Agniveer Recruitment 2022</u></p>
+                                    </a>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-12 col-sm-12 py-1 ">
+                    <div class="col-lg-3 col-md-12 col-sm-12 py-1">
                         <div class="si_heading pb-4">
                             <h5 class="si_border shadow mb-2 mx-auto text-center">SEARCH GOVT JOBS HERE</h5>
                         </div>
@@ -116,7 +131,7 @@
                                     <button type="submit" class="btn si_btn_btn"><i class="fa fa-search" aria-hidden="true"></i></button>
                                 </div>
                             </div>
-                            <ul class="list-unstyled ul_hover">
+                            <ul class="list-unstyled">
                                 @if(count($important_dates))
                                 @foreach($important_dates as $important_date)
                                 <a href="">
