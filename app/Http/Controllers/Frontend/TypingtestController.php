@@ -26,8 +26,6 @@ class TypingtestController extends Controller
         $mock_test = MockTest::find($request->id);
         $typing_text = isset($request->typing_text)?$request->typing_text:'';
         
-    }
-    public function typing_result(){
         return view('frontend.typing_test_result');
     }
 }
