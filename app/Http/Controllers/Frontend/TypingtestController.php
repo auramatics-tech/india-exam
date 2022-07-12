@@ -23,9 +23,11 @@ class TypingtestController extends Controller
 
     public function mock_test_save(Request $request)
     {
+        $result = $request->all();
         $mock_test = MockTest::find($request->id);
-        $typing_text = isset($request->typing_text)?$request->typing_text:'';
-        
-        return view('frontend.typing_test_result');
+        $typed_words = isset($result['typing_text'])?count(explode(' ',$result['typing_text'])):'0';
+        $total_words = isset($mock_test->text)?count(explode(' ',$mock_test->text)):'0';
+        $time_taken =  $request->time_taken_min .' minutes and' . $request->time_taken_sec . ' seconds';
+        return view('frontend.typing_test_result',compact('result','typed_words','total_words','time_taken'));
     }
 }

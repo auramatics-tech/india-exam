@@ -46,11 +46,11 @@ function processCurrentText() {
 
   // get current input text and split it
   curr_input = input_area.value;
+  $('#typing_text').val(curr_input);
   curr_input_array = curr_input.split('');
 
   // increment total characters typed
   characterTyped++;
-
   errors = 0;
 
   quoteSpanArray = quote_text.querySelectorAll('span');
@@ -107,7 +107,6 @@ function updateTimer() {
     timeElapsed++;
     
           // Time calculations for days, hours, minutes and seconds
-          var days = Math.floor(timeLeft / ( 60 * 60 * 24));
           var hours = Math.floor((timeLeft % ( 60 * 60 * 24)) / (60 * 60));
           var minutes = Math.floor((timeLeft % ( 60 * 60)) / (60));
           var seconds = Math.floor((timeLeft % ( 60)));
@@ -119,7 +118,14 @@ function updateTimer() {
           document.getElementById("timer").innerHTML = hours + ":" +
               minutes + ":" + seconds;
 
+      var time_taken = TIME_LIMIT - timeLeft;
+      
+      var hours = Math.floor((time_taken % ( 60 * 60 * 24)) / (60 * 60));
+      var minutes = Math.floor((time_taken % ( 60 * 60)) / (60));
+      var seconds = Math.floor((time_taken % ( 60)));
 
+      $('#time_taken_min').val(minutes);
+      $('#time_taken_sec').val(seconds);
     // update the timer text
     timer_text.textContent = timeLeft + "s";
   }
@@ -153,7 +159,15 @@ function finishGame() {
   cpm_group.style.display = "block";
   wpm_group.style.display = "block";
   
-  $('#submit').trigger('click');
+  var wpm = $('.curr_wpm').html();
+  $('#wpm').val(wpm);
+  var cpm = $('.curr_cpm').html();
+  $('#cpm').val(cpm);
+  var errors = $('.curr_errors').html();
+  $('#errors').val(errors);
+  var accuracy = $('.curr_accuracy').html();
+  $('#accuracy').val(accuracy);
+  $('#form_submit').trigger('click');
 }
 
 

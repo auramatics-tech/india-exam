@@ -13,24 +13,33 @@
                     </a>
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-sm-5">
-                            <p class="pt-2">gross Characters</p>
-                            <p class="pt-2">skip and missing words</p>
-                            <p class="pt-2">Wrong and extra words</p>
+                            <p class="pt-2">Words per minute</p>
+                            <p class="pt-2">Characters per minute</p>
+                            <p class="pt-2">Errors</p>
+                            <p class="pt-2">Accuracy</p>
+                            <p class="pt-2">Typed words</p>
+                            <p class="pt-2">Total words</p>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2">
                             <p class="pt-2">=</p>
                             <p class="pt-2">=</p>
                             <p class="pt-2">=</p>
+                            <p class="pt-2">=</p>
+                            <p class="pt-2">=</p>
+                            <p class="pt-2">=</p>
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-5">
-                            <p class="pt-2">422</p>
-                            <p class="pt-2">0</p>
-                            <p class="pt-2">11</p>
+                            <p class="pt-2">{{$result['wpm']}}</p>
+                            <p class="pt-2">{{$result['cpm']}}</p>
+                            <p class="pt-2">{{$result['errors']}}</p>
+                            <p class="pt-2">{{$result['accuracy']}}%</p>
+                            <p class="pt-2">{{$typed_words}}</p>
+                            <p class="pt-2">{{$total_words}}</p>
                         </div>
                     </div>
                     <div class="py-3">
-                        <p class="pt-2">The time you took for this test - 3 Minute and 40 Second.</p>
-                        <p class="pt-2">Your actual gross speed is - 23 WPM</p>
+                        <p class="pt-2">The time you took for this test - {{$time_taken}}.</p>
+                        <p class="pt-2">Your actual gross speed is - {{$result['wpm']}} WPM</p>
                     </div>
                 </div>
             </div>

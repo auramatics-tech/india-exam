@@ -53,14 +53,18 @@
                 <form action="{{route('mock_test_save')}}" method="post" id="here">
                     @csrf
                     <input type="hidden" name="id" value="{{$mock_test->id}}">
-                    <input type="hidden" name="wpm" id="wpm" value="{{$mock_test->id}}">
-                    <input type="hidden" name="cpm" id="cpm" value="{{$mock_test->id}}">
-                    <input type="hidden" name="errors" id="errors" value="{{$mock_test->id}}">
-                    <input type="hidden" name="accuracy" id="accuracy" value="{{$mock_test->id}}">
+                    <input type="hidden" name="wpm" id="wpm" value="0">
+                    <input type="hidden" name="cpm" id="cpm" value="0">
+                    <input type="hidden" name="errors" id="errors" value="0">
+                    <input type="hidden" name="accuracy" id="accuracy" value="0">
+                    <input type="hidden" name="typing_text" id="typing_text" value="">
+                    <input type="hidden" name="typed_words" id="typing_text" value="">
+                    <input type="hidden" name="time_taken_min" id="time_taken_min" value="0">
+                    <input type="hidden" name="time_taken_sec" id="time_taken_sec" value="0">
                     <div class="pt-4">
                         <div class="si_main_border px-3 pb-3 pt-1">
                             <h5>Typing Box</h5>
-                            <textarea name="typing_text" placeholder="start typing here..." oninput="processCurrentText()"
+                            <textarea placeholder="start typing here..." oninput="processCurrentText()"
                                 onfocus="startGame()" class="input_area w-100" rows="6" class="w-100"></textarea>
                         </div>
                     </div>
@@ -85,15 +89,7 @@ let quotes_array = [
 ];
 
 $(document).on('click','#submit',function(){
-var wpm = $('.curr_wpm').html();
-$('#wpm').val(wpm);
-var cpm = $('.curr_cpm').html();
-$('#cpm').val(cpm);
-var errors = $('.curr_errors').html();
-$('#errors').val(errors);
-var accuracy = $('.curr_accuracy').html();
-$('#accuracy').val(accuracy);
-$('#form_submit').trigger('click');
+    finishGame();
 })
 </script>
 <script src="{{asset('frontend/js/mock_test.js')}}"></script>
