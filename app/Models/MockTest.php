@@ -11,6 +11,7 @@ class MockTest extends Model
     protected $fillable = [
         'text',
         'time',
+        'cat_id'
     ];
     protected $casts = [
         'created_at' => 'datetime',

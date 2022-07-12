@@ -13,8 +13,6 @@ class MockTestCategory extends Model
     protected $table = 'mock_test_categories';
     protected $fillable = [
         'name',
-        'parent_id',
-        'type',
         'active',
         'slug'
     ];
@@ -23,17 +21,13 @@ class MockTestCategory extends Model
         'updated_at' => 'datetime',
     ];
 
-    public function get_subcategory()
-    {
-        return $this->hasMany(MockTestCategory::class, 'parent_id', 'id')->where('active', 1)->orderby("sort",'asc');
-    }
-    public function get_parent_id()
-    {
-        return $this->hasOne(MockTestCategory::class, 'id', 'parent_id');
-    }
-
     public function first_question()
     {
-        return $this->hasOne(MockTest::class, 'sub_cat_id', 'id')->orderby('mock_test.id','asc');
+        return $this->hasOne(MockTest::class, 'cat_id', 'id')->orderby('mock_test.id','asc');
+    }
+    
+    public function all_question()
+    {
+        return $this->hasMany(MockTest::class, 'cat_id', 'id')->orderby('mock_test.id','asc');
     }
 }

@@ -136,7 +136,7 @@
                 </li>
                 <li class="menu-item  @if (Route::is('mock.category_data')=='mock.category_data'
                     ) menu-item-active @endif" aria-haspopup="true">
-                    <a href="{{route('mock.category_data',['type'=>'Category'])}}" class="menu-link">
+                    <a href="{{route('mock.category_data')}}" class="menu-link">
                         <span class="svg-icon menu-icon">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

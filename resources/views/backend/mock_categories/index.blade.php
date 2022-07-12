@@ -59,7 +59,7 @@
                 <div class="card card-custom">
                     <div class="card-header flex-wrap border-0 pt-6 pb-0">
                         <div class="card-title">
-                            <h3 class="card-label">Mock {{ isset($top_cat->name) ? $top_cat->name : 'Categories' }}
+                            <h3 class="card-label">Mock Categories
                                 <!-- <span class="d-block text-muted pt-2 font-size-sm">Edit categories details and delete
                                     categories</span> -->
                             </h3>
@@ -126,7 +126,6 @@
                                     <tr>
                                         <th title="Field #1">Sr no</th>
                                         <th title="Field #2">Name</th>
-                                        <th title="Field #2">Type</th>
                                         <th title="Field #3">Created at</th>
                                         <th title="Field #6">Action</th>
                                         <th title="Field #6">Active/Deactive</th>
@@ -142,38 +141,20 @@
                                                         {{ $category->name }}
                                                     </label>
                                                 </td>
-                                                <td>{{ $category->type }}</td>
                                                 <td>{{ $category->created_at }}</td>
                                                 <td>
                                                     <a href="{{ route('admin.mock.edit', $category->id) }}"
                                                         style="text-decoration: none; color:green;">
                                                         <i class="far fa-edit"></i>
                                                     </a>
-                                                    @if (request()->type == 'Category')
-                                                        @php
-                                                            $type = 'Subcategory';
-                                                            $id = $category->id;
-                                                        @endphp
-                                                        
-                                                    @elseif (request()->type == 'Subcategory')
                                                         @php
                                                             $type = 'Questions';
                                                             $id = $category->id;
-                                                        @endphp
-                                                    @endif
-                                                    @if (isset($type) && $type == 'Questions')
-                                                        @php
                                                             $question = $category->first_question;
                                                         @endphp
                                                         <a href="{{ route('admin.mock_test', $category->id) }}{{ isset($question->id) ? "?mock_test_id=$question->id" : '' }}"><i
                                                                 class="fa fa-eye" aria-hidden="true"></i>
                                                         </a>
-                                                    @else
-                                                        <a href="{{ route('mock.category_data', ['type' => $type, 'id' => $id]) }}"
-                                                            style="text-decoration: none; color:green;">
-                                                            <i class="far fa-eye"></i>
-                                                        </a>
-                                                    @endif
                                                 </td>
                                                 <td class="">
                                                     <div class="form-check form-switch">
@@ -258,32 +239,5 @@
     <!--end::Page Scripts-->
 
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-    <!--end::Page Scripts-->
-    <script>
-        $(function() {
-            $("#sortable").sortable({
-                update: function(event, ui) {
-                    var page_id_array = new Array();
-                    $('.sort-tr').each(function(i) {
-                        page_id_array.push($(this).attr("data-id"));
-                        $(this).children('td').first().html(parseInt(i) + 1)
-                    });
-                    console.log(page_id_array)
-
-                    $.ajax({
-                        url: "{{ route('admin.cat_drag_drop') }}",
-                        method: "POST",
-                        data: {
-                            page_id_array: page_id_array,
-                            "_token": "{{ csrf_token() }}",
-                        },
-                        success: function(data) {
-                        }
-                    });
-                }
-            });
-        });
-
-    </script>
 
 @endsection

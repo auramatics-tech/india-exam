@@ -51,30 +51,6 @@
                                     <input type="text" class="form-control" name="slug" value="{{ isset($form->slug) ? $form->slug : '' }}" placeholder="mcq-question-on-competitive-reasoning" />
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Category Type<span class="text-danger">*</span></label>
-                                    <select class="form-control" id="type" name="type">
-                                        <option value="0">Select type</option>
-                                        <option @if (isset($form->type) && $form->type == 'Category') selected @endif value="Category">Category</option>
-                                        <option @if (isset($form->type) && $form->type == 'Subcategory') selected @endif value="Subcategory">Subcategory
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6" id="cat_div" style="display: none;">
-                                <div class="form-group">
-                                    <label>Category<span class="text-danger">*</span></label>
-                                    <select class="form-control" id="category" name="parent_id">
-                                        <option value="">Select Category</option>
-                                        @foreach ($categories as $category)
-                                        <option @if ((isset($form->parent_id) && $form->parent_id == $category->id) || (isset($data['category']) && $data['category']->id == $category->id)) selected @endif value="{{ $category->id }}">
-                                            {{ $category->name }}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -90,39 +66,4 @@
     <!--end::Entry-->
 </div>
 <!--end::Content-->
-@endsection
-@section('script')
-<script>
-    $(document).on('change','#type',function(){
-        var value = $(this).val();
-        if(value == "Subcategory")
-        {
-            $('#cat_div').show();
-        }
-        else
-        {
-            $('#cat_div').hide();
-        }
-    })
-</script>
-
-<script>
-    $(document).on('change', '#type', function() {
-        $("#category").val('')
-        var cate_type = $(this).val();
-        change_div(cate_type)
-    })
-    $(document).ready(function() {
-        var cate_type_ = $('#type').val();
-        change_div(cate_type_)
-    })
-    function change_div(type) {
-        if(type == 'Category' || type == '0'){
-            $('#cat_div').hide();
-        }
-        else if (type == 'Subcategory') {
-            $('#cat_div').show();
-        }
-    }
-</script>
 @endsection

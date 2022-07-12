@@ -98,7 +98,7 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin'], function () {
     Route::get('/mock/create', [MockCategoriesController::class, 'create'])->name('admin.mock.create');
     Route::post('/mock/store', [MockCategoriesController::class, 'store'])->name('admin.mock.store');
     Route::get('/mock/edit/{id}', [MockCategoriesController::class, 'edit'])->name('admin.mock.edit');
-    Route::get('/mock-categories/{type}/{id?}/{q?}', [MockCategoriesController::class, 'categories'])->name("mock.category_data");
+    Route::get('/mock-categories', [MockCategoriesController::class, 'categories'])->name("mock.category_data");
     Route::post('/mock-active-update', [MockCategoriesController::class, 'mock_active_update'])->name('admin.mock_active_update');
     Route::get('/mock-test/{id}', [MockCategoriesController::class, 'mock_test'])->name('admin.mock_test');
     Route::post('/mock-test/save', [MockCategoriesController::class, 'mock_test_save'])->name('admin.mock_test.save');
@@ -150,7 +150,8 @@ Route::post('/check-ans', [QuestionsAnswerController::class, 'check_ans'])->name
 Route::post('/discussions_form_save', [DiscussionController::class, 'form_save'])->name('discussions_form_save');
 //typing
 Route::get('/typing-test', [TypingtestController::class, 'typing_test'])->name('home.typing_test');
-Route::get('/test-box', [TypingtestController::class, 'test_box'])->name('test_box');
+Route::get('/mock-test/{id}', [TypingtestController::class, 'mock_test'])->name('mock_test');
+Route::post('/mock-test-save', [TypingtestController::class, 'mock_test_save'])->name('mock_test_save');
 
 
 // search
