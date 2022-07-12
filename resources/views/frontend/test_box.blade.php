@@ -21,18 +21,20 @@
                         <h5>Reference Text</h5>
                         <div class="si_test_border bg-white">
                             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo est aut numquam nostrum vero ex natus non voluptates, nisi commodi porro autem omnis ratione laborum labore! Ut distinctio dolores corrupti?
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores nihil temporibus labore magnam impedit harum quaerat, saepe rerum error aliquid cum repellat doloremque non, quo commodi minus placeat voluptates? Quae!
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus laborum libero, mollitia tempora quisquam asperiores quia nulla. Nobis deleniti voluptatibus quas. Sint, accusamus? Excepturi, sed. Ratione deleniti pariatur assumenda reiciendis!
                                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam sapiente sint dolorum ullam quos aliquam consequuntur animi id porro quo. Magni quis cupiditate cumque maiores nostrum, quae numquam amet nihil?</p>
                         </div>
                     </div>
                 </div>
                 <div class="pt-4">
-                    <div class="si_main_border px-3 pb-3 pt-1">
+                    <div class="si_main_border px-3 pb-3 pt-1 si_textarea">
                         <h5>Typing Box</h5>
                         <textarea name="" id="" cols="" rows="6" class="w-100"></textarea>
                     </div>
                 </div>
                 <div class="pt-3 si_floats_btn">
-                    <button class="si_mock_btn bg-danger border none rounded p-1" type="submit">Submit your mock test</button>
+                    <a href="{{route('typing_result')}}"><button class="si_mock_btn bg-danger border none rounded p-1" type="submit">Submit your mock test</button></a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12"></div>

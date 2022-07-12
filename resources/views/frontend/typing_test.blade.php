@@ -20,9 +20,9 @@
                                 <img src="{{ asset('frontend/images/question.png') }}" class="su_img_question" alt="question">
                                 <ul class="list-unstyled su_circle">
                                     <li><i class="fas fa-angle-right"></i><a id="" href="{{route('test_box')}}">Practice Exercise 1</a></li>
-                                        <li>
-                                            <i class="fas fa-angle-right"></i><a class="text-decoration-underline" id="" href="{{route('test_box')}}">Practice Exercise 3</a></li>
-
+                                    <li>
+                                        <i class="fas fa-angle-right"></i><a class="text-decoration-underline" id="" href="{{route('test_box')}}">Practice Exercise 3</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -36,9 +36,9 @@
                                 <img src="{{ asset('frontend/images/question.png') }}" class="su_img_question" alt="question">
                                 <ul class="list-unstyled su_circle">
                                     <li><i class="fas fa-angle-right"></i><a id="" href="{{route('test_box')}}">Practice Exercise 1</a></li>
-                                        <li>
-                                            <i class="fas fa-angle-right"></i><a class="text-decoration-underline" id="" href="{{route('test_box')}}">Practice Exercise 4</a></li>
-
+                                    <li>
+                                        <i class="fas fa-angle-right"></i><a class="text-decoration-underline" id="" href="{{route('test_box')}}">Practice Exercise 4</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

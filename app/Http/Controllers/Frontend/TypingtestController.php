@@ -17,4 +17,7 @@ class TypingtestController extends Controller
     public function test_box(){
         return view('frontend.test_box');
     }
+    public function typing_result(){
+        return view('frontend.typing_test_result');
+    }
 }

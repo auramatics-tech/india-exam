@@ -1259,7 +1259,7 @@ li a {
 
 /* -----------------simran css-------------------------*/
 
-.si_sec_text li:hover {
+.ul_hover li:hover {
 
 	color: #0067ac;
 
@@ -1923,3 +1923,22 @@ body {
 .si_floats_btn {
 	float: right;
 }
+.si_textarea textarea {
+    resize: none;
+    overflow: hidden;
+}
+/* blog detail page */
+.si_bg_light{
+	background-color: #dee2e6;
+}
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+  }
+  
+  td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+  }

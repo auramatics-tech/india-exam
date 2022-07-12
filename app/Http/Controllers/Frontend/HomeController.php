@@ -77,4 +77,10 @@ class HomeController extends Controller
         $category = $main_category;
         return view('frontend.subcategories', compact('category', 'subcategories'));
     }
+    public function blog_detail_page($id){
+        $categories=Category::where('active',1)->get();
+        $blogs = Blog::find($id);
+        $important_dates=ImportantDate::where('active',1)->get();
+    return view('frontend.blog_detail',compact('categories','blogs','important_dates'));
+    }
 }

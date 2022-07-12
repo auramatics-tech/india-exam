@@ -140,6 +140,7 @@ Auth::routes([
 ]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/blog-detail-page/{id}', [HomeController::class, 'blog_detail_page'])->name('blog_detail_page');
 Route::get('/sitemap', [SubcategoriesController::class, 'sitemap'])->name('sitemap');
 Route::get('/topics/{id}', [SubcategoriesController::class, 'index'])->name('topics');
 Route::get('/topic/{cat}', [SubcategoriesController::class, 'topics_with_cat'])->name('topics_cat');
@@ -151,6 +152,7 @@ Route::post('/discussions_form_save', [DiscussionController::class, 'form_save']
 //typing
 Route::get('/typing-test', [TypingtestController::class, 'typing_test'])->name('home.typing_test');
 Route::get('/test-box', [TypingtestController::class, 'test_box'])->name('test_box');
+Route::get('/typing-result', [TypingtestController::class, 'typing_result'])->name('typing_result');
 
 
 // search
