@@ -1,6 +1,8 @@
 @extends('frontend.layouts.master')
 @section('content')
 <section class="pt-2">
+@if(count($announcements))
+    @foreach($announcements as $announcement)
     <div class="marq1">
         <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex si_announce_style">
             <div class="si_width_announce">
@@ -8,25 +10,14 @@
                 <div class="textmarqmob">Announcements</div>
             </div>
             <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
-                <h5 class="si_marq_style">
-                    <font class=""><a href="https://earnmoneyjobs.com/kendriya-vidyalaya-patiala-rectuitment-2022/">Kendriya Vidyalaya Patiala Recruitment 2022</a> | <a href="https://earnmoneyjobs.com/district-session-court-faridkot-recruitment-2022-peon-process-server/">District Court Faridkot Recruitment</a> | <a href="https://earnmoneyjobs.com/rbi-assistant-recruitment-2022-rbi-950-assistant-vacancies-feb-march-2022/">RBI 950 Assistant Vacancies</a> </font>
-                </h5>
+                <div class="si_marq_style">
+                    <h5>{{$announcement->text}}</h5>
+                </div>
             </marquee>
         </div>
     </div>
-    <div class="marq1">
-        <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex si_announce_style">
-            <div class="si_width_announce">
-                <div class="textmarq">Announcements</div>
-                <div class="textmarqmob">Announcements</div>
-            </div>
-            <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
-                <h5 class="si_marq_style">
-                    <font class=""><a href="https://earnmoneyjobs.com/kendriya-vidyalaya-patiala-rectuitment-2022/">Kendriya Vidyalaya Patiala Recruitment 2022</a> | <a href="https://earnmoneyjobs.com/district-session-court-faridkot-recruitment-2022-peon-process-server/">District Court Faridkot Recruitment</a> | <a href="https://earnmoneyjobs.com/rbi-assistant-recruitment-2022-rbi-950-assistant-vacancies-feb-march-2022/">RBI 950 Assistant Vacancies</a> </font>
-                </h5>
-            </marquee>
-        </div>
-    </div>
+    @endforeach
+    @endif
 </section>
 <section class="si_sec_text su_height">
     <div class="container-fluid px-4">
@@ -83,13 +74,13 @@
                                 <p class="text-muted"><a href="">{{date('d M Y',strtotime( $blogs->created_at)) }}</p>
                                 <h4 class="pt-3 text-dark">{{$blogs->title}}</h4>
                                 <p class="pt-2 text-dark">{{$blogs->thumbnail_description}}</p>
-                                <p class="pt-2 text-dark">{{$blogs->description}}</p>
+                                <p class="pt-2 text-dark">{!! $blogs->description !!}</p>
                             </div>
                             <div class="pt-3 text-dark">
                                 @if(isset($blogs->blog_pdf))
                                 <p class="text-center si_bg_light"><b>Official Notification</b></p>
                                 <div class="py-3 text-center">
-                                    <a href=""><button class="si_mock_btn bg-danger border none rounded p-1" type="submit">Download <i class="fa fa-download" aria-hidden="true"></i></button></a>
+                                    <a target="_blank" href="{{asset('blog/pdf/'.$blogs->blog_pdf)}}"><button class="si_mock_btn bg-danger border none rounded p-1" type="submit">Download <i class="fa fa-download" aria-hidden="true"></i></button></a>
                                 </div>
                                 @endif
                                 <div class="py-3 text-dark">
@@ -97,18 +88,13 @@
                                 </div>
                                 <div class="py-2 border p-3 text-dark">
                                     <p class="pt-2">IMPORTANT LINKS :</p>
+                                    @if(count($blogs->get_links))
+                                    @foreach($blogs->get_links as $key => $val)
                                     <a class="pt-2" href="">
-                                        <p><u>PSSSB Senior Assistant Vacancies 2022</u></p>
+                                        <h5><u>{{$val->link}}</u></h5>
                                     </a>
-                                    <a class="pt-2" href="">
-                                        <p><u>PPSC Building Inspector Vacancies 2022</u></p>
-                                    </a>
-                                    <a class="pt-2" href="">
-                                        <p><u>IBPS clerk recruitment 2022</u></p>
-                                    </a>
-                                    <a class="pt-2" href="">
-                                        <p><u>Army Agniveer Recruitment 2022</u></p>
-                                    </a>
+                                    @endforeach
+                                    @endif
                                 </div>
 
                             </div>

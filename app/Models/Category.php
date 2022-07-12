@@ -66,8 +66,6 @@ class Category extends Model
     {
         return $this->hasMany(Questioncategories::class, 'topic_id', 'id');
     }
-
-    
     public function first_question()
     {
         return $this->hasOne(Questioncategories::class, 'topic_id', 'id')->orderby('question_id','ASC');
