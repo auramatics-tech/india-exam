@@ -9,22 +9,24 @@ use App\Models\Category;
 use App\Models\Questions;
 use App\Models\Questioncategories;
 use App\Models\ImportantDate;
+use App\Models\Announcement;
 
 
 class HomeController extends Controller
 {
     public function index(request $request)
     {
-            $categories = Category::when($request->q, function ($query) use ($request) {
+        $categories = Category::when($request->q, function ($query) use ($request) {
             $query->where('name', 'like', '%' . $request->q . '%');
         }, function ($query) {
             $query->where('type', 'Category');
         })
             ->where('active', 1)->orderby("sort", 'asc')->get();
 
-        $blogs = Blog::where('active',1)->get();
-        $important_dates=ImportantDate::where('active',1)->get();
-        return view('frontend.home', compact('categories','blogs','important_dates'));
+        $blogs = Blog::where('active', 1)->get();
+        $important_dates = ImportantDate::where('active', 1)->get();
+        $announcements = Announcement::where('active', 1)->get();
+        return view('frontend.home', compact('categories', 'blogs', 'important_dates', 'announcements'));
     }
 
     public function categories(Request $request)
@@ -39,10 +41,10 @@ class HomeController extends Controller
                 $current_topic = $category3;
                 $main_category = Category::where("slug", $request->category1)->first();
                 $category2 = Category::where("slug", $request->category2)->first();
-                $topics = Category::where(['type' => 'Topics', 'parent_id' => $category3->parent_id])->orderby('sort','asc')->get();
+                $topics = Category::where(['type' => 'Topics', 'parent_id' => $category3->parent_id])->orderby('sort', 'asc')->get();
                 $questions_id = Questioncategories::where(['topic_id' => $category3->id])->pluck('question_id')->toArray();
                 $questions = Questions::whereIn('id', $questions_id)->where('active', 1)->paginate(5);
-                return view('frontend.question', compact('questions', 'paginate', 'topics','current_topic','main_category','category2'));
+                return view('frontend.question', compact('questions', 'paginate', 'topics', 'current_topic', 'main_category', 'category2'));
             } else {
                 $main_category = $category3;
             }
@@ -77,10 +79,12 @@ class HomeController extends Controller
         $category = $main_category;
         return view('frontend.subcategories', compact('category', 'subcategories'));
     }
-    public function blog_detail_page($id){
-        $categories=Category::where('active',1)->get();
+    public function blog_detail_page($id)
+    {
+        $categories = Category::where('active', 1)->get();
         $blogs = Blog::find($id);
-        $important_dates=ImportantDate::where('active',1)->get();
-    return view('frontend.blog_detail',compact('categories','blogs','important_dates'));
+        $important_dates = ImportantDate::where('active', 1)->get();
+        $announcements = Announcement::where('active', 1)->get();
+        return view('frontend.blog_detail', compact('categories', 'blogs', 'important_dates', 'announcements'));
     }
 }
