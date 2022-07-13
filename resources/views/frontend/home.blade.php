@@ -66,19 +66,19 @@
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 py-1">
                         <div class="si_heading pb-4">
-                            <h5 class="si_border shadow mb-2 mx-auto text-center">GOVERNMENT JOBS</h5>
+                            <h5 class="si_border shadow mb-2 mx-auto text-center">Blogs</h5>
                             <h5 class="py-2 mx-auto text-center border-bottom text-dark">LATEST</h5>
                             @if(count($blogs))
                             @foreach($blogs as $blog)
                             <div class="row pt-3">
                                 <div class="col-lg-4 col-md-4 col-sm-12 si_center_style">
-                                    <a href=""> <img src="{{asset('blog/images/'.$blog->image )}}" alt="" class="si_blog_image"> </a>
+                                    <a href="{{route('blog_detail_page', $blog->id)}}"> <img src="{{asset('blog/images/'.$blog->image )}}" alt="" class="si_blog_image"> </a>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-12 si_center_style">
-                                    <a href="">
+                                    <a href="{{route('blog_detail_page', $blog->id)}}">
                                         <h4>{{ $blog->title }}</h4>
                                     </a>
-                                    <span class="text-muted"><a href="" class="text-primary">{{date('d M Y',strtotime( $blog->created_at)) }}</span>
+                                    <span class="text-muted"><a href="{{route('blog_detail_page', $blog->id)}}" class="text-primary">{{date('d M Y',strtotime( $blog->created_at)) }}</span>
                                     <p class="mt-2 si-text-dark">{{ substr($blog->thumbnail_description ,0,200) }}...</p>
                                 </div>
                                 <div> <a href="{{route('blog_detail_page', $blog->id)}}">
@@ -92,10 +92,10 @@
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 py-1 ">
                         <div class="si_heading pb-4">
-                            <h5 class="si_border shadow mb-2 mx-auto text-center">SEARCH GOVT JOBS HERE</h5>
+                            <h5 class="si_border shadow mb-2 mx-auto text-center">IMPORTANT DATES</h5>
                         </div>
                         <div class="si_left_styling">
-                            <h5 class="pt-3">IMPORTANT DATES</h5>
+                            {{--<h5 class="pt-3">IMPORTANT DATES</h5>
                             <div class="d-flex">
                                 <div class="input-icon">
                                     <input type="text" class="form-control search_radius" value="" name="" placeholder="Search..." id="" />
@@ -106,7 +106,7 @@
                                 <div>
                                     <button type="submit" class="btn si_btn_btn"><i class="fa fa-search" aria-hidden="true"></i></button>
                                 </div>
-                            </div>
+                            </div>--}}
                             <ul class="list-unstyled ul_hover">
                                 @if(count($important_dates))
                                 @foreach($important_dates as $important_date)

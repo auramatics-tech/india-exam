@@ -23,9 +23,9 @@ class HomeController extends Controller
         })
             ->where('active', 1)->orderby("sort", 'asc')->get();
 
-        $blogs = Blog::where('active', 1)->get();
-        $important_dates = ImportantDate::where('active', 1)->get();
-        $announcements = Announcement::where('active', 1)->get();
+        $blogs = Blog::where('active', 1)->orderby('id','desc')->get();
+        $important_dates = ImportantDate::where('active', 1)->orderby('id','desc')->get();
+        $announcements = Announcement::where('active', 1)->orderby('id','desc')->get();
         return view('frontend.home', compact('categories', 'blogs', 'important_dates', 'announcements'));
     }
 
@@ -83,8 +83,8 @@ class HomeController extends Controller
     {
         $categories = Category::where('active', 1)->get();
         $blogs = Blog::find($id);
-        $important_dates = ImportantDate::where('active', 1)->get();
-        $announcements = Announcement::where('active', 1)->get();
+        $important_dates = ImportantDate::where('active', 1)->orderby('id','desc')->get();
+        $announcements = Announcement::where('active', 1)->orderby('id','desc')->get();
         return view('frontend.blog_detail', compact('categories', 'blogs', 'important_dates', 'announcements'));
     }
 }
