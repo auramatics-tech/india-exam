@@ -65,6 +65,24 @@
                     </a>
                 </li>
 
+                {!!navbar()!!}
+                <li class="su_padding_nav_list">
+                    <a class="accordion-heading su_a_decoration su_color_Categories" data-toggle="collapse" data-target="#submenu1">
+                    <i class="fa-solid fa-angles-right su_right_icon"></i>
+                        <span class="nav-header-primary ">Menu Link <span class="pull-right"><b class="caret"></b></span></span>
+                    </a>
+
+                    <ul class="nav nav-list collapse" id="submenu1">
+                   
+                        <li class="su_margin_subCategories">
+                            <a class="accordion-heading su_color_subCategories su_a_decoration" data-toggle="collapse" data-target="#submenu2"> <i class="fa-solid fa-angle-right su_right_icon_subCategories"></i>Sub Menu Link <span class="pull-right"><b class="caret"></b></span></a>
+                            <ul class="nav nav-list collapse" id="submenu2">
+                                <li class="su_margin_subCategories"><a class="su_color_heading su_a_decoration" href="#" title="Title"><i class="fa-solid fa-caret-right su_right_icon_subCategories"></i>Sub Sub Menu Link</a></li>
+                                <li class="su_margin_subCategories"><a class="su_color_heading su_a_decoration" href="#" title="Title"><i class="fa-solid fa-caret-right su_right_icon_subCategories"></i>Sub Sub Menu Link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
                 
                 <li class="menu-item  @if (Route::is('admin.questions')=='admin.questions'
                     ) menu-item-active @endif" aria-haspopup="true">

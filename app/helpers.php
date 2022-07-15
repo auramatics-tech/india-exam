@@ -4,6 +4,7 @@ use App\Models\Category;
 use App\Models\Questioncategories;
 use App\Models\Setting;
 use App\Models\MockTest;
+// use App\Models\Category;
 
 function productImagePath($image_name)
 {
@@ -156,4 +157,31 @@ function next_url($category)
     if (isset($category1->slug) && $category1->slug)
         $url = route('home.data', ['category1' => isset($category1->slug) ? $category1->slug : '', 'category2' => isset($category2->slug) ? $category2->slug : '', 'category3' => isset($category3->slug) ? $category3->slug : '','category4'=> isset($category4->slug) ? $category4->slug : '','category5'=>isset($category5->slug) ? $category5->slug : '']);
     return $url;
+}
+
+function navbar()
+{
+    $categories = Category::where('type','Category')->where('active',1)->get();
+    $html = '';
+    foreach($categories as $category)
+    {
+        $html.= '<li class="su_padding_nav_list">
+        <a class="accordion-heading su_a_decoration su_color_Categories" data-toggle="collapse" data-target="#submenu1">
+        <i class="fa-solid fa-angles-right su_right_icon"></i>
+            <span class="nav-header-primary ">'.$category->name.' <span class="pull-right"><b class="caret"></b></span></span>
+        </a>
+
+        <ul class="nav nav-list collapse" id="submenu1">
+       
+            <li class="su_margin_subCategories">
+                <a class="accordion-heading su_color_subCategories su_a_decoration" data-toggle="collapse" data-target="#submenu2"> <i class="fa-solid fa-angle-right su_right_icon_subCategories"></i>Sub Menu Link <span class="pull-right"><b class="caret"></b></span></a>
+                <ul class="nav nav-list collapse" id="submenu2">
+                    <li class="su_margin_subCategories"><a class="su_color_heading su_a_decoration" href="#" title="Title"><i class="fa-solid fa-caret-right su_right_icon_subCategories"></i>Sub Sub Menu Link</a></li>
+                    <li class="su_margin_subCategories"><a class="su_color_heading su_a_decoration" href="#" title="Title"><i class="fa-solid fa-caret-right su_right_icon_subCategories"></i>Sub Sub Menu Link</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>';
+    }
+    return $html;
 }

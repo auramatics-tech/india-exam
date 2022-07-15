@@ -38,6 +38,55 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+/*------------------------sumit style admin panel start----------------- */
+.su_color_Categories{
+  color: #ffffff;
+  opacity: 0.6;
+}
+.su_color_Categories:hover{
+  opacity: 0.9;
+  color: #ffffff;
+}
+.su_color_subCategories{
+  color: #ffffff;
+  opacity: 0.6;
+  padding: 2px 0px 5px 15px;
+}
+.su_color_subCategories:hover{
+  opacity: 0.9;
+  color: #ffffff;
+}
+.su_color_heading{
+  color: #ffffff;
+  opacity: 0.6;
+  padding: 2px 0px 5px 25px;
+}
+.su_color_heading:hover{
+  opacity: 0.9;
+  color: #ffffff;
+}
+
+
+.su_padding_nav_list{
+  padding: 9px 20px;
+}
+.su_a_decoration{
+  text-decoration: none !important;
+}
+.su_right_icon{
+  margin-right: 5px;
+  color: #3699FF;
+}
+.su_margin_subCategories{
+  margin-top: 10px;
+  color: #3699FF;
+}
+.su_right_icon_subCategories{
+  margin-right: 10px;
+  color: #3699FF;
+}
+/*------------------------sumit style admin panel end----------------- */
+
 *,
 *::before,
 *::after {
