@@ -43,6 +43,15 @@
   color: #ffffff;
   opacity: 0.6;
 }
+.su_toogle_Categories{
+  color: #ffffff;
+  opacity: 0.6;
+  padding: 9px 20px;
+}
+.su_toogle_Categories:hover{
+  opacity: 0.9;
+  color: #ffffff;
+}
 .su_color_Categories:hover{
   opacity: 0.9;
   color: #ffffff;
@@ -82,6 +91,10 @@
   color: #3699FF;
 }
 .su_right_icon_subCategories{
+  margin-right: 10px;
+  color: #3699FF;
+}
+.su_icon_Categories_main{
   margin-right: 10px;
   color: #3699FF;
 }
