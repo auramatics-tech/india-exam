@@ -39,7 +39,7 @@
                     </div>
                     <div class="py-3">
                         <p class="pt-2">The time you took for this test - {{$time_taken}}.</p>
-                        <p class="pt-2">Your actual gross speed is - {{$result['wpm']}} WPM</p>
+                        <p class="pt-2">Your actual gross speed is {{$result['wpm']}} WPM</p>
                     </div>
                 </div>
             </div>

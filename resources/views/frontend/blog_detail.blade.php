@@ -68,8 +68,8 @@
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 py-1">
                         <div class="si_heading pb-4">
-                            <h5 class="si_border shadow mb-2 mx-auto text-center">GOVERNMENT JOBS</h5>
-                            <h5 class="py-2 mx-auto text-center border-bottom text-dark">{{$blogs->title}}</h5>
+                            <h5 class="si_border shadow mb-2 mx-auto text-center">{{$blogs->title}}</h5>
+                            {{--<h5 class="py-2 mx-auto text-center border-bottom text-dark">{{$blogs->title}}</h5>--}}
                             <div class="pt-3 text-dark">
                                 <p class="text-muted"><a href="">{{date('d M Y',strtotime( $blogs->created_at)) }}</p>
                                 <h4 class="pt-3 text-dark">{{$blogs->title}}</h4>
@@ -90,8 +90,8 @@
                                     <p class="pt-2">IMPORTANT LINKS :</p>
                                     @if(count($blogs->get_links))
                                     @foreach($blogs->get_links as $key => $val)
-                                    <a class="pt-2" href="">
-                                        <h5><u>{{$val->link}}</u></h5>
+                                    <a class="pt-2" href="{{$val->link}}">
+                                        <h5><u>{{$val->title}}</u></h5>
                                     </a>
                                     @endforeach
                                     @endif
@@ -102,10 +102,10 @@
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 py-1">
                         <div class="si_heading pb-4">
-                            <h5 class="si_border shadow mb-2 mx-auto text-center">SEARCH GOVT JOBS HERE</h5>
+                            <h5 class="si_border shadow mb-2 mx-auto text-center">IMPORTANT DATES</h5>
                         </div>
                         <div class="si_left_styling">
-                            <h5 class="pt-3">IMPORTANT DATES</h5>
+                            {{--<h5 class="pt-3">IMPORTANT DATES</h5>
                             <div class="d-flex">
                                 <div class="input-icon">
                                     <input type="text" class="form-control search_radius" value="" name="" placeholder="Search..." id="" />
@@ -116,7 +116,7 @@
                                 <div>
                                     <button type="submit" class="btn si_btn_btn"><i class="fa fa-search" aria-hidden="true"></i></button>
                                 </div>
-                            </div>
+                            </div>--}}
                             <ul class="list-unstyled">
                                 @if(count($important_dates))
                                 @foreach($important_dates as $important_date)

@@ -1774,6 +1774,7 @@ a.footer_text_clr {
 }
 .si_blog_image{
 	width: 100%;
+	max-height: 200px;
 }
 .si_hr_div {
 	margin-top: 24px !important;
