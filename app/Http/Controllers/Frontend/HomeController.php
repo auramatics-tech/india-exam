@@ -87,4 +87,17 @@ class HomeController extends Controller
         $announcements = Announcement::where('active', 1)->get();
         return view('frontend.blog_detail', compact('categories', 'blogs', 'important_dates', 'announcements'));
     }
+    public function online_quiz(Request $request)
+    {
+        $categories = Category::where('active', 1)->get();
+        $announcements = Announcement::where('active', 1)->get();
+        return view('Frontend.layouts.online_quiz', compact('categories', 'announcements'));
+    }
+    public function government_jobs()
+    {
+        $blogs = Blog::where('active', 1)->get();
+        $important_dates = ImportantDate::where('active', 1)->get();
+        $announcements = Announcement::where('active', 1)->get();
+        return view('Frontend.layouts.government_jobs', compact('blogs', 'important_dates', 'announcements'));
+    }
 }

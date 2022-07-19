@@ -38,7 +38,7 @@
         </nav>
     </div>
 
-    <div id="main_navbar" class="bg_blue shadow main_navbar">
+    <!-- <div id="main_navbar" class="bg_blue shadow main_navbar">
         <nav class="container navbar navbar-expand-custom navbar_padding1">
             <button class="navbar-toggler su_padding_icon" type="button" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -83,6 +83,34 @@
                     @endif
                     <li class="nav-item su_nav_change">
                         <a class="nav-link su_navitem_clr" href="{{ route('home.typing_test') }}"> Typing Test</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div> -->
+    <div id="main_navbar" class="bg_blue shadow main_navbar">
+        <nav class="container navbar navbar-expand-custom navbar_padding1">
+            <button class="navbar-toggler su_padding_icon" type="button" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars text-white"></i>
+            </button>
+            <div class="navbar-collapse su_postion si_overflow_style" style="justify-content: left; display: none;"
+                id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item su_nav_change @if (Route::is('home')=='home' ) active @endif">
+                        <a class="nav-link su_navitem_clr" href="{{ route('home') }}"> Home</a>
+                    </li>
+                                <li
+                                    class="nav-item @if((isset(request()->category1) && request()->category1 == $val->slug)) active @endif">
+                                    <a class="nav-link su_navitem_clr"
+                                        href="{{route('online_quiz')}}">Online Quiz</a>
+                                </li>
+                   
+                    <li class="nav-item su_nav_change">
+                        <a class="nav-link su_navitem_clr" href="{{ route('home.typing_test') }}"> Typing Test</a>
+                    </li>
+                    <li class="nav-item su_nav_change">
+                        <a class="nav-link su_navitem_clr" href="{{ route('government_jobs') }}">Government jobs</a>
                     </li>
                 </ul>
             </div>

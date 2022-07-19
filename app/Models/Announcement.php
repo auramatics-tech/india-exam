@@ -12,7 +12,7 @@ class Announcement extends Model
     use SoftDeletes;
     protected $table = 'announcements';
     protected $fillable = [
-        'text',
+        'blog_id',
         'active'
     ];
     protected $casts = [

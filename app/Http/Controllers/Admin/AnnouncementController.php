@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Announcement;
+use App\Models\Blog;
 
 class AnnouncementController extends Controller
 {
@@ -23,14 +24,16 @@ class AnnouncementController extends Controller
         {
             $announcement = Announcement::find($announcement_id);
         }
-        return view('backend.announcements.add_edit', compact('announcement'));                                                               
+        // $blogs = array();
+        $blogs = Blog::where('active',1)->orderby('id','desc')->get();
+        return view('backend.announcements.add_edit', compact('announcement','blogs'));                                                               
     }
 
     public function announcement_save(Request $request)
     {
         
         $this->validate($request,[
-            'text' => 'required',
+            'blog_id' => 'required',
          ]);
         if($request->id)
         {
@@ -40,7 +43,7 @@ class AnnouncementController extends Controller
         {
             $announcement = new Announcement;
         }
-        $announcement->text = isset($request->text)?$request->text:'';
+        $announcement->blog_id = $request->blog_id;
         $announcement->save();
         return redirect()->route('admin.announcements')->with('success','Announcement add or edit successfully'); 
     }

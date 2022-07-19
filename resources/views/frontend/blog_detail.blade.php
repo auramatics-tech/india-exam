@@ -78,7 +78,7 @@
                             </div>
                             <div class="pt-3 text-dark">
                                 @if(isset($blogs->blog_pdf))
-                                <p class="text-center si_bg_light"><b>Official Notification</b></p>
+                                <p class="text-center si_bg_light text-dark"><b>Official Notification</b></p>
                                 <div class="py-3 text-center">
                                     <a target="_blank" href="{{asset('blog/pdf/'.$blogs->blog_pdf)}}"><button class="si_mock_btn bg-danger border none rounded p-1" type="submit">Download <i class="fa fa-download" aria-hidden="true"></i></button></a>
                                 </div>
