@@ -16,7 +16,8 @@ class Blog extends Model
         'thumbnail_description',
         'description',
         'blog_pdf',
-        'image'
+        'image',
+        'state'
     ];
     protected $casts = [
         'created_at' => 'datetime',
@@ -26,6 +27,11 @@ class Blog extends Model
     public function get_links()
     {
         return $this->hasMany(BlogLink::class, 'blog_id', 'id');
+    }
+
+    public function get_states()
+    {
+        return $this->hasOne(States::class, 'id', 'state');
     }
 
 }

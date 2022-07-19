@@ -16,13 +16,17 @@
   <link rel="stylesheet" href="{{asset('frontend/css/style.css?t='.time())}}">
   <link rel="stylesheet" href="{{asset('frontend/css/responsive.css?t='.time())}}">
   <style>
-     *{
-        user-select: none; /* supported by Chrome and Opera */
-        -webkit-user-select: none; /* Safari */
-        -khtml-user-select: none; /* Konqueror HTML */
-        -moz-user-select: none; /* Firefox */
-        -ms-user-select: none;
-      }
+    * {
+      user-select: none;
+      /* supported by Chrome and Opera */
+      -webkit-user-select: none;
+      /* Safari */
+      -khtml-user-select: none;
+      /* Konqueror HTML */
+      -moz-user-select: none;
+      /* Firefox */
+      -ms-user-select: none;
+    }
   </style>
   @yield('css')
   <title>India Exam Junction</title>
@@ -40,12 +44,15 @@
     gtag('config', 'G-2CKXC794CR');
   </script>
   <!-- Required meta tags -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6588326529881449"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6588326529881449" crossorigin="anonymous"></script>
 </head>
 
 <body>
+  @if(Route::is('online_quiz'))
+  @include('frontend.layouts.header2')
+  @else
   @include('frontend.layouts.header')
+  @endif
   @yield('content')
   @include('frontend.layouts.footer')
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

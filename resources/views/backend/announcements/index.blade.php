@@ -138,7 +138,7 @@
                                                 <td>{{ ++$key }}</td>
                                                 <td>
                                                     <label class="ml-3">
-                                                        {{ $announcement->blog_id }}
+                                                        {{ $announcement->get_title->title}}
                                                     </label>
                                                 </td>
                                                 <td>{{ $announcement->created_at }}</td>

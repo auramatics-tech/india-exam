@@ -126,6 +126,7 @@
                                     <tr>
                                         <th title="Field #1">Sr no</th>
                                         <th title="Field #2">Title</th>
+                                        <th title="Field #2">States</th>
                                         <th title="Field #2">Thumbnail Description</th>
                                         <th title="Field #3">Created at</th>
                                         <th title="Field #6">Action</th>
@@ -140,6 +141,11 @@
                                                 <td>
                                                     <label class="ml-3">
                                                         {{ $blog->title }}
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                <label class="ml-3">
+                                                        {{ isset($blog->get_states)?$blog->get_states->state:'' }}
                                                     </label>
                                                 </td>
                                                 <td>{{ substr($blog->thumbnail_description,0,30) }}</td>

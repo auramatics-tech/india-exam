@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogLink;
+use App\Models\States;
 
 class BlogController extends Controller
 {
@@ -25,7 +26,8 @@ class BlogController extends Controller
         {
             $blog = Blog::find($blog_id);
         }
-        return view('backend.blogs.add_edit', compact('blog'));                                                               
+        $states= States::all();
+        return view('backend.blogs.add_edit', compact('blog','states'));                                                               
     }
 
     public function blog_save(Request $request)
@@ -55,6 +57,7 @@ class BlogController extends Controller
         $blog->title = isset($request->title)?$request->title:'';
         $blog->thumbnail_description = isset($request->thumbnail_description)?$request->thumbnail_description:'';
         $blog->description = isset($request->description)?$request->description:'';
+        $blog->state = isset($request->state)?$request->state:'';
         if($request->hasFile('blog_pdf'))
         {
             $pdfName = time().'.'.$request->blog_pdf->getClientOriginalExtension();

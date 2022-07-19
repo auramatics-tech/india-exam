@@ -11,7 +11,7 @@
             </div> -->
             <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
                 <div class="si_marq_style">
-                    <h5>{{$announcement->text}}</h5>
+                <a href="{{route('blog_detail_page', $announcement->blog_id)}}"> <h5>{{ $announcement->get_title->title}}</h5></a>
                 </div>
             </marquee>
         </div>
@@ -92,7 +92,8 @@
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 py-1 ">
                         <div class="si_heading pb-4">
-                            <h5 class="si_border shadow mb-2 mx-auto text-center">IMPORTANT DATES</h5>
+                        <h5 class="si_border shadow mb-2 mx-auto text-center">IMPORTANT DATES</h5>
+                                <h5 class="py-2 mx-auto text-center border-bottom text-dark">DATES</h5>
                         </div>
                         <div class="si_left_styling">
                             {{--<h5 class="pt-3">IMPORTANT DATES</h5>

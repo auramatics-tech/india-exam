@@ -10,6 +10,7 @@ use App\Models\Questions;
 use App\Models\Questioncategories;
 use App\Models\ImportantDate;
 use App\Models\Announcement;
+use App\Models\States;
 
 
 class HomeController extends Controller
@@ -85,7 +86,8 @@ class HomeController extends Controller
         $blogs = Blog::find($id);
         $important_dates = ImportantDate::where('active', 1)->orderby('id','desc')->get();
         $announcements = Announcement::where('active', 1)->orderby('id','desc')->get();
-        return view('frontend.blog_detail', compact('categories', 'blogs', 'important_dates', 'announcements'));
+        $states= States::all();
+        return view('frontend.blog_detail', compact('categories', 'blogs', 'important_dates', 'announcements','states'));
     }
     public function online_quiz(Request $request)
     {
@@ -93,11 +95,14 @@ class HomeController extends Controller
         $announcements = Announcement::where('active', 1)->get();
         return view('Frontend.layouts.online_quiz', compact('categories', 'announcements'));
     }
-    public function government_jobs()
+    public function government_jobs(Request $request)
     {
-        $blogs = Blog::where('active', 1)->get();
+        $blogs = Blog::where('active', 1)->when($request->state,function($query) use ($request){
+            $query->where('state', $request->state);
+        })->get();
         $important_dates = ImportantDate::where('active', 1)->get();
         $announcements = Announcement::where('active', 1)->get();
-        return view('Frontend.layouts.government_jobs', compact('blogs', 'important_dates', 'announcements'));
+        $states= States::all();
+        return view('Frontend.layouts.government_jobs', compact('blogs', 'important_dates', 'announcements','states'));
     }
 }

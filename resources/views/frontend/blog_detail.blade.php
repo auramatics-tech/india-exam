@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 @section('content')
 <section class="pt-2">
-@if(count($announcements))
+    @if(count($announcements))
     @foreach($announcements as $announcement)
     <div class="marq1">
         <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex si_announce_style">
@@ -102,7 +102,8 @@
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 py-1">
                         <div class="si_heading pb-4">
-                            <h5 class="si_border shadow mb-2 mx-auto text-center">IMPORTANT DATES</h5>
+                            <h5 class="si_border shadow mb-2 mx-auto text-center">STATE JOBS</h5>
+                            <h5 class="py-2 mx-auto text-center border-bottom text-dark">STATES</h5>
                         </div>
                         <div class="si_left_styling">
                             {{--<h5 class="pt-3">IMPORTANT DATES</h5>
@@ -118,10 +119,10 @@
                                 </div>
                             </div>--}}
                             <ul class="list-unstyled">
-                                @if(count($important_dates))
-                                @foreach($important_dates as $important_date)
-                                <a href="">
-                                    <li class="py-2">{!! $important_date->text !!}</li>
+                                @if(count($states))
+                                @foreach($states as $state)
+                                <a href="{{route('blog_detail_page', $state->id)}}">
+                                    <li class="py-2"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ isset($state->state)?$state->state:'' }}</li>
                                 </a>
                                 @endforeach
                                 @endif

@@ -105,12 +105,11 @@
                                     <a class="nav-link su_navitem_clr"
                                         href="{{route('online_quiz')}}">Online Quiz</a>
                                 </li>
-                   
-                    <li class="nav-item su_nav_change">
-                        <a class="nav-link su_navitem_clr" href="{{ route('home.typing_test') }}"> Typing Test</a>
+                                <li class="nav-item su_nav_change">
+                        <a class="nav-link su_navitem_clr" href="{{ route('government_jobs') }}">Government jobs</a>
                     </li>
                     <li class="nav-item su_nav_change">
-                        <a class="nav-link su_navitem_clr" href="{{ route('government_jobs') }}">Government jobs</a>
+                        <a class="nav-link su_navitem_clr" href="{{ route('home.typing_test') }}"> Typing Test</a>
                     </li>
                 </ul>
             </div>

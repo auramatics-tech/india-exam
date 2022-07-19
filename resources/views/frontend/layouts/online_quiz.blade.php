@@ -11,7 +11,7 @@
             </div> -->
             <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
                 <div class="si_marq_style">
-                    <h5>{{$announcement->text}}</h5>
+                <a href="{{route('blog_detail_page', $announcement->blog_id)}}"> <h5>{{ $announcement->get_title->title}}</h5></a>
                 </div>
             </marquee>
         </div>

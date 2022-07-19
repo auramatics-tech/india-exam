@@ -11,7 +11,9 @@
             </div> -->
             <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
                 <div class="si_marq_style">
-                    <h5>{{$announcement->text}}</h5>
+                    <a href="{{route('blog_detail_page', $announcement->blog_id)}}">
+                        <h5>{{ $announcement->get_title->title}}</h5>
+                    </a>
                 </div>
             </marquee>
         </div>
@@ -20,10 +22,10 @@
     @endif
 </section>
 <section class="si_sec_text su_height">
-    <div class="container-fluid px-4 container_padding">
+    <div class="container px-4 container_padding">
         <div class="py-0 py-lg-3 py-md-3">
             <div class="row py-0 py-lg-3 py-md-3">
-                <div class="col-lg-8 col-md-12 col-sm-12">
+                <div class="col-lg-9 col-md-12 col-sm-12">
                     <div class="row px-2 bg-white shadow rounded">
                         <div class="py-3 si_heading1">
                             <h1 style="display: none">&nbsp;</h1>
@@ -59,15 +61,15 @@
                         </div>
                         <div class="col-lg-5 col-md-12 col-sm-12 py-1">
                             <div class="si_heading pb-4">
-                                <h5 class="si_border shadow mb-2 mx-auto text-center">SEARCH GOVT JOBS HERE</h5>
-                                <h5 class="py-2 mx-auto text-center border-bottom text-dark">IMPORTANT DATES</h5>
+                                <h5 class="si_border shadow mb-2 mx-auto text-center">STATE JOBS</h5>
+                                <h5 class="py-2 mx-auto text-center border-bottom text-dark">STATES</h5>
                             </div>
                             <div class="si_left_styling">
                                 <ul class="list-unstyled ul_hover">
-                                    @if(count($important_dates))
-                                    @foreach($important_dates as $important_date)
-                                    <a href="">
-                                        <li class="py-2">{!! $important_date->text !!}</li>
+                                    @if(count($states))
+                                    @foreach($states as $state)
+                                    <a href="{{route('government_jobs', ['state' =>$state->id])}}">
+                                        <li class="py-2"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ isset($state->state)?$state->state:'' }}</li>
                                     </a>
                                     @endforeach
                                     @endif
@@ -76,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 col-sm-12"></div>
+                <div class="col-lg-3 col-md-12 col-sm-12"></div>
             </div>
         </div>
     </div>

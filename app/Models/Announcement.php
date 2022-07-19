@@ -19,4 +19,9 @@ class Announcement extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function get_title()
+    {
+        return $this->hasOne(Blog::class, 'id', 'blog_id');
+    }
 }

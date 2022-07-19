@@ -86,7 +86,7 @@
                     </div>
                     @endif
                     <div class="card-body">
-                        <div class="row px-4">
+                        <div class=blogs"row px-4">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <!-- <div class="form-group">
                                         <label>Text<span class="text-danger">*</span></label>
