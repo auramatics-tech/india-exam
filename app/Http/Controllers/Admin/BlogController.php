@@ -69,7 +69,7 @@ class BlogController extends Controller
         }
         $blog->save();
         BlogLink::where('blog_id',$blog->id)->delete();
-        if(isset($request->link_title))
+        if(isset($request->link_title) && count($request->link_title))
         {
             foreach($request->link_title as $key => $link_title)
             {

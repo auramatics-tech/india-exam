@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 @section('content')
 <section class="pt-2">
-@if(count($announcements))
+    @if(count($announcements))
     @foreach($announcements as $announcement)
     <div class="marq1">
         <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex si_announce_style">
@@ -83,20 +83,19 @@
                                     <a target="_blank" href="{{asset('blog/pdf/'.$blogs->blog_pdf)}}"><button class="si_mock_btn bg-danger border none rounded p-1" type="submit">Download <i class="fa fa-download" aria-hidden="true"></i></button></a>
                                 </div>
                                 @endif
+                                @if(count($blogs->get_links))
                                 <div class="py-3 text-dark">
                                     <p class="text-center si_bg_light"><b>Important Links</b></p>
                                 </div>
                                 <div class="py-2 border p-3 text-dark">
                                     <p class="pt-2">IMPORTANT LINKS :</p>
-                                    @if(count($blogs->get_links))
                                     @foreach($blogs->get_links as $key => $val)
                                     <a class="pt-2" href="{{$val->link}}">
                                         <h5><u>{{$val->title}}</u></h5>
                                     </a>
                                     @endforeach
-                                    @endif
                                 </div>
-
+                                @endif
                             </div>
                         </div>
                     </div>

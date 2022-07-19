@@ -196,7 +196,8 @@
         CKEDITOR.config.mathJaxLib ='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML';
         CKEDITOR.replace('question', {
             filebrowserUploadUrl: HOST_URL + "/ck-image?_token={{ csrf_token() }}",
-            filebrowserUploadMethod: 'form'
+            filebrowserUploadMethod: 'form',
+            height: 500
         });
         $(document).ready(function() {
             $('.select2').select2();

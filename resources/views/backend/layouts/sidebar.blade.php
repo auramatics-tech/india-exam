@@ -232,11 +232,4 @@
     </div>
     <!--end::Aside Menu-->
 </div>
-<script>
-$(document).ready(function(){
-//   $(".su_toogle_Categories").click(function(){
-//     $(".su_padding_nav_list").toggle();
-//   });
-// });
-</script>
 

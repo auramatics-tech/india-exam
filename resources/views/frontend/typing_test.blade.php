@@ -8,7 +8,7 @@
                     <div class="py-3 si_heading1">
                         <h1 style="display: none">&nbsp;</h1>
                         <h5 class="su_clr_heading">Welcome to IndiaExamJunction.com !</h5>
-                        <p class="text-dark">Here, you can practice English Mock Test Exercises.
+                        <p class="text-dark">Here, you can practice Typing Mock Test Exercises.
                         </p>
                     </div>
                     @if(count($mock_categories))
