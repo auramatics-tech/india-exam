@@ -106,7 +106,7 @@
                                     <select name="state" class="form-control">
                                         @if(count($states))
                                         @foreach($states as $state)
-                                        <option value="{{$state->id}}">{{$state->state}}</option>
+                                        <option value="{{$state->id}}" @if(isset($blog->state) && $blog->state == $state->id) selected @endif>{{$state->state}}</option>
                                         @endforeach
                                         @endif
                                     </select>

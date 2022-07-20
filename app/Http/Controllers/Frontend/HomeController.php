@@ -27,7 +27,8 @@ class HomeController extends Controller
         $blogs = Blog::where('active', 1)->orderby('id','desc')->get();
         $important_dates = ImportantDate::where('active', 1)->orderby('id','desc')->get();
         $announcements = Announcement::where('active', 1)->orderby('id','desc')->get();
-        return view('frontend.home', compact('categories', 'blogs', 'important_dates', 'announcements'));
+        $states= States::all();
+        return view('frontend.home', compact('categories', 'blogs', 'important_dates', 'announcements','states'));
     }
 
     public function categories(Request $request)

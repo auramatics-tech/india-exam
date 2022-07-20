@@ -92,8 +92,8 @@
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 py-1 ">
                         <div class="si_heading pb-4">
-                        <h5 class="si_border shadow mb-2 mx-auto text-center">IMPORTANT DATES</h5>
-                                <h5 class="py-2 mx-auto text-center border-bottom text-dark">DATES</h5>
+                        <h5 class="si_border shadow mb-2 mx-auto text-center">STATE JOBS</h5>
+                                <h5 class="py-2 mx-auto text-center border-bottom text-dark">STATES</h5>
                         </div>
                         <div class="si_left_styling">
                             {{--<h5 class="pt-3">IMPORTANT DATES</h5>
@@ -109,14 +109,14 @@
                                 </div>
                             </div>--}}
                             <ul class="list-unstyled ul_hover">
-                                @if(count($important_dates))
-                                @foreach($important_dates as $important_date)
-                                <a href="">
-                                    <li class="py-2">{!! $important_date->text !!}</li>
-                                </a>
-                                @endforeach
-                                @endif
-                            </ul>
+                                    @if(count($states))
+                                    @foreach($states as $state)
+                                    <a href="{{route('government_jobs', ['state' =>$state->id])}}">
+                                        <li class="py-2"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ isset($state->state)?$state->state:'' }}</li>
+                                    </a>
+                                    @endforeach
+                                    @endif
+                                </ul>
                         </div>
                     </div>
                 </div>
