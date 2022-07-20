@@ -65,6 +65,9 @@
                     </a>
                 </li>
 
+                <li class="su_toogle_Categories"><i class="fa-solid fa-certificate su_icon_Categories_main"></i>Categories</li>
+                {!!navbar()!!}
+              
                 
                 <li class="menu-item  @if (Route::is('admin.questions')=='admin.questions'
                     ) menu-item-active @endif" aria-haspopup="true">
@@ -229,3 +232,4 @@
     </div>
     <!--end::Aside Menu-->
 </div>
+

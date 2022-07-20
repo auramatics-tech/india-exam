@@ -1,4 +1,20 @@
 @extends('frontend.layouts.master')
+@section('css')
+<style>
+    .collapsed.my_accordian .up_arr{
+        display: none;
+    }
+    .my_accordian .up_arr{
+        display: block;
+    }
+    .collapsed.my_accordian .down_arr{
+        display: block;
+    }
+    .my_accordian .down_arr{
+        display: none;
+    }
+</style>
+@endsection
 @section('content')
 <section class="pt-2">
     @if(count($announcements))
@@ -36,8 +52,11 @@
                             @foreach ($categories as $k => $category)
                             @if (count($category->get_subcategory))
                             <div class="si_heading" id="heading{{$k}}">
-                                <h5 class="si_border1 shadow mb-4 mx-auto"> <button class="d-flex align-items-left justify-content-between w-100 btn text-white collapsed" data-toggle="collapse" data-target="#collapse{{$k}}" aria-expanded="false" aria-controls="collapse{{$k}}"><a href="{{ route('topics', ['id' => $category->id]) }}"></a>{{ $category->name }} <span>
-                                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                <h5 class="si_border1 shadow mb-4 mx-auto">
+                                    <button class="d-flex align-items-left justify-content-between w-100 btn text-white collapsed my_accordian" data-toggle="collapse" data-target="#collapse{{$k}}" aria-expanded="false" aria-controls="collapse{{$k}}"><a href="{{ route('topics', ['id' => $category->id]) }}"></a>{{ $category->name }} 
+                                    <span>
+                                            <i class="fa fa-chevron-down down_arr" aria-hidden="true"></i>
+                                            <i class="fa fa-chevron-up up_arr" aria-hidden="true"></i>
                                         </span></button>
                                 </h5>
                             </div>
@@ -125,12 +144,5 @@
 </section>
 @endsection
 @section('script')
-<script>
-    $("#accordion").on("hide.bs.collapse show.bs.collapse", e => {
-        $(e.target)
-            .prev()
-            .find("i:last-child")
-            .toggleClass("fa-minus fa-plus");
-    });
-</script>
+
 @endsection

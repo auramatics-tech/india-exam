@@ -73,6 +73,7 @@ CKEDITOR.editorConfig = function( config ) {
 		'mathjax,' +
 		'wysiwygarea';
 	// %REMOVE_END%
+
 };
 
 // %LEAVE_UNMINIFIED% %REMOVE_LINE%

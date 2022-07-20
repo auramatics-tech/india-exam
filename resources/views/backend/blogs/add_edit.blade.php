@@ -194,18 +194,19 @@
 @section('script')
 
 <script src="{{ asset('ckeditor4/ckeditor.js') }}"></script>
-<script type="text/javascript">
-    CKEDITOR.config.mathJaxLib = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML';
-    CKEDITOR.replace('question', {
-        filebrowserUploadUrl: HOST_URL + "/ck-image?_token={{ csrf_token() }}",
-        filebrowserUploadMethod: 'form'
-    });
-    $(document).ready(function() {
-        $('.select2').select2();
-    });
-</script>
-<script>
-    var html = '<div class="row">\n\
+    <script type="text/javascript">
+        CKEDITOR.config.mathJaxLib ='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML';
+        CKEDITOR.replace('question', {
+            filebrowserUploadUrl: HOST_URL + "/ck-image?_token={{ csrf_token() }}",
+            filebrowserUploadMethod: 'form',
+            height: 500
+        });
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
+    <script>
+        var html ='<div class="row">\n\
                         <div class="col-5">\n\
                             <label>Link title</label>\n\
                             <input type="text" name="link_title[]" class="form-control">\n\
