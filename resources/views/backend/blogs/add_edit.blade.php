@@ -90,6 +90,12 @@
                                     <input type="text" class="form-control" required name="title" value="{{ isset($blog->title) ? $blog->title : '' }}" />
                                 </div>
                             </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>SLug<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" required name="slug" value="{{ isset($blog->slug) ? $blog->slug : '' }}" />
+                                </div>
+                            </div>
                         </div>
                         <div class="">
                             <div class="col-md-12">

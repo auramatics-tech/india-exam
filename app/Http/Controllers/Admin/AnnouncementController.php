@@ -11,9 +11,8 @@ class AnnouncementController extends Controller
 {
     public function index(Request $request)
     {
-        $announcements = Announcement::when(request('q'), function ($query) use ($request) {
-            return $query->where('text', 'like', '%'.$request->q.'%');
-        })->orderby('id','desc')->get();
+        $announcements = Announcement::orderby('id','desc')->get();
+        
         return view('backend.announcements.index', compact('announcements'));
     }
 

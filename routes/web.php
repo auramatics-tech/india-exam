@@ -140,7 +140,7 @@ Auth::routes([
 ]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/blog-detail-page/{id}', [HomeController::class, 'blog_detail_page'])->name('blog_detail_page');
+Route::get('/blog-detail-page/{blog_slug}', [HomeController::class, 'blog_detail_page'])->name('blog_detail_page');
 Route::get('/online-quiz', [HomeController::class, 'online_quiz'])->name('online_quiz');
 Route::get('/government-jobs', [HomeController::class, 'government_jobs'])->name('government_jobs');
 Route::get('/sitemap', [SubcategoriesController::class, 'sitemap'])->name('sitemap');

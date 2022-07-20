@@ -11,7 +11,7 @@
             </div> -->
             <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
                 <div class="si_marq_style">
-                    <a href="{{route('blog_detail_page', $announcement->blog_id)}}">
+                    <a href="{{route('blog_detail_page', $announcement->get_title->slug)}}">
                         <h5>{{ $announcement->get_title->title}}</h5>
                     </a>
                 </div>
@@ -50,7 +50,7 @@
                                         <span class="text-muted"><a href="" class="text-primary">{{date('d M Y',strtotime( $blog->created_at)) }}</span>
                                         <p class="mt-2 si-text-dark">{{ substr($blog->thumbnail_description ,0,200) }}...</p>
                                     </div>
-                                    <div> <a href="{{route('blog_detail_page', $blog->id)}}">
+                                    <div> <a href="{{route('blog_detail_page', $blog->slug)}}">
                                             <p class="text-primary si_floating">Read More</p>
                                         </a></div>
                                 </div>

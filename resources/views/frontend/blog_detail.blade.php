@@ -5,13 +5,15 @@
     @foreach($announcements as $announcement)
     <div class="marq1">
         <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex si_announce_style">
-            <div class="si_width_announce">
+            <!-- <div class="si_width_announce">
                 <div class="textmarq">Announcements</div>
                 <div class="textmarqmob">Announcements</div>
-            </div>
+            </div> -->
             <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
                 <div class="si_marq_style">
-                    <h5>{{$announcement->text}}</h5>
+                    <a href="{{route('blog_detail_page', $announcement->get_title->slug)}}">
+                        <h5>{{ $announcement->get_title->title}}</h5>
+                    </a>
                 </div>
             </marquee>
         </div>

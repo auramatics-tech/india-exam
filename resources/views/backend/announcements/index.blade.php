@@ -121,7 +121,7 @@
                         <!--end::Search Form-->
                         <!--begin: Datatable-->
                         <div class="">
-                            <table class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
+                            <table class="table table-responsive cat_table" id="">
                                 <thead>
                                     <tr>
                                         <th title="Field #1">Sr no</th>
@@ -138,7 +138,7 @@
                                                 <td>{{ ++$key }}</td>
                                                 <td>
                                                     <label class="ml-3">
-                                                        {{ $announcement->get_title->title}}
+                                                        {{ isset($announcement->get_title->title) ? $announcement->get_title->title : ''}}
                                                     </label>
                                                 </td>
                                                 <td>{{ $announcement->created_at }}</td>
@@ -182,7 +182,6 @@
 @section('script')
     <!--begin::Page Scripts(used by this page)-->
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <script src="{{ asset('backend/assets/js/pages/crud/ktdatatable/base/html-table.js') }}"></script>
     <script type="text/javascript" src="jquery-1.3.2.js"> </script>
     <script>
         $(document).on('click', '.act', function() {

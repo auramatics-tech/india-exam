@@ -81,10 +81,10 @@ class HomeController extends Controller
         $category = $main_category;
         return view('frontend.subcategories', compact('category', 'subcategories'));
     }
-    public function blog_detail_page($id)
+    public function blog_detail_page(Request $request)
     {
         $categories = Category::where('active', 1)->get();
-        $blogs = Blog::find($id);
+        $blogs = Blog::where('slug',$request->blog_slug)->first();
         $important_dates = ImportantDate::where('active', 1)->orderby('id','desc')->get();
         $announcements = Announcement::where('active', 1)->orderby('id','desc')->get();
         $states= States::all();

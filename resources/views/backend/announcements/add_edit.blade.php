@@ -45,6 +45,14 @@
         text-align: center;
         height: 31px;
     }
+    .select2-container .select2-selection--single {
+        box-sizing: border-box;
+        cursor: pointer;
+        display: block;
+        height: 49px !important;
+        user-select: none;
+        -webkit-user-select: none;
+    }
 </style>
 @endsection
 @section('content')
@@ -90,14 +98,15 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <!-- <div class="form-group">
                                         <label>Text<span class="text-danger">*</span></label>
-                                        <input type="hidden" name="id" value="{{ isset($announcement->id) ? $announcement->id : '' }}">
                                         <textarea name="text" required class="form-control" cols="30" rows="10">{{ isset($announcement->text) ? $announcement->text : '' }}</textarea>
                                     </div> -->
                                 <label for="">Blogs :</label>
+                                <input type="hidden" name="id" value="{{ isset($announcement->id) ? $announcement->id : '' }}">
                                 <select class="form-control py-3 select2" name="blog_id">
+                                    <option value="">Select Blog</option>
                                     @if(count($blogs))
                                     @foreach($blogs as $blog)
-                                    <option value="{{$blog->id}}">{{$blog->title}}</option>
+                                    <option @if(isset($announcement->blog_id) && $announcement->blog_id == $blog->id) selected @endif value="{{$blog->id}}">{{$blog->title}}</option>
                                     @endforeach
                                     @endif
                                 </select>

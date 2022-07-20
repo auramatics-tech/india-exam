@@ -155,7 +155,7 @@
                     </a>
                 </li>
                 
-                <li class="menu-item  @if (Route::is('admin.important_dates')=='admin.important_dates'
+                {{--<li class="menu-item  @if (Route::is('admin.important_dates')=='admin.important_dates'
                     ) menu-item-active @endif" aria-haspopup="true">
                     <a href="{{route('admin.important_dates')}}" class="menu-link">
                         <span class="svg-icon menu-icon">
@@ -171,7 +171,7 @@
                         </span>
                         <span class="menu-text">Important Dates</span>
                     </a>
-                </li>
+                </li>--}}
                 <li class="menu-item  @if (Route::is('admin.settings')=='admin.settings'
                     ) menu-item-active @endif" aria-haspopup="true">
                     <a href="{{route('admin.settings')}}" class="menu-link">

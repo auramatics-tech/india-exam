@@ -27,7 +27,7 @@
             </div> -->
             <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
                 <div class="si_marq_style">
-                <a href="{{route('blog_detail_page', $announcement->blog_id)}}"> <h5>{{ $announcement->get_title->title}}</h5></a>
+                <a href="{{route('blog_detail_page', $announcement->get_title->slug)}}"> <h5>{{ $announcement->get_title->title}}</h5></a>
                 </div>
             </marquee>
         </div>
@@ -91,16 +91,16 @@
                             @foreach($blogs as $blog)
                             <div class="row pt-3">
                                 <div class="col-lg-4 col-md-4 col-sm-12 si_center_style">
-                                    <a href="{{route('blog_detail_page', $blog->id)}}"> <img src="{{asset('blog/images/'.$blog->image )}}" alt="" class="si_blog_image"> </a>
+                                    <a href="{{route('blog_detail_page', $blog->slug)}}"> <img src="{{asset('blog/images/'.$blog->image )}}" alt="" class="si_blog_image"> </a>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-12 si_center_style">
-                                    <a href="{{route('blog_detail_page', $blog->id)}}">
+                                    <a href="{{route('blog_detail_page', $blog->slug)}}">
                                         <h4>{{ $blog->title }}</h4>
                                     </a>
-                                    <span class="text-muted"><a href="{{route('blog_detail_page', $blog->id)}}" class="text-primary">{{date('d M Y',strtotime( $blog->created_at)) }}</span>
+                                    <span class="text-muted"><a href="{{route('blog_detail_page', $blog->slug)}}" class="text-primary">{{date('d M Y',strtotime( $blog->created_at)) }}</span>
                                     <p class="mt-2 si-text-dark">{{ substr($blog->thumbnail_description ,0,200) }}...</p>
                                 </div>
-                                <div> <a href="{{route('blog_detail_page', $blog->id)}}">
+                                <div> <a href="{{route('blog_detail_page', $blog->slug)}}">
                                         <p class="text-primary si_floating">Read More</p>
                                     </a></div>
                             </div>

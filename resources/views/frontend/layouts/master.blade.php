@@ -48,7 +48,7 @@
 </head>
 
 <body>
-  @if(Route::is('online_quiz'))
+  @if(Route::is('online_quiz') || Route::is('home.data') || Route::is('search'))
   @include('frontend.layouts.header2')
   @else
   @include('frontend.layouts.header')

@@ -15,7 +15,7 @@ class BlogController extends Controller
     {
         $blogs = Blog::when(request('q'), function ($query) use ($request) {
             return $query->where('title', 'like', '%'.$request->q.'%');
-        })->orderby('id','desc')->get();
+        })->orderby('id','desc')->paginate(10);
         return view('backend.blogs.index', compact('blogs'));                                                               
     }
 
@@ -35,12 +35,14 @@ class BlogController extends Controller
         if($request->id){
             $this->validate($request,[
                 'title' => 'required',
+                'slug' => 'required',
                 'thumbnail_description' => 'required',
              ]);
         }else{
             $this->validate($request,[
                 'title' => 'required',
                 'thumbnail_description' => 'required',
+                'slug' => 'required',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10000',
              ]);
         }
@@ -58,6 +60,7 @@ class BlogController extends Controller
         $blog->thumbnail_description = isset($request->thumbnail_description)?$request->thumbnail_description:'';
         $blog->description = isset($request->description)?$request->description:'';
         $blog->state = isset($request->state)?$request->state:'';
+        $blog->slug = isset($request->slug)?$request->slug:'';
         if($request->hasFile('blog_pdf'))
         {
             $pdfName = time().'.'.$request->blog_pdf->getClientOriginalExtension();
