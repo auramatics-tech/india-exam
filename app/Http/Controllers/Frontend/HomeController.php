@@ -24,7 +24,7 @@ class HomeController extends Controller
         })
             ->where('active', 1)->orderby("sort", 'asc')->get();
 
-        $blogs = Blog::where('active', 1)->orderby('id','desc')->get();
+        $blogs = Blog::where('active', 1)->orderby('id','desc')->paginate(10);
         $important_dates = ImportantDate::where('active', 1)->orderby('id','desc')->get();
         $announcements = Announcement::where('active', 1)->orderby('id','desc')->get();
         $states= States::all();
@@ -100,7 +100,7 @@ class HomeController extends Controller
     {
         $blogs = Blog::where('active', 1)->when($request->state,function($query) use ($request){
             $query->where('state', $request->state);
-        })->get();
+        })->orderby('id','desc')->paginate(10);
         $important_dates = ImportantDate::where('active', 1)->get();
         $announcements = Announcement::where('active', 1)->get();
         $states= States::all();

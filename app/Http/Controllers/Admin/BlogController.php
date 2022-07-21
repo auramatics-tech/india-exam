@@ -75,7 +75,7 @@ class BlogController extends Controller
         }
         $blog->save();
         BlogLink::where('blog_id',$blog->id)->delete();
-        if(isset($request->link_title) && count($request->link_title))
+        if(isset($request->link_title[0]) && $request->link_title[0] != '' && count($request->link_title))
         {
             foreach($request->link_title as $key => $link_title)
             {
@@ -106,5 +106,12 @@ class BlogController extends Controller
         Blog::where('id',$blog_id)->delete();
         BlogLink::where('blog_id',$blog_id)->delete();
         return redirect()->route('admin.blogs')->with('success','Blog deleted successfully'); 
+    }
+    public function delete_blog_img($blog_id){
+        // echo "here";die;
+        $blog = Blog::find($blog_id);
+        $blog->image = Null;
+        $blog->save();
+        return redirect()->route('admin.blogs.add_edit',$blog->id)->with('success','Blog deleted successfully'); 
     }
 }

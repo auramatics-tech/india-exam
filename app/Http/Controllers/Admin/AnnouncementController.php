@@ -43,6 +43,7 @@ class AnnouncementController extends Controller
             $announcement = new Announcement;
         }
         $announcement->blog_id = $request->blog_id;
+        $announcement->title = $request->title;
         $announcement->save();
         return redirect()->route('admin.announcements')->with('success','Announcement add or edit successfully'); 
     }

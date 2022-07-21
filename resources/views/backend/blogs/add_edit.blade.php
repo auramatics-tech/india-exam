@@ -134,6 +134,14 @@
                                     <input type="file" name="image" accept=".jpeg,.png,.jpg,.gif" class="form-Control">
                                 </div>
                             </div>
+                            @if(isset($blog->image))
+                            <div class="col-md-12 d-flex">
+                                <div class="form-group">
+                                    <img src="{{asset('blog/images/'.$blog->image)}}" alt="" width="300" height="300" >
+                                </div>
+                                <a href="javascript:" class="deleteRecord" rel="{{$blog->id}}" rel1="delete-blog-img"><i class="fas fa-trash text-danger"></i></a>
+                            </div>
+                            @endif
                         </div>
                         <div class="">
                             <div class="col-md-12">

@@ -85,6 +85,7 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin'], function () {
     Route::get('/blog-delete/{blog_id?}', [BlogController::class, 'delete'])->name('admin.blogs.delete');
     Route::post('/blog/save', [BlogController::class, 'blog_save'])->name('admin.blogs.save');
     Route::post('/blog/active-update', [BlogController::class, 'active_update'])->name('admin.blog_active_update');
+    Route::get('/delete-blog-img/{blog_id?}', [BlogController::class, 'delete_blog_img'])->name('admin.delete_blog_img');
 
     // announcement
     Route::get('/announcements', [AnnouncementController::class, 'index'])->name('admin.announcements');

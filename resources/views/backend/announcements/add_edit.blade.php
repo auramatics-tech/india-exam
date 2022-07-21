@@ -110,7 +110,10 @@
                                     @endforeach
                                     @endif
                                 </select>
-
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <label for="">Title :</label>
+                                <input type="text" name="title" class="form-control" value="{{isset($announcement->title) ? $announcement->title : ''}}">
                             </div>
                         </div>
                         <div class="px-4 d-flex py-3">

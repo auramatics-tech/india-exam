@@ -1,31 +1,33 @@
 <header class="d-lg-block d-none">
     <div class="top_nav shadow py-2 bg-white">
-        <nav
-            class="container navbar navbar-expand-lg navbar-light navbar_padding rounded d-flex justify-content-between">
-            <div class="set_logo d-none d-lg-block d-md-block">
-                <a href="{{ route('home') }}"><img class="img-fluid"
-                        src="{{ asset('frontend/images/logo_desktop.png') }}" alt="logo"></a>
+        <nav class="container navbar navbar-expand-lg navbar-light navbar_padding rounded d-flex justify-content-between">
+            <div class="d-flex align-items-center justify-content-start">
+                <div>
+                    <div class="set_logo d-none d-lg-block d-md-block">
+                        <a href="{{ route('home') }}"><img class="img-fluid" src="{{ asset('frontend/images/logo_desktop.png') }}" alt="logo"></a>
+                    </div>
+                </div>
+                <div class="ms-3 d-none d-lg-block">
+                    <img src="{{ asset('frontend/images/large_logo.png') }}" alt="" class="large_log img-fluid">
+                </div>
             </div>
             <div class="col-md-4 my-2 my-md-0 ">
-                <form method="get" action="{{route('searchindex')}}" class="d-flex text-right margin_search" id="search">
+                <form method="get" action="{{route('searchindex')}}" class="d-flex justify-content-end text-right margin_search" id="search">
                     <div class="input-icon">
-                    <input type="text" class="form-control search_radius"   value="{{ isset(request()->q) ? request()->q : '' }}" name="q" placeholder="Search..."
-                            id="kt_datatable_search_query" />
+                        <input type="text" class="form-control search_radius" value="{{ isset(request()->q) ? request()->q : '' }}" name="q" placeholder="Search..." id="kt_datatable_search_query" />
                         <span>
                             <i class="flaticon2-search-1 text-muted"></i>
                         </span>
                     </div>
                     <div>
-                       <button type="submit" class="btn si_btn_btn"><i class="fa fa-search"
-                                aria-hidden="true"></i></button>
+                        <button type="submit" class="btn si_btn_btn"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </div>
                 </form>
             </div>
             <div class="container d-block d-lg-none d-md-none d-sm-block">
                 <div class="si_logo d-flex justify-content-between">
                     <div class="set_logo">
-                        <a href="{{ route('home') }}"><img class="img-fluid"
-                                src="{{ asset('frontend/images/logo_desktop.png') }}" alt="logo"></a>
+                        <a href="{{ route('home') }}"><img class="img-fluid" src="{{ asset('frontend/images/logo_desktop.png') }}" alt="logo"></a>
                     </div>
                     <div class="su_search_width">
                         <form class="d-flex text-right pl-3 si_position">
@@ -90,22 +92,18 @@
     </div> -->
     <div id="main_navbar" class="bg_blue shadow main_navbar">
         <nav class="container navbar navbar-expand-custom navbar_padding1">
-            <button class="navbar-toggler su_padding_icon" type="button" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler su_padding_icon" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars text-white"></i>
             </button>
-            <div class="navbar-collapse su_postion si_overflow_style" style="justify-content: left; display: none;"
-                id="navbarSupportedContent">
+            <div class="navbar-collapse su_postion si_overflow_style" style="justify-content: left; display: none;" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item su_nav_change @if (Route::is('home')=='home' ) active @endif">
                         <a class="nav-link su_navitem_clr" href="{{ route('home') }}"> Home</a>
                     </li>
-                                <li
-                                    class="nav-item @if((isset(request()->category1) && request()->category1 == $val->slug)) active @endif">
-                                    <a class="nav-link su_navitem_clr"
-                                        href="{{route('online_quiz')}}">Online Quiz</a>
-                                </li>
-                                <li class="nav-item su_nav_change">
+                    <li class="nav-item @if((isset(request()->category1) && request()->category1 == $val->slug)) active @endif">
+                        <a class="nav-link su_navitem_clr" href="{{route('online_quiz')}}">Previous Year Quistion</a>
+                    </li>
+                    <li class="nav-item su_nav_change">
                         <a class="nav-link su_navitem_clr" href="{{ route('government_jobs') }}">Government jobs</a>
                     </li>
                     <li class="nav-item su_nav_change">
@@ -118,25 +116,28 @@
 </header>
 <header class="d-lg-none d-block">
     <div class="top_nav shadow py-2 bg-white">
-        <nav
-            class="container navbar navbar-expand-lg navbar-light navbar_padding rounded d-flex justify-content-between">
-            <div class="set_logo d-none d-lg-block d-md-block">
-                <a href="{{ route('home') }}"><img class="img-fluid"
-                        src="{{ asset('frontend/images/logophotoshop.jpg') }}" alt="logo"></a>
+        <nav class="container navbar navbar-expand-lg navbar-light navbar_padding rounded d-flex justify-content-between">
+            <div class="d-flex align-items-center justify-content-start">
+                <div>
+                    <div class="set_logo d-none d-lg-block d-md-block">
+                        <a href="{{ route('home') }}"><img class="img-fluid" src="{{ asset('frontend/images/logophotoshop.jpg') }}" alt="logo"></a>
+                    </div>
+                </div>
+                <div class="ms-3 d-none d-md-block">
+                    <img src="{{ asset('frontend/images/large_logo.png') }}" alt="" class="medium_logo img-fluid">
+                </div>
             </div>
+
             <div class="d-none d-lg-block d-md-block">
                 <form method="get" action="{{ route('search') }}" class="d-flex text-right" id="search">
-                    <input class="form-control su_search_focus d-none d-lg-block d-md-block me-2" type="search"
-                        value="" name="q"
-                        aria-label="Search">
+                    <input class="form-control su_search_focus d-none d-lg-block d-md-block me-2" type="search" value="" name="q" aria-label="Search">
                     <button class="btn su_nav_search" type="submit"><i class="fas fa-search"></i></button>
                 </form>
             </div>
             <div class="container d-block d-lg-none d-md-none d-sm-block">
                 <div class="si_logo d-flex justify-content-between">
                     <div class="set_logo">
-                        <a href="{{ route('home') }}"><img class="img-fluid"
-                                src="{{ asset('frontend/images/logo_desktop.png') }}" alt="logo"></a>
+                        <a href="{{ route('home') }}"><img class="img-fluid" src="{{ asset('frontend/images/logo_desktop.png') }}" alt="logo"></a>
                     </div>
                     <div class="su_search_width">
                         <form class="d-flex text-right pl-3 si_position">
@@ -151,35 +152,29 @@
 
     <div id="main_navbar" class="bg_blue shadow main_navbar">
         <nav class="container navbar navbar-expand-custom navbar_padding1">
-            <button class="navbar-toggler su_padding_icon" type="button" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler su_padding_icon" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars text-white"></i>
             </button>
-            <div class="navbar-collapse su_postion si_overflow_style" style="justify-content: left; display: none;"
-                id="navbarSupportedContent">
+            <div class="navbar-collapse su_postion si_overflow_style" style="justify-content: left; display: none;" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item su_nav_change @if (Route::is('home')=='home' ) active @endif">
                         <a class="nav-link su_navitem_clr" href="{{ route('home') }}"> Home</a>
                     </li>
                     <?php $drop_act = []; ?>
                     @if (count(get_all_category()))
-                        @foreach (get_all_category() as $key => $val)
-                            <li
-                                class="nav-item @if((isset(request()->category1) && request()->category1 == $val->slug)) active @endif">
-                                <a class="nav-link su_navitem_clr"
-                                    href="{{ next_url($val) }}">{{ ucfirst($val->name) }}</a>
-                            </li>
-                            <?php $drop_act[] = $val->id; ?>
+                    @foreach (get_all_category() as $key => $val)
+                    <li class="nav-item @if((isset(request()->category1) && request()->category1 == $val->slug)) active @endif">
+                        <a class="nav-link su_navitem_clr" href="{{ next_url($val) }}">{{ ucfirst($val->name) }}</a>
+                    </li>
+                    <?php $drop_act[] = $val->id; ?>
 
-                        @endforeach
+                    @endforeach
                     @endif
 
 
                     <div class="fixed_search">
                         <form method="get" action="{{ route('search') }}" class="d-flex text-right" id="search">
-                            <input class="form-control su_search_focus me-2" type="search"
-                                value="{{ isset(request()->search) ? request()->search : '' }}" name="search"
-                                aria-label="Search">
+                            <input class="form-control su_search_focus me-2" type="search" value="{{ isset(request()->search) ? request()->search : '' }}" name="search" aria-label="Search">
                             <button class="btn su_nav_search" type="submit"><i class="fas fa-search"></i></button>
                         </form>
                     </div>

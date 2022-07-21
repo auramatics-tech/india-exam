@@ -1,38 +1,46 @@
 @extends('frontend.layouts.master')
 @section('css')
 <style>
-    .collapsed.my_accordian .up_arr{
+    .collapsed.my_accordian .up_arr {
         display: none;
     }
-    .my_accordian .up_arr{
+
+    .my_accordian .up_arr {
         display: block;
     }
-    .collapsed.my_accordian .down_arr{
+
+    .collapsed.my_accordian .down_arr {
         display: block;
     }
-    .my_accordian .down_arr{
+
+    .my_accordian .down_arr {
         display: none;
+    }
+
+    .slide {
+        float: left;
+        transform: translateX(400%);
+        transition: all 7s;
+    }
+
+    .slide.active {
+        transform: translateX(-350%);
     }
 </style>
 @endsection
 @section('content')
 <section class="pt-2">
     @if(count($announcements))
-    @foreach($announcements as $announcement)
-    <div class="marq1">
-        <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex si_announce_style">
-            <!-- <div class="si_width_announce">
-                <div class="textmarq">Announcements</div>
-                <div class="textmarqmob">Announcements</div>
-            </div> -->
-            <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
-                <div class="si_marq_style">
-                <a href="{{route('blog_detail_page', $announcement->get_title->slug)}}"> <h5>{{ $announcement->get_title->title}}</h5></a>
-                </div>
-            </marquee>
-        </div>
+    <div class="content si_announce_style si_marq_style">
+        <marquee behavior="scroll" scrollamount="8"  direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="height: 30px;">
+        @foreach($announcements as $announcement)
+            <span><a href="{{route('blog_detail_page', $announcement->get_title->slug)}}" class="slide">
+                {{ $announcement->title}}
+            </a>
+            </span>
+            @endforeach
+        </marquee>
     </div>
-    @endforeach
     @endif
 </section>
 <section class="si_sec_text su_height">
@@ -53,8 +61,8 @@
                             @if (count($category->get_subcategory))
                             <div class="si_heading" id="heading{{$k}}">
                                 <h5 class="si_border1 shadow mb-4 mx-auto">
-                                    <button class="d-flex align-items-left justify-content-between w-100 btn text-white collapsed my_accordian" data-toggle="collapse" data-target="#collapse{{$k}}" aria-expanded="false" aria-controls="collapse{{$k}}"><a href="{{ route('topics', ['id' => $category->id]) }}"></a>{{ $category->name }} 
-                                    <span>
+                                    <button class="d-flex align-items-left justify-content-between w-100 btn text-white collapsed my_accordian" data-toggle="collapse" data-target="#collapse{{$k}}" aria-expanded="false" aria-controls="collapse{{$k}}"><a href="{{ route('topics', ['id' => $category->id]) }}"></a>{{ $category->name }}
+                                        <span>
                                             <i class="fa fa-chevron-down down_arr" aria-hidden="true"></i>
                                             <i class="fa fa-chevron-up up_arr" aria-hidden="true"></i>
                                         </span></button>
@@ -85,19 +93,21 @@
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 py-1">
                         <div class="si_heading pb-4">
-                            <h5 class="si_border shadow mb-2 mx-auto text-center">Blogs</h5>
+                            <h5 class="si_border shadow mb-2 mx-auto text-center">Government Jobs Updates</h5>
                             <h5 class="py-2 mx-auto text-center border-bottom text-dark">LATEST</h5>
                             @if(count($blogs))
                             @foreach($blogs as $blog)
                             <div class="row pt-3">
+                                @if(isset($blog->image))
                                 <div class="col-lg-4 col-md-4 col-sm-12 si_center_style">
                                     <a href="{{route('blog_detail_page', $blog->slug)}}"> <img src="{{asset('blog/images/'.$blog->image )}}" alt="" class="si_blog_image"> </a>
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-12 si_center_style">
+                                @endif
+                                <div class=" @if(isset($blog->image)) col-lg-8 col-md-8 @else col-lg-12 col-md-12  @endif col-sm-12 si_center_style">
                                     <a href="{{route('blog_detail_page', $blog->slug)}}">
                                         <h4>{{ $blog->title }}</h4>
                                     </a>
-                                    <span class="text-muted"><a href="{{route('blog_detail_page', $blog->slug)}}" class="text-primary">{{date('d M Y',strtotime( $blog->created_at)) }}</span>
+                                    {{--<span class="text-muted"><a href="{{route('blog_detail_page', $blog->slug)}}" class="text-primary">{{date('d M Y',strtotime( $blog->created_at)) }}</span>--}}
                                     <p class="mt-2 si-text-dark">{{ substr($blog->thumbnail_description ,0,200) }}...</p>
                                 </div>
                                 <div> <a href="{{route('blog_detail_page', $blog->slug)}}">
@@ -111,8 +121,8 @@
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 py-1 ">
                         <div class="si_heading pb-4">
-                        <h5 class="si_border shadow mb-2 mx-auto text-center">STATE JOBS</h5>
-                                <h5 class="py-2 mx-auto text-center border-bottom text-dark">STATES</h5>
+                            <h5 class="si_border shadow mb-2 mx-auto text-center">STATE JOBS</h5>
+                            <h5 class="py-2 mx-auto text-center border-bottom text-dark">STATES</h5>
                         </div>
                         <div class="si_left_styling">
                             {{--<h5 class="pt-3">IMPORTANT DATES</h5>
@@ -128,14 +138,16 @@
                                 </div>
                             </div>--}}
                             <ul class="list-unstyled ul_hover">
-                                    @if(count($states))
-                                    @foreach($states as $state)
-                                    <a href="{{route('government_jobs', ['state' =>$state->id])}}">
-                                        <li class="py-2"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ isset($state->state)?$state->state:'' }}</li>
-                                    </a>
-                                    @endforeach
-                                    @endif
-                                </ul>
+                                @if(count($states))
+                                @foreach($states as $state)
+                                @if(count(jobsinstate($state->id)))
+                                <a href="{{route('government_jobs', ['state' =>$state->id])}}">
+                                    <li class="py-2"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ isset($state->state)?$state->state:'' }}</li>
+                                </a>
+                                @endif
+                                @endforeach
+                                @endif
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -144,5 +156,4 @@
 </section>
 @endsection
 @section('script')
-
 @endsection
