@@ -7,22 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class Announcement extends Model
+class BlogCategory extends Model
 {  
     use SoftDeletes;
-    protected $table = 'announcements';
+    protected $table = 'blog_categories';
     protected $fillable = [
-        'blog_id',
-        'active',
-        'sort'
+        'name'
     ];
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-
-    public function get_title()
-    {
-        return $this->hasOne(Blog::class, 'id', 'blog_id');
-    }
 }

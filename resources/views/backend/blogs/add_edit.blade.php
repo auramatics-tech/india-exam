@@ -45,6 +45,10 @@
         text-align: center;
         height: 31px;
     }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 12px;
+}
 </style>
 @endsection
 @section('content')
@@ -92,7 +96,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>SLug<span class="text-danger">*</span></label>
+                                    <label>Slug<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" required name="slug" value="{{ isset($blog->slug) ? $blog->slug : '' }}" />
                                 </div>
                             </div>
@@ -117,6 +121,20 @@
                                         @endif
                                     </select>
                                 </div>
+                            </div>
+                        </div>
+                        <div class=blogs"row px-4">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <label for="">Blog Category :</label>
+                                <select class="form-control select2" name="blog_cat_id">
+                                    <option value="">Select Blog Category</option>
+                                    @if(count($blog_categories))
+                                    @foreach($blog_categories as $blog_category)
+                                    <option @if(isset($blog_category->id) && isset($blog->blog_cat_id)  && $blog->blog_cat_id == $blog_category->id) selected @endif value="{{$blog_category->id}}">{{$blog_category->name}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+
                             </div>
                         </div>
                         <div class="">
