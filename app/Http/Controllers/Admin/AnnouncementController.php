@@ -11,7 +11,7 @@ class AnnouncementController extends Controller
 {
     public function index(Request $request)
     {
-        $announcements = Announcement::orderby('id','desc')->get();
+        $announcements = Announcement::orderby('sort','asc')->get();
         
         return view('backend.announcements.index', compact('announcements'));
     }
@@ -64,4 +64,19 @@ class AnnouncementController extends Controller
         Announcement::where('id',$announcement_id)->delete();
         return redirect()->route('admin.announcements')->with('success','Announcement deleted successfully'); 
     }
+
+    
+    public function announcement_drag_drop(Request $request)
+    {
+        $data = $request->page_id_array;
+        if (count($data)) {
+            foreach ($data as $key => $category) {
+                $cat =  Announcement::find($category);
+                $cat->sort = $key + 1;
+                $cat->save();
+            }
+        }
+        return response()->json(['status' => 1]);
+    }
+
 }

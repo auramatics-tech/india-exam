@@ -127,6 +127,7 @@
                                         <th title="Field #1">Sr no</th>
                                         <th title="Field #2">Title</th>
                                         <th title="Field #2">States</th>
+                                        <th title="Field #2">Category</th>
                                         <th title="Field #2">Thumbnail Description</th>
                                         <th title="Field #3">Created at</th>
                                         <th title="Field #6">Action</th>
@@ -146,6 +147,11 @@
                                                 <td>
                                                 <label class="ml-3">
                                                         {{ isset($blog->get_states)?$blog->get_states->state:'' }}
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                <label class="ml-3">
+                                                        {{ isset($blog->get_category)?$blog->get_category->name:'' }}
                                                     </label>
                                                 </td>
                                                 <td>{{ substr($blog->thumbnail_description,0,30) }}</td>
@@ -213,4 +219,33 @@
             });
         });
     </script>
+    
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $("#sortable").sortable({
+                update: function(event, ui) {
+                    var page_id_array = new Array();
+                    $('.sort-tr').each(function(i) {
+                        page_id_array.push($(this).attr("data-id"));
+                        $(this).children('td').first().html(parseInt(i) + 1)
+                    });
+                    console.log(page_id_array)
+
+                    $.ajax({
+                        url: "{{ route('admin.blog_drag_drop') }}",
+                        method: "POST",
+                        data: {
+                            page_id_array: page_id_array,
+                            "_token": "{{ csrf_token() }}",
+                        },
+                        success: function(data) {
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
+
 @endsection
