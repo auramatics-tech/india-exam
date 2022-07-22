@@ -100,6 +100,8 @@ class HomeController extends Controller
     {
         $blogs = Blog::where('active', 1)->when($request->state,function($query) use ($request){
             $query->where('state', $request->state);
+        })->when($request->q,function($query) use ($request){
+            return $query->where('title', 'like', '%'.$request->q.'%');
         })->orderby('id','desc')->paginate(20);
         $important_dates = ImportantDate::where('active', 1)->get();
         $announcements = Announcement::where('active', 1)->get();

@@ -12,7 +12,8 @@
                 </div>
             </div>
             <div class="col-md-4 my-2 my-md-0 ">
-                <form method="get" action="{{route('searchindex')}}" class="d-flex justify-content-end text-right margin_search" id="search">
+                <form method="get" action="@if (Route::is('government_jobs')=='government_jobs'
+                    ) {{route('government_jobs')}} @else {{route('searchindex')}} @endif" class="d-flex justify-content-end text-right margin_search" id="search">
                     <div class="input-icon">
                         <input type="text" class="form-control search_radius" value="{{ isset(request()->q) ? request()->q : '' }}" name="q" placeholder="Search..." id="kt_datatable_search_query" />
                         <span>
