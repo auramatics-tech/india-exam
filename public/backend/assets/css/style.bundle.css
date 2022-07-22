@@ -61088,9 +61088,9 @@ code {
   border-radius: 0.42rem;
 }
 
-.datatable:not(.table) {
+/* .datatable:not(.table) {
   display: none;
-}
+} */
 
 .datatable.datatable-default {
   display: block;

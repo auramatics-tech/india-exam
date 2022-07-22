@@ -63,12 +63,14 @@
                     @endif
                     <!--end::Search Form-->
                     <!--begin: Datatable-->
-                    <table class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
+                    <!-- <table class="datatable datatable-bordered datatable-head-custom " id="kt_datatable"> -->
+                    <table class="table table-responsive cat_table " id="kt_datatable">
                         <thead>
                             <tr>
                                 <th title="Field #1">Id</th>
                                 <th title="Field #2">Name</th>
                                 <th title="Field #2">Email</th>
+                                <th title="Field #3">Question</th>
                                 <th title="Field #3">Comments</th>
                                 <th title="Field #3">created at</th>
                                 <th title="Field #6">Action</th>
@@ -81,6 +83,7 @@
                                 <td>{{ $discussion->id }}</td>
                                 <td>{{ $discussion->name }}</td>
                                 <td>{{ $discussion->email }}</td>
+                                <td>{!! $discussion->get_question->question !!}</td>
                                 <td>{{ $discussion->comments }}</td>
                                 <td>{{ $discussion->created_at }}</td>
                                 <td>
@@ -99,6 +102,7 @@
                     </table>
                     <!--end: Datatable-->
                 </div>
+                {{ $discussions->links("pagination::bootstrap-4") }}
             </div>
             <!--end::Card-->
         </div>

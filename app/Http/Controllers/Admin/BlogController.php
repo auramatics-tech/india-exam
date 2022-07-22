@@ -16,7 +16,7 @@ class BlogController extends Controller
     {
         $blogs = Blog::when(request('q'), function ($query) use ($request) {
             return $query->where('title', 'like', '%'.$request->q.'%');
-        })->orderby('sort','asc')->paginate(10);
+        })->orderby('sort','asc')->paginate(20);
         return view('backend.blogs.index', compact('blogs'));                                                               
     }
 

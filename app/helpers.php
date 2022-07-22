@@ -93,6 +93,7 @@ function facebook_google_link()
     $data['facebook'] = Setting::where('key', 'facebook')->first()->value;
     $data['google'] = Setting::where('key', 'google')->first()->value;
     $data['youtube'] = Setting::where('key', 'youtube')->first()->value;
+    $data['telegram'] = Setting::where('key', 'telegram')->first()->value;
     return $data;
 }
 

@@ -107,6 +107,7 @@
                             <hr class="si_hr_div">
                             @endforeach
                             @endif
+                            {{ $blogs->links("pagination::bootstrap-4") }}
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 py-1 ">

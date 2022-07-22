@@ -60,7 +60,7 @@ class QuestionsController extends Controller
             }
         }
 
-        if(count($request->subcategory)){
+        if(isset($request->subcategory) && count($request->subcategory)){
             foreach($request->subcategory as $k => $v){
                 if(isset($v))
                 {
@@ -98,7 +98,7 @@ class QuestionsController extends Controller
             }
         }
 
-        if(count($request->topics)){
+        if(isset($request->topics) && count($request->topics)){
             foreach($request->topics as $k => $v){
                 if(isset($v))
                 {
@@ -111,7 +111,7 @@ class QuestionsController extends Controller
             }
         }
         $loop = $request->answers;
-        if(count($loop)){
+        if(isset($loop) && count($loop)){
         foreach ($loop as $key => $value) {
             $save_answers = new Answers;
             $save_answers->is_corrected = isset($request->is_correct[$key][0]) ? $request->is_correct[$key][0] : 0;
