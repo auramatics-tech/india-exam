@@ -48,11 +48,11 @@
 </head>
 
 <body>
-  @if(Route::is('online_quiz') || Route::is('home.data') || Route::is('search'))
+  {{--@if(Route::is('online_quiz') || Route::is('home.data') || Route::is('search'))
   @include('frontend.layouts.header2')
   @else
+  @endif--}}
   @include('frontend.layouts.header')
-  @endif
   @yield('content')
   @include('frontend.layouts.footer')
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

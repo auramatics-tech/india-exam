@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Questioncategories;
 use App\Models\Setting;
@@ -13,7 +14,7 @@ function productImagePath($image_name)
 if (!function_exists('get_all_category')) {
     function get_all_category()
     {
-        $categories = Category::where('type', 'Category')->where('is_navbar', 1)->where('active', 1)->orderby('sort','ASC')->get();
+        $categories = Category::where('type', 'Category')->where('is_navbar', 1)->where('active', 1)->orderby('sort', 'ASC')->get();
         return $categories;
     }
 }
@@ -99,7 +100,7 @@ function facebook_google_link()
 
 function next_url($category)
 {
-    
+
     if ($category->type == 'Category') {
         $category1 = $category;
     } elseif ($category->type == 'Subcategory') {
@@ -156,46 +157,52 @@ function next_url($category)
     $url = '';
 
     if (isset($category1->slug) && $category1->slug)
-        $url = route('home.data', ['category1' => isset($category1->slug) ? $category1->slug : '', 'category2' => isset($category2->slug) ? $category2->slug : '', 'category3' => isset($category3->slug) ? $category3->slug : '','category4'=> isset($category4->slug) ? $category4->slug : '','category5'=>isset($category5->slug) ? $category5->slug : '']);
+        $url = route('home.data', ['category1' => isset($category1->slug) ? $category1->slug : '', 'category2' => isset($category2->slug) ? $category2->slug : '', 'category3' => isset($category3->slug) ? $category3->slug : '', 'category4' => isset($category4->slug) ? $category4->slug : '', 'category5' => isset($category5->slug) ? $category5->slug : '']);
     return $url;
 }
 
 function navbar()
 {
-    $categories = Category::where('type','Category')->where('active',1)->get();
+    $categories = Category::where('type', 'Category')->where('active', 1)->get();
 
     $html = '';
-    foreach($categories as $key =>  $category)
-    {
-        $html.= '<li class="su_padding_nav_list">
-        <a class="accordion-heading su_a_decoration su_color_Categories" data-toggle="collapse" data-target="#submenu'.$category->id.'">
+    foreach ($categories as $key =>  $category) {
+        $html .= '<li class="su_padding_nav_list">
+        <a class="accordion-heading su_a_decoration su_color_Categories" data-toggle="collapse" data-target="#submenu' . $category->id . '">
         
         <i class="fa-solid fa-angles-right su_right_icon"></i>
-            <span class="nav-header-primary ">'.$category->name.' <span class="pull-right"><b class="caret"></b></span></span>
+            <span class="nav-header-primary ">' . $category->name . ' <span class="pull-right"><b class="caret"></b></span></span>
         </a>
 
-        <ul class="nav nav-list collapse" id="submenu'.$category->id.'">';
-        
-        $Subcategories = Category::where('type','Subcategory')->where('parent_id',$category->id)->where('active',1)->get();
-        
-        foreach( $Subcategories as $key2 => $subcategory)
-        {
-            $html.= '<li class="su_margin_subCategories">
-            <a class="accordion-heading su_color_subCategories su_a_decoration" data-toggle="collapse" data-target="#submenu2_'.$subcategory->id.'">
+        <ul class="nav nav-list collapse" id="submenu' . $category->id . '">';
+
+        $Subcategories = Category::where('type', 'Subcategory')->where('parent_id', $category->id)->where('active', 1)->get();
+
+        foreach ($Subcategories as $key2 => $subcategory) {
+            $html .= '<li class="su_margin_subCategories">
+            <a class="accordion-heading su_color_subCategories su_a_decoration" data-toggle="collapse" data-target="#submenu2_' . $subcategory->id . '">
              <i class="fa-solid fa-angle-right su_right_icon_subCategories"></i> 
-              '.$subcategory->name.'<span class="pull-right"><b class="caret"></b></span>
+              ' . $subcategory->name . '<span class="pull-right"><b class="caret"></b></span>
             </a> 
-                <ul class="nav nav-list collapse" id="submenu2_'.$subcategory->id.'">';
-                $Subcategories1 = Category::where('type','Topics')->where('parent_id',$subcategory->id)->where('active',1)->get();
-                foreach($Subcategories1 as $key3 => $Subcategory1)
-                {
-                    $html.=  '<li class="su_margin_subCategories"><a class="su_color_heading su_a_decoration" href="#" title="Title"><i class="fa-solid fa-caret-right su_right_icon_subCategories"></i>Sub Sub Menu </a></li>';
-                }
-                    $html.=  '</ul>
+                <ul class="nav nav-list collapse" id="submenu2_' . $subcategory->id . '">';
+            $Subcategories1 = Category::where('type', 'Topics')->where('parent_id', $subcategory->id)->where('active', 1)->get();
+            foreach ($Subcategories1 as $key3 => $Subcategory1) {
+                $html .=  '<li class="su_margin_subCategories"><a class="su_color_heading su_a_decoration" href="#" title="Title"><i class="fa-solid fa-caret-right su_right_icon_subCategories"></i>Sub Sub Menu </a></li>';
+            }
+            $html .=  '</ul>
             </li>';
         }
-        $html.= '</ul>
+        $html .= '</ul>
     </li>';
     }
     return $html;
+}
+
+if (!function_exists('jobsinstate')) {
+    function jobsinstate($state)
+    {
+        $blogs = array();
+        $blogs = Blog::where('state', $state)->get();
+        return $blogs;
+    }
 }

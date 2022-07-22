@@ -73,10 +73,12 @@
                             <h5 class="si_border shadow mb-2 mx-auto text-center">{{$blogs->title}}</h5>
                             {{--<h5 class="py-2 mx-auto text-center border-bottom text-dark">{{$blogs->title}}</h5>--}}
                             <div class="pt-3 text-dark">
-                                <p class="text-muted"><a href="">{{date('d M Y',strtotime( $blogs->created_at)) }}</p>
+                                {{--<p class="text-muted"><a href="">{{date('d M Y',strtotime( $blogs->created_at)) }}</p>--}}
                                 <h4 class="pt-3 text-dark">{{$blogs->title}}</h4>
                                 <p class="pt-2 text-dark">{{$blogs->thumbnail_description}}</p>
-                                <p class="pt-2 text-dark">{!! $blogs->description !!}</p>
+                            </div>
+                            <div class="pt-3 text-dark">
+                                {!! $blogs->description !!}
                             </div>
                             <div class="pt-3 text-dark">
                                 @if(isset($blogs->blog_pdf))
@@ -122,9 +124,11 @@
                             <ul class="list-unstyled">
                                 @if(count($states))
                                 @foreach($states as $state)
+                                @if(count(jobsinstate($state->id)))
                                 <a href="{{route('blog_detail_page', $state->id)}}">
                                     <li class="py-2"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ isset($state->state)?$state->state:'' }}</li>
                                 </a>
+                                @endif
                                 @endforeach
                                 @endif
                             </ul>
