@@ -47,7 +47,7 @@
                     </a>
                 </li>
 
-                <li class="menu-item  @if (Route::is('admin.Categories')=='admin.Categories'
+                {{--<li class="menu-item  @if (Route::is('admin.Categories')=='admin.Categories'
                     ) menu-item-active @endif" aria-haspopup="true">
                     <a href="{{route('category_data',['type'=>'Category'])}}" class="menu-link">
                         <span class="svg-icon menu-icon">
@@ -65,7 +65,7 @@
                     </a>
                 </li>
 
-                <li class="su_toogle_Categories"><i class="fa-solid fa-certificate su_icon_Categories_main"></i>Categories</li>
+                <li class="su_toogle_Categories"><i class="fa-solid fa-certificate su_icon_Categories_main"></i>Categories</li>--}}
                 {!!navbar()!!}
               
                 
@@ -232,11 +232,4 @@
     </div>
     <!--end::Aside Menu-->
 </div>
-<script>
-$(document).ready(function(){
-//   $(".su_toogle_Categories").click(function(){
-//     $(".su_padding_nav_list").toggle();
-//   });
-// });
-</script>
 
