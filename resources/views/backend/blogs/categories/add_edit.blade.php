@@ -68,7 +68,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-1 mr-5">Announcements Management</h5>
+                    <h5 class="text-dark font-weight-bold my-1 mr-5">Blog Category Management</h5>
 
                     <!--end::Page Title-->
                 </div>
@@ -84,7 +84,7 @@
         <!--begin::Container-->
         <div class="container">
             <div class="card card-custom gutter-b example example-compact">
-                <form action="{{ route('admin.announcements.save') }}" method="post">
+                <form action="{{ route('admin.blog_category.save') }}" method="post">
                     @csrf
                     @if (count($errors) > 0)
                     <div class="alert alert-danger">
@@ -100,20 +100,10 @@
                                         <label>Text<span class="text-danger">*</span></label>
                                         <textarea name="text" required class="form-control" cols="30" rows="10">{{ isset($announcement->text) ? $announcement->text : '' }}</textarea>
                                     </div> -->
-                                <label for="">Blogs :</label>
-                                <input type="hidden" name="id" value="{{ isset($announcement->id) ? $announcement->id : '' }}">
-                                <select class="form-control py-3 select2" name="blog_id">
-                                    <option value="">Select Blog</option>
-                                    @if(count($blogs))
-                                    @foreach($blogs as $blog)
-                                    <option @if(isset($announcement->blog_id) && $announcement->blog_id == $blog->id) selected @endif value="{{$blog->id}}">{{$blog->title}}</option>
-                                    @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <label for="">Title :</label>
-                                <input type="text" name="title" class="form-control" value="{{isset($announcement->title) ? $announcement->title : ''}}">
+                                <label for="">Name :</label>
+                                <input type="hidden" name="id" value="{{ isset($blog_category->id) ? $blog_category->id : '' }}">
+                                <input type="text" class="form-control" required name="name" value="{{ isset($blog_category->name) ? $blog_category->name : '' }}" />
+
                             </div>
                         </div>
                         <div class="px-4 d-flex py-3">
@@ -121,7 +111,7 @@
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
                             </div>
                             <div">
-                                <a href="{{route('admin.announcements')}}"><button type="button" class="btn btn-primary mr-2 mb-2">Cancel</button></a>
+                                <a href="{{route('admin.blog_category_list')}}"><button type="button" class="btn btn-primary mr-2 mb-2">Cancel</button></a>
                         </div>
                     </div>
             </div>

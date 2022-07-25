@@ -55,6 +55,10 @@
           <a href="{{facebook_google_link()['google']}}" class="btn btn-outline-light btn-floating m-1 footer_text_clr rounded" class="text-white" role="button"><i
 
               class="fab fa-instagram su_icon_footer"></i></a>
+              
+          <a href="{{facebook_google_link()['telegram']}}" class="btn btn-outline-light btn-floating m-1 footer_text_clr rounded" class="text-white" role="button"><i
+
+              class="fab fa-telegram su_icon_footer"></i></a>
 
         </div>
 

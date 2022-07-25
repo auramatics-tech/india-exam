@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogLink;
+use App\Models\States;
+use App\Models\BlogCategory;
 
 class BlogController extends Controller
 {
@@ -14,7 +16,7 @@ class BlogController extends Controller
     {
         $blogs = Blog::when(request('q'), function ($query) use ($request) {
             return $query->where('title', 'like', '%'.$request->q.'%');
-        })->orderby('id','desc')->get();
+        })->orderby('sort','asc')->paginate(20);
         return view('backend.blogs.index', compact('blogs'));                                                               
     }
 
@@ -25,7 +27,10 @@ class BlogController extends Controller
         {
             $blog = Blog::find($blog_id);
         }
-        return view('backend.blogs.add_edit', compact('blog'));                                                               
+        $states= States::all();
+        
+        $blog_categories = BlogCategory::get();
+        return view('backend.blogs.add_edit', compact('blog','states','blog_categories'));                                                               
     }
 
     public function blog_save(Request $request)
@@ -33,12 +38,14 @@ class BlogController extends Controller
         if($request->id){
             $this->validate($request,[
                 'title' => 'required',
+                'slug' => 'required',
                 'thumbnail_description' => 'required',
              ]);
         }else{
             $this->validate($request,[
                 'title' => 'required',
                 'thumbnail_description' => 'required',
+                'slug' => 'required',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10000',
              ]);
         }
@@ -55,6 +62,9 @@ class BlogController extends Controller
         $blog->title = isset($request->title)?$request->title:'';
         $blog->thumbnail_description = isset($request->thumbnail_description)?$request->thumbnail_description:'';
         $blog->description = isset($request->description)?$request->description:'';
+        $blog->state = isset($request->state)?$request->state:'';
+        $blog->slug = isset($request->slug)?$request->slug:'';
+        $blog->blog_cat_id = isset($request->blog_cat_id)?$request->blog_cat_id:'';
         if($request->hasFile('blog_pdf'))
         {
             $pdfName = time().'.'.$request->blog_pdf->getClientOriginalExtension();
@@ -69,7 +79,7 @@ class BlogController extends Controller
         }
         $blog->save();
         BlogLink::where('blog_id',$blog->id)->delete();
-        if(isset($request->link_title))
+        if(isset($request->link_title[0]) && $request->link_title[0] != '' && count($request->link_title))
         {
             foreach($request->link_title as $key => $link_title)
             {
@@ -100,5 +110,70 @@ class BlogController extends Controller
         Blog::where('id',$blog_id)->delete();
         BlogLink::where('blog_id',$blog_id)->delete();
         return redirect()->route('admin.blogs')->with('success','Blog deleted successfully'); 
+    }
+    public function delete_blog_img($blog_id){
+        // echo "here";die;
+        $blog = Blog::find($blog_id);
+        $blog->image = Null;
+        $blog->save();
+        return redirect()->route('admin.blogs.add_edit',$blog->id)->with('success','Blog deleted successfully'); 
+
+    }
+    public function blog_category_list(Request $request)
+    {
+        $blog_categories = BlogCategory::when(request('q'), function ($query) use ($request) {
+            return $query->where('name', 'like', '%'.$request->q.'%');
+        })->orderby('id','desc')->get();
+        
+        return view('backend.blogs.categories.list', compact('blog_categories'));
+    }
+
+    public function blog_category_add_edit($blog_category_id='',Request $request)
+    {
+        $blog_category = "";
+        if($blog_category_id)
+        {
+            $blog_category = BlogCategory::find($blog_category_id);
+        }
+        return view('backend.blogs.categories.add_edit', compact('blog_category'));                                                               
+    }
+
+    public function blog_category_save(Request $request)
+    {
+        
+        $this->validate($request,[
+            'name' => 'required',
+         ]);
+        if($request->id)
+        {
+            $blog_category = BlogCategory::find($request->id);
+        }
+        else
+        {
+            $blog_category = new BlogCategory;
+        }
+        $blog_category->name = $request->name;
+        $blog_category->save();
+        return redirect()->route('admin.blog_category_list')->with('success','Blog Category add or edit successfully'); 
+    }
+
+    public function blog_category_delete($blog_category_id)
+    {
+        BlogCategory::where('id',$blog_category_id)->delete();
+        return redirect()->route('admin.blog_category_list')->with('success','Blog Category deleted successfully'); 
+    }
+
+    
+    public function blog_drag_drop(Request $request)
+    {
+        $data = $request->page_id_array;
+        if (count($data)) {
+            foreach ($data as $key => $category) {
+                $cat =  Blog::find($category);
+                $cat->sort = $key + 1;
+                $cat->save();
+            }
+        }
+        return response()->json(['status' => 1]);
     }
 }

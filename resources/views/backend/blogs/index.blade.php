@@ -121,11 +121,13 @@
                         <!--end::Search Form-->
                         <!--begin: Datatable-->
                         <div class="">
-                            <table class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
+                            <table class="table table-responsive cat_table" id="">
                                 <thead>
                                     <tr>
                                         <th title="Field #1">Sr no</th>
                                         <th title="Field #2">Title</th>
+                                        <th title="Field #2">States</th>
+                                        <th title="Field #2">Category</th>
                                         <th title="Field #2">Thumbnail Description</th>
                                         <th title="Field #3">Created at</th>
                                         <th title="Field #6">Action</th>
@@ -140,6 +142,16 @@
                                                 <td>
                                                     <label class="ml-3">
                                                         {{ $blog->title }}
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                <label class="ml-3">
+                                                        {{ isset($blog->get_states)?$blog->get_states->state:'' }}
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                <label class="ml-3">
+                                                        {{ isset($blog->get_category)?$blog->get_category->name:'' }}
                                                     </label>
                                                 </td>
                                                 <td>{{ substr($blog->thumbnail_description,0,30) }}</td>
@@ -168,6 +180,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        {{ $blogs->links("pagination::bootstrap-4") }}
                         <!--end: Datatable-->
                     </div>
                 </div>
@@ -184,7 +197,6 @@
 @section('script')
     <!--begin::Page Scripts(used by this page)-->
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <script src="{{ asset('backend/assets/js/pages/crud/ktdatatable/base/html-table.js') }}"></script>
     <script type="text/javascript" src="jquery-1.3.2.js"> </script>
     <script>
         $(document).on('click', '.act', function() {
@@ -207,4 +219,33 @@
             });
         });
     </script>
+    
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $("#sortable").sortable({
+                update: function(event, ui) {
+                    var page_id_array = new Array();
+                    $('.sort-tr').each(function(i) {
+                        page_id_array.push($(this).attr("data-id"));
+                        $(this).children('td').first().html(parseInt(i) + 1)
+                    });
+                    console.log(page_id_array)
+
+                    $.ajax({
+                        url: "{{ route('admin.blog_drag_drop') }}",
+                        method: "POST",
+                        data: {
+                            page_id_array: page_id_array,
+                            "_token": "{{ csrf_token() }}",
+                        },
+                        success: function(data) {
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
+
 @endsection

@@ -43,7 +43,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{ucfirst($s->key)}}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="{{$s->key}}" value="{{$s->value}}" placeholder="Facebook_link" />
+                                    <input type="text" class="form-control" name="{{$s->key}}" value="{{$s->value}}" placeholder="{{ucfirst($s->key)}}_link" />
                                 </div>
                             </div>
                         @endforeach

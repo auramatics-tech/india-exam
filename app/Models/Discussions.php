@@ -19,4 +19,9 @@ class Discussions extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+    
+    public function get_question()
+    {
+        return $this->hasOne(Questions::class, 'id', 'question_id');
+    }
 }

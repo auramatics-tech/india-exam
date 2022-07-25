@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Announcement;
+use App\Models\Blog;
 
 class AnnouncementController extends Controller
 {
     public function index(Request $request)
     {
-        $announcements = Announcement::when(request('q'), function ($query) use ($request) {
-            return $query->where('text', 'like', '%'.$request->q.'%');
-        })->orderby('id','desc')->get();
+        $announcements = Announcement::orderby('sort','asc')->get();
+        
         return view('backend.announcements.index', compact('announcements'));
     }
 
@@ -23,14 +23,16 @@ class AnnouncementController extends Controller
         {
             $announcement = Announcement::find($announcement_id);
         }
-        return view('backend.announcements.add_edit', compact('announcement'));                                                               
+        // $blogs = array();
+        $blogs = Blog::where('active',1)->orderby('id','desc')->get();
+        return view('backend.announcements.add_edit', compact('announcement','blogs'));                                                               
     }
 
     public function announcement_save(Request $request)
     {
         
         $this->validate($request,[
-            'text' => 'required',
+            'blog_id' => 'required',
          ]);
         if($request->id)
         {
@@ -40,7 +42,8 @@ class AnnouncementController extends Controller
         {
             $announcement = new Announcement;
         }
-        $announcement->text = isset($request->text)?$request->text:'';
+        $announcement->blog_id = $request->blog_id;
+        $announcement->title = $request->title;
         $announcement->save();
         return redirect()->route('admin.announcements')->with('success','Announcement add or edit successfully'); 
     }
@@ -62,4 +65,19 @@ class AnnouncementController extends Controller
         Announcement::where('id',$announcement_id)->delete();
         return redirect()->route('admin.announcements')->with('success','Announcement deleted successfully'); 
     }
+
+    
+    public function announcement_drag_drop(Request $request)
+    {
+        $data = $request->page_id_array;
+        if (count($data)) {
+            foreach ($data as $key => $category) {
+                $cat =  Announcement::find($category);
+                $cat->sort = $key + 1;
+                $cat->save();
+            }
+        }
+        return response()->json(['status' => 1]);
+    }
+
 }

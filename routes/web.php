@@ -85,6 +85,15 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin'], function () {
     Route::get('/blog-delete/{blog_id?}', [BlogController::class, 'delete'])->name('admin.blogs.delete');
     Route::post('/blog/save', [BlogController::class, 'blog_save'])->name('admin.blogs.save');
     Route::post('/blog/active-update', [BlogController::class, 'active_update'])->name('admin.blog_active_update');
+    Route::get('/delete-blog-img/{blog_id?}', [BlogController::class, 'delete_blog_img'])->name('admin.delete_blog_img');
+    Route::post('/blog-drag-drop', [BlogController::class, 'blog_drag_drop'])->name('admin.blog_drag_drop');
+    
+    // Blog Category
+    Route::get('/blog-category-list', [BlogController::class, 'blog_category_list'])->name('admin.blog_category_list');
+    Route::get('/blog-category/add_edit/{blog_category_id?}', [BlogController::class, 'blog_category_add_edit'])->name('admin.blog_category.add_edit');
+    Route::get('/blog-category-delete/{blog_category_id?}', [BlogController::class, 'blog_category_delete'])->name('admin.blog_category.delete');
+    Route::post('/blog-category/save', [BlogController::class, 'blog_category_save'])->name('admin.blog_category.save');
+    
 
     // announcement
     Route::get('/announcements', [AnnouncementController::class, 'index'])->name('admin.announcements');
@@ -92,6 +101,7 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin'], function () {
     Route::get('/announcement-delete/{announcement_id?}', [AnnouncementController::class, 'delete'])->name('admin.announcements.delete');
     Route::post('/announcement/save', [AnnouncementController::class, 'announcement_save'])->name('admin.announcements.save');
     Route::post('/announcement/active-update', [AnnouncementController::class, 'active_update'])->name('admin.announcement_active_update');
+    Route::post('/announcement-drag-drop', [AnnouncementController::class, 'announcement_drag_drop'])->name('admin.announcement_drag_drop');
     
     //mock categories
     Route::get('/mock-categories', [MockCategoriesController::class, 'index'])->name('admin.mock_categories');
@@ -140,7 +150,9 @@ Auth::routes([
 ]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/blog-detail-page/{id}', [HomeController::class, 'blog_detail_page'])->name('blog_detail_page');
+Route::get('/blog-detail-page/{blog_slug}', [HomeController::class, 'blog_detail_page'])->name('blog_detail_page');
+Route::get('/online-quiz', [HomeController::class, 'online_quiz'])->name('online_quiz');
+Route::get('/government-jobs', [HomeController::class, 'government_jobs'])->name('government_jobs');
 Route::get('/sitemap', [SubcategoriesController::class, 'sitemap'])->name('sitemap');
 Route::get('/topics/{id}', [SubcategoriesController::class, 'index'])->name('topics');
 Route::get('/topic/{cat}', [SubcategoriesController::class, 'topics_with_cat'])->name('topics_cat');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Questioncategories;
 use App\Models\Setting;
@@ -13,7 +14,7 @@ function productImagePath($image_name)
 if (!function_exists('get_all_category')) {
     function get_all_category()
     {
-        $categories = Category::where('type', 'Category')->where('is_navbar', 1)->where('active', 1)->orderby('sort','ASC')->get();
+        $categories = Category::where('type', 'Category')->where('is_navbar', 1)->where('active', 1)->orderby('sort', 'ASC')->get();
         return $categories;
     }
 }
@@ -93,12 +94,13 @@ function facebook_google_link()
     $data['facebook'] = Setting::where('key', 'facebook')->first()->value;
     $data['google'] = Setting::where('key', 'google')->first()->value;
     $data['youtube'] = Setting::where('key', 'youtube')->first()->value;
+    $data['telegram'] = Setting::where('key', 'telegram')->first()->value;
     return $data;
 }
 
 function next_url($category)
 {
-    
+
     if ($category->type == 'Category') {
         $category1 = $category;
     } elseif ($category->type == 'Subcategory') {
@@ -155,7 +157,7 @@ function next_url($category)
     $url = '';
 
     if (isset($category1->slug) && $category1->slug)
-        $url = route('home.data', ['category1' => isset($category1->slug) ? $category1->slug : '', 'category2' => isset($category2->slug) ? $category2->slug : '', 'category3' => isset($category3->slug) ? $category3->slug : '','category4'=> isset($category4->slug) ? $category4->slug : '','category5'=>isset($category5->slug) ? $category5->slug : '']);
+        $url = route('home.data', ['category1' => isset($category1->slug) ? $category1->slug : '', 'category2' => isset($category2->slug) ? $category2->slug : '', 'category3' => isset($category3->slug) ? $category3->slug : '', 'category4' => isset($category4->slug) ? $category4->slug : '', 'category5' => isset($category5->slug) ? $category5->slug : '']);
     return $url;
 }
 
@@ -255,4 +257,13 @@ function navbar()
     $html.= '</ul>
     </li>';
     return $html;
+}
+
+if (!function_exists('jobsinstate')) {
+    function jobsinstate($state)
+    {
+        $blogs = array();
+        $blogs = Blog::where('state', $state)->get();
+        return $blogs;
+    }
 }

@@ -12,7 +12,7 @@ class DiscussionsController extends Controller
 
     public function index()
     {
-        $discussions = Discussions::all();
+        $discussions = Discussions::paginate(20);
         return view('backend.discussions.discussion',compact('discussions'));                                                               
     }
     public function approved(request $request)

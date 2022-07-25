@@ -59,14 +59,14 @@
                 <div class="card card-custom">
                     <div class="card-header flex-wrap border-0 pt-6 pb-0">
                         <div class="card-title">
-                            <h3 class="card-label"> Announcements
+                            <h3 class="card-label"> Blog Management
                                 <!-- <span class="d-block text-muted pt-2 font-size-sm">Edit categories details and delete
                                     categories</span> -->
                             </h3>
                         </div>
                         <div class="card-toolbar">
                             <!--begin::Button-->
-                            <a href="{{ route('admin.announcements.add_edit') }}" class="new_record btn btn-primary font-weight-bolder">
+                            <a href="{{ route('admin.blog_category.add_edit') }}" class="new_record btn btn-primary font-weight-bolder">
                                 <span class="svg-icon svg-icon-md">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -125,40 +125,30 @@
                                 <thead>
                                     <tr>
                                         <th title="Field #1">Sr no</th>
-                                        <th title="Field #2">Text</th>
+                                        <th title="Field #2">Name</th>
                                         <th title="Field #3">Created at</th>
                                         <th title="Field #6">Action</th>
-                                        <th title="Field #6">Active/Deactive</th>
                                     </tr>
                                 </thead>
                                 <tbody id="sortable">
-                                    @if (isset($announcements[0]) && count($announcements))
-                                        @foreach ($announcements as $key => $announcement)
-                                            <tr data-id="{{ $announcement->id }}" class="sort-tr">
+                                    @if (isset($blog_categories[0]) && count($blog_categories))
+                                        @foreach ($blog_categories as $key => $blog_category)
+                                            <tr data-id="{{ $blog_category->id }}" class="sort-tr">
                                                 <td>{{ ++$key }}</td>
                                                 <td>
                                                     <label class="ml-3">
-                                                        {{ isset($announcement->get_title->title) ? $announcement->get_title->title : ''}}
+                                                        {{ isset($blog_category->name) ? $blog_category->name : ''}}
                                                     </label>
                                                 </td>
-                                                <td>{{ $announcement->created_at }}</td>
+                                                <td>{{ $blog_category->created_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.announcements.add_edit', $announcement->id) }}"
+                                                    <a href="{{ route('admin.blog_category.add_edit', $blog_category->id) }}"
                                                         style="text-decoration: none; color:green;">
                                                         <i class="far fa-edit"></i>
                                                     </a>
-                                                        <a class="deleteRecord" rel="{{$announcement->id}}" rel1="announcement-delete" href="java-script:" style="text-decoration: none; color:green;">
+                                                        <a class="deleteRecord" rel="{{$blog_category->id}}" rel1="blog-category-delete" href="java-script:" style="text-decoration: none; color:green;">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
-                                                </td>
-                                                <td class="">
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input act" type="checkbox" role="switch"
-                                                            id="flexSwitchCheckChecked" @if (isset($announcement->active) && $announcement->active == '1') data-status="0" @else data-status="1" @endif @if (isset($announcement->active) && $announcement->active == '1')
-                                                        checked @endif value="{{ $announcement->id }}" >
-                                                        <label class="form-check-label"
-                                                            for="flexSwitchCheckChecked"></label>
-                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -183,54 +173,4 @@
     <!--begin::Page Scripts(used by this page)-->
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script type="text/javascript" src="jquery-1.3.2.js"> </script>
-    <script>
-        $(document).on('click', '.act', function() {
-            var announcement_id = $(this).val();
-            var status = $(this).attr('data-status');
-            
-            $.ajax({ //create an ajax request to display.php
-                type: "POST",
-                url: "{{ route('admin.announcement_active_update') }}",
-                data: {
-                    announcement_id: announcement_id,
-                    status: status,
-                    "_token": "{{ csrf_token() }}",
-                },
-                dataType: "html", //expect html to be returned                
-                success: function(response) {
-                    //alert(response);
-                }
-
-            });
-        });
-    </script>
-    
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-    <script>
-        $(function() {
-            $("#sortable").sortable({
-                update: function(event, ui) {
-                    var page_id_array = new Array();
-                    $('.sort-tr').each(function(i) {
-                        page_id_array.push($(this).attr("data-id"));
-                        $(this).children('td').first().html(parseInt(i) + 1)
-                    });
-                    console.log(page_id_array)
-
-                    $.ajax({
-                        url: "{{ route('admin.announcement_drag_drop') }}",
-                        method: "POST",
-                        data: {
-                            page_id_array: page_id_array,
-                            "_token": "{{ csrf_token() }}",
-                        },
-                        success: function(data) {
-                        }
-                    });
-                }
-            });
-        });
-
-    </script>
-
 @endsection

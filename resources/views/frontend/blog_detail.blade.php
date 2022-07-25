@@ -1,17 +1,19 @@
 @extends('frontend.layouts.master')
 @section('content')
 <section class="pt-2">
-@if(count($announcements))
+    @if(count($announcements))
     @foreach($announcements as $announcement)
     <div class="marq1">
         <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex si_announce_style">
-            <div class="si_width_announce">
+            <!-- <div class="si_width_announce">
                 <div class="textmarq">Announcements</div>
                 <div class="textmarqmob">Announcements</div>
-            </div>
+            </div> -->
             <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
                 <div class="si_marq_style">
-                    <h5>{{$announcement->text}}</h5>
+                    <a href="{{route('blog_detail_page', $announcement->get_title->slug)}}">
+                        <h5>{{ $announcement->get_title->title}}</h5>
+                    </a>
                 </div>
             </marquee>
         </div>
@@ -71,10 +73,12 @@
                             <h5 class="si_border shadow mb-2 mx-auto text-center">{{$blogs->title}}</h5>
                             {{--<h5 class="py-2 mx-auto text-center border-bottom text-dark">{{$blogs->title}}</h5>--}}
                             <div class="pt-3 text-dark">
-                                <p class="text-muted"><a href="">{{date('d M Y',strtotime( $blogs->created_at)) }}</p>
+                                {{--<p class="text-muted"><a href="">{{date('d M Y',strtotime( $blogs->created_at)) }}</p>--}}
                                 <h4 class="pt-3 text-dark">{{$blogs->title}}</h4>
                                 <p class="pt-2 text-dark">{{$blogs->thumbnail_description}}</p>
-                                <p class="pt-2 text-dark">{!! $blogs->description !!}</p>
+                            </div>
+                            <div class="pt-3 text-dark">
+                                {!! $blogs->description !!}
                             </div>
                             <div class="pt-3 text-dark">
                                 @if(isset($blogs->blog_pdf))
@@ -83,26 +87,26 @@
                                     <a target="_blank" href="{{asset('blog/pdf/'.$blogs->blog_pdf)}}"><button class="si_mock_btn bg-danger border none rounded p-1" type="submit">Download <i class="fa fa-download" aria-hidden="true"></i></button></a>
                                 </div>
                                 @endif
+                                @if(count($blogs->get_links))
                                 <div class="py-3 text-dark">
                                     <p class="text-center si_bg_light"><b>Important Links</b></p>
                                 </div>
                                 <div class="py-2 border p-3 text-dark">
                                     <p class="pt-2">IMPORTANT LINKS :</p>
-                                    @if(count($blogs->get_links))
                                     @foreach($blogs->get_links as $key => $val)
                                     <a class="pt-2" href="{{$val->link}}">
                                         <h5><u>{{$val->title}}</u></h5>
                                     </a>
                                     @endforeach
-                                    @endif
                                 </div>
-
+                                @endif
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 py-1">
                         <div class="si_heading pb-4">
-                            <h5 class="si_border shadow mb-2 mx-auto text-center">IMPORTANT DATES</h5>
+                            <h5 class="si_border shadow mb-2 mx-auto text-center">STATE JOBS</h5>
+                            <h5 class="py-2 mx-auto text-center border-bottom text-dark">STATES</h5>
                         </div>
                         <div class="si_left_styling">
                             {{--<h5 class="pt-3">IMPORTANT DATES</h5>
@@ -118,11 +122,13 @@
                                 </div>
                             </div>--}}
                             <ul class="list-unstyled">
-                                @if(count($important_dates))
-                                @foreach($important_dates as $important_date)
-                                <a href="">
-                                    <li class="py-2">{!! $important_date->text !!}</li>
+                                @if(count($states))
+                                @foreach($states as $state)
+                                @if(count(jobsinstate($state->id)))
+                                <a href="{{route('blog_detail_page', $state->id)}}">
+                                    <li class="py-2"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ isset($state->state)?$state->state:'' }}</li>
                                 </a>
+                                @endif
                                 @endforeach
                                 @endif
                             </ul>

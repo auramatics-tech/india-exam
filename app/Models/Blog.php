@@ -13,19 +13,33 @@ class Blog extends Model
     protected $table = 'blogs';
     protected $fillable = [
         'title',
+        'blog_cat_id',
         'thumbnail_description',
         'description',
         'blog_pdf',
-        'image'
+        'image',
+        'state',
+        'sort'
     ];
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
+    
+    public function get_category()
+    {
+        return $this->hasOne(BlogCategory::class, 'id', 'blog_cat_id');
+    }
+
     public function get_links()
     {
         return $this->hasMany(BlogLink::class, 'blog_id', 'id');
+    }
+
+    public function get_states()
+    {
+        return $this->hasOne(States::class, 'id', 'state');
     }
 
 }

@@ -10,6 +10,7 @@ use App\Models\Questions;
 use App\Models\Questioncategories;
 use App\Models\ImportantDate;
 use App\Models\Announcement;
+use App\Models\States;
 
 
 class HomeController extends Controller
@@ -23,10 +24,11 @@ class HomeController extends Controller
         })
             ->where('active', 1)->orderby("sort", 'asc')->get();
 
-        $blogs = Blog::where('active', 1)->orderby('id','desc')->get();
+        $blogs = Blog::where('active', 1)->orderby('id','desc')->paginate(20);
         $important_dates = ImportantDate::where('active', 1)->orderby('id','desc')->get();
         $announcements = Announcement::where('active', 1)->orderby('id','desc')->get();
-        return view('frontend.home', compact('categories', 'blogs', 'important_dates', 'announcements'));
+        $states= States::all();
+        return view('frontend.home', compact('categories', 'blogs', 'important_dates', 'announcements','states'));
     }
 
     public function categories(Request $request)
@@ -79,12 +81,31 @@ class HomeController extends Controller
         $category = $main_category;
         return view('frontend.subcategories', compact('category', 'subcategories'));
     }
-    public function blog_detail_page($id)
+    public function blog_detail_page(Request $request)
     {
         $categories = Category::where('active', 1)->get();
-        $blogs = Blog::find($id);
+        $blogs = Blog::where('slug',$request->blog_slug)->first();
         $important_dates = ImportantDate::where('active', 1)->orderby('id','desc')->get();
         $announcements = Announcement::where('active', 1)->orderby('id','desc')->get();
-        return view('frontend.blog_detail', compact('categories', 'blogs', 'important_dates', 'announcements'));
+        $states= States::all();
+        return view('frontend.blog_detail', compact('categories', 'blogs', 'important_dates', 'announcements','states'));
+    }
+    public function online_quiz(Request $request)
+    {
+        $categories = Category::where('active', 1)->get();
+        $announcements = Announcement::where('active', 1)->get();
+        return view('frontend.layouts.online_quiz', compact('categories', 'announcements'));
+    }
+    public function government_jobs(Request $request)
+    {
+        $blogs = Blog::where('active', 1)->when($request->state,function($query) use ($request){
+            $query->where('state', $request->state);
+        })->when($request->q,function($query) use ($request){
+            return $query->where('title', 'like', '%'.$request->q.'%');
+        })->orderby('id','desc')->paginate(20);
+        $important_dates = ImportantDate::where('active', 1)->get();
+        $announcements = Announcement::where('active', 1)->get();
+        $states= States::all();
+        return view('frontend.layouts.government_jobs', compact('blogs', 'important_dates', 'announcements','states'));
     }
 }
