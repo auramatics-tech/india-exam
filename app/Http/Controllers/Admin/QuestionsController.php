@@ -164,4 +164,82 @@ class QuestionsController extends Controller
         $ques->save();
         return response('success','Data Updated successfully!');
     }
+    public function add_mutliple_questions(Request $request)
+    {
+        $questions = Questions::where('active',1)->orderby('id','desc')->get();
+        $categories = Category::where(['type'=> 'Category','active'=>1])->orderby('sort','asc')->get();
+        return view('backend.questions.add_mutliple_questions', compact('questions', 'categories'));
+    }
+    public function save_mutliple_questions(Request $request)
+    {
+        if(!isset($request->question))
+        {
+            return back()->with('errors','Please select atleast 1 question');
+        }
+        $category = Category::find($request->category);
+        $sub_categories = Category::where(['type'=>'Subcategory','parent_id'=>$category->id,'active'=>1])->get();
+        if(count($sub_categories))
+        {
+            foreach($sub_categories as $subcategory)
+            {
+                $sub_categories1 = Category::where(['type'=>'Subcategory1','parent_id'=>$subcategory->id,'active'=>1])->get();
+                if(count($sub_categories1))
+                {
+                    foreach($sub_categories1 as $sub_category1)
+                    {
+                        $sub_categories2 = Category::where(['type'=>'Subcategory2','parent_id'=>$sub_category1->id,'active'=>1])->get();
+                        if(count($sub_categories2))
+                        {
+                            foreach($sub_categories2 as $sub_category2)
+                            {
+                                $topic = Category::where(['type'=>'Topics','parent_id'=>$sub_category2->id,'active'=>1])->first();
+                                if(isset($topic->id))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            $topic = Category::where(['type'=>'Topics','parent_id'=>$subcategory->id,'active'=>1])->first();
+                            if(isset($topic->id))
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    $topic = Category::where(['type'=>'Topics','parent_id'=>$subcategory->id,'active'=>1])->first();
+                    if(isset($topic->id))
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
+        $questions = $request->question;
+        if(count($questions))
+        {
+            foreach($questions as $question)
+            {
+                $questioncategories = new Questioncategories;
+                $questioncategories->topic_id = $request->category;
+                $questioncategories->question_id = $question;
+                $questioncategories->type = 'category';
+                $questioncategories->save();
+                if(isset( $topic->id))
+                {
+                    $questioncategories = new Questioncategories;
+                    $questioncategories->topic_id = $topic->id;
+                    $questioncategories->question_id = $question;
+                    $questioncategories->type = 'topics';
+                    $questioncategories->save();
+                }
+            }
+        }
+        return back()->with('success','Questions successfully added.');
+    }
 }

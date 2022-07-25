@@ -74,6 +74,9 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin'], function () {
     Route::get('/questions-edit/{id}', [QuestionsController::class, 'edit'])->name('admin.questions_edit');
     Route::post('/active-update', [QuestionsController::class, 'active_update'])->name('admin.active_update');
     Route::get('/upload-images', [QuestionsController::class, 'upload_images'])->name('admin.upload_images');
+    Route::get('/add-mutliple-questions', [QuestionsController::class, 'add_mutliple_questions'])->name('admin.add_mutliple_questions');
+    Route::post('/save-mutliple-questions', [QuestionsController::class, 'save_mutliple_questions'])->name('admin.save_mutliple_questions');
+
     // Discussion
     Route::get('/discussion', [DiscussionsController::class, 'index'])->name('admin.discussion');
     Route::get('/discussion/{id}', [DiscussionsController::class, 'approved'])->name('admin.approved');
@@ -120,7 +123,7 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin'], function () {
     Route::get('/important-date-delete/{important_date_id?}', [ImportantDateController::class, 'delete'])->name('admin.important_dates.delete');
     Route::post('/important-date/save', [ImportantDateController::class, 'important_date_save'])->name('admin.important_dates.save');
     Route::post('/important-date/active-update', [ImportantDateController::class, 'active_update'])->name('admin.important_date_active_update');
-
+    
     //Ckeditor
     Route::post('/ck-image', [CategoriesController::class, 'ckeditor_image'])->name('admin.ck_image');
 

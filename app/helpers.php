@@ -164,38 +164,92 @@ function next_url($category)
 
 function navbar()
 {
-    $categories = Category::where('type', 'Category')->where('active', 1)->get();
-
+    $categories = Category::where('type','Category')->where('active',1)->get();
     $html = '';
-    foreach ($categories as $key =>  $category) {
-        $html .= '<li class="su_padding_nav_list">
-        <a class="accordion-heading su_a_decoration su_color_Categories" data-toggle="collapse" data-target="#submenu' . $category->id . '">
-        
-        <i class="fa-solid fa-angles-right su_right_icon"></i>
-            <span class="nav-header-primary ">' . $category->name . ' <span class="pull-right"><b class="caret"></b></span></span>
-        </a>
 
-        <ul class="nav nav-list collapse" id="submenu' . $category->id . '">';
-
-        $Subcategories = Category::where('type', 'Subcategory')->where('parent_id', $category->id)->where('active', 1)->get();
-
-        foreach ($Subcategories as $key2 => $subcategory) {
-            $html .= '<li class="su_margin_subCategories">
-            <a class="accordion-heading su_color_subCategories su_a_decoration" data-toggle="collapse" data-target="#submenu2_' . $subcategory->id . '">
-             <i class="fa-solid fa-angle-right su_right_icon_subCategories"></i> 
-              ' . $subcategory->name . '<span class="pull-right"><b class="caret"></b></span>
-            </a> 
-                <ul class="nav nav-list collapse" id="submenu2_' . $subcategory->id . '">';
-            $Subcategories1 = Category::where('type', 'Topics')->where('parent_id', $subcategory->id)->where('active', 1)->get();
-            foreach ($Subcategories1 as $key3 => $Subcategory1) {
-                $html .=  '<li class="su_margin_subCategories"><a class="su_color_heading su_a_decoration" href="#" title="Title"><i class="fa-solid fa-caret-right su_right_icon_subCategories"></i>Sub Sub Menu </a></li>';
+        foreach($categories as $key =>  $category)
+        {
+            $html.= '<li class="su_padding_nav_list">
+            <a class="accordion-heading su_a_decoration su_color_Categories" data-toggle="collapse" data-target="#submenu'.$category->id.'">
+            <i class="fa-solid fa-angles-right su_right_icon"></i>
+                <span class="nav-header-primary ">'.$category->name.' <span class="pull-right"><b class="caret"></b></span></span>
+            </a>
+            <ul class="nav nav-list collapse" id="submenu'.$category->id.'">';
+            $Subcategories = Category::where('type','Subcategory')->where('parent_id',$category->id)->where('active',1)->get(); 
+            foreach( $Subcategories as $key2 => $subcategory)
+            {
+                $html.= '<li class="su_margin_subCategories">
+                <a class="accordion-heading su_color_subCategories su_a_decoration" data-toggle="collapse" data-target="#submenu1'.$subcategory->id.'">
+                <i class="fa-solid fa-angle-right su_right_icon_subCategories"></i> 
+                '.$subcategory->name.'<span class="pull-right"><b class="caret"></b></span>
+                </a> 
+                    <ul class="nav nav-list collapse" id="submenu1'.$subcategory->id.'">';
+                    $Subcategories1 = Category::where('type','Subcategory1')->where('parent_id',$subcategory->id)->where('active',1)->get();
+                    if(count($Subcategories1))
+                    {
+                        foreach($Subcategories1 as $key3 => $subcategory1)
+                        {
+                            $html.= '<li class="su_margin_subCategories">
+                                <a class="accordion-heading su_color_subCategories su_a_decoration" data-toggle="collapse" data-target="#submenu2'.$subcategory1->id.'">
+                                <i class="fa-solid fa-angle-right su_right_icon_subCategories"></i> 
+                                '.$subcategory1->name.'<span class="pull-right"><b class="caret"></b></span>
+                                </a> 
+                                    <ul class="nav nav-list collapse" id="submenu2'.$subcategory1->id.'">';
+                                    $subcategories2 = Category::where('type','Subcategory2')->where('parent_id',$subcategory1->id)->where('active',1)->get();
+                                    if(count($subcategories2))
+                                    {
+                                        foreach($subcategories2 as $key3 => $subcategory2)
+                                        {
+                                            
+                                            $html.= '<li class="su_margin_subCategories">
+                                            <a class="accordion-heading su_color_subCategories su_a_decoration" data-toggle="collapse" data-target="#topic'.$subcategory2->id.'">
+                                            <i class="fa-solid fa-angle-right su_right_icon_subCategories"></i> 
+                                            '.$subcategory2->name.'<span class="pull-right"><b class="caret"></b></span>
+                                            </a> 
+                                                <ul class="nav nav-list collapse" id="topic'.$subcategory2->id.'">';
+                                                $topics = Category::where('type','Topics')->where('parent_id',$subcategory2->id)->where('active',1)->get();
+                                                foreach($topics as $key3 => $topic)
+                                                {
+                                                    $question = $topic->first_question;
+                                                    $question_id = isset($question->question_id) ? "?question_id=$question->question_id" : '' ;
+                                                    $html.=  '<li class="su_margin_subCategories"><a class="su_color_heading su_a_decoration" href="'.route('admin.questioncat', $category->id) .$question_id .'" title="Title"><i class="fa-solid fa-caret-right su_right_icon_subCategories"></i>'.$topic->name.' </a></li>';
+                                                }
+                                                    $html.=  '</ul>
+                                            </li>';
+                                        }
+                                    }
+                                    else
+                                    {
+                                        $topics = Category::where('type','Topics')->where('parent_id',$subcategory1->id)->where('active',1)->get();
+                                        foreach($topics as $key3 => $topic)
+                                        {
+                                            $question = $topic->first_question;
+                                            $question_id = isset($question->question_id) ? "?question_id=$question->question_id" : '' ;
+                                            $html.=  '<li class="su_margin_subCategories"><a class="su_color_heading su_a_decoration" href="'.route('admin.questioncat', $category->id) .$question_id .'" title="Title"><i class="fa-solid fa-caret-right su_right_icon_subCategories"></i>'.$topic->name.' </a></li>';
+                                        }
+                                    }
+                                    
+                                        $html.=  '</ul>
+                                </li>';
+                        }
+                    }
+                    else
+                    {
+                        $topics = Category::where('type','Topics')->where('parent_id',$subcategory->id)->where('active',1)->get();
+                        foreach($topics as $key3 => $topic)
+                        {
+                            $question = $topic->first_question;
+                            $question_id = isset($question->question_id) ? "?question_id=$question->question_id" : '' ;
+                            $html.=  '<li class="su_margin_subCategories"><a class="su_color_heading su_a_decoration" href="'.route('admin.questioncat', $category->id) .$question_id .'" title="Title"><i class="fa-solid fa-caret-right su_right_icon_subCategories"></i>'.$topic->name.' </a></li>';
+                        }
+                    }
+                    
+                        $html.=  '</ul>
+                </li>';
             }
-            $html .=  '</ul>
-            </li>';
+            $html.= '</ul>
+        </li>';
         }
-        $html .= '</ul>
-    </li>';
-    }
     return $html;
 }
 
