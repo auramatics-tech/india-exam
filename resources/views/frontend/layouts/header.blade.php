@@ -102,7 +102,7 @@
                         <a class="nav-link su_navitem_clr" href="{{ route('home') }}"> Home</a>
                     </li>
                     <li class="nav-item @if((isset(request()->category1) && request()->category1 == $val->slug)) active @endif">
-                        <a class="nav-link su_navitem_clr" href="{{route('online_quiz')}}">Previous Year Quistion</a>
+                        <a class="nav-link su_navitem_clr" href="{{route('online_quiz')}}">Previous Year Question</a>
                     </li>
                     <li class="nav-item su_nav_change">
                         <a class="nav-link su_navitem_clr" href="{{ route('government_jobs') }}">Government jobs</a>
