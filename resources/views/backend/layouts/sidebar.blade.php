@@ -73,7 +73,7 @@
                 
               
                 
-                <li class="menu-item  @if (Route::is('admin.questions')=='admin.questions'
+                {{--<li class="menu-item  @if (Route::is('admin.questions')=='admin.questions'
                     ) menu-item-active @endif" aria-haspopup="true">
                     <a href="{{route('admin.questions')}}" class="menu-link">
                         <span class="svg-icon menu-icon">
@@ -89,7 +89,7 @@
                         </span>
                         <span class="menu-text">Questions</span>
                     </a>
-                </li>
+                </li>--}}
                 <li class="menu-item  @if (Route::is('admin.discussion')=='admin.discussion'
                     ) menu-item-active @endif" aria-haspopup="true">
                     <a href="{{route('admin.discussion')}}" class="menu-link">

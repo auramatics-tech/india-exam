@@ -1,24 +1,30 @@
 @extends('frontend.layouts.master')
+@section('css')
+<style>
+    .slide {
+        float: left;
+        transform: translateX(400%);
+        transition: all 7s;
+    }
+
+    .slide.active {
+        transform: translateX(-350%);
+    }
+</style>
+@endsection
 @section('content')
 <section class="pt-2">
-    @if(count($announcements))
-    @foreach($announcements as $announcement)
-    <div class="marq1">
-        <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex si_announce_style">
-            <!-- <div class="si_width_announce">
-                <div class="textmarq">Announcements</div>
-                <div class="textmarqmob">Announcements</div>
-            </div> -->
-            <marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()">
-                <div class="si_marq_style">
-                    <a href="{{route('blog_detail_page', $announcement->get_title->slug)}}">
-                        <h5>{{ $announcement->get_title->title}}</h5>
-                    </a>
-                </div>
-            </marquee>
-        </div>
+@if(count($announcements))
+    <div class="content si_announce_style si_marq_style">
+        <marquee behavior="scroll" scrollamount="15" width="100%"   direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="height: 30px;line-height:30px;">
+        @foreach($announcements as $announcement)
+            <span><a href="{{route('blog_detail_page', $announcement->get_title->slug)}}" class="slide">
+                {{ $announcement->title}}
+            </a>
+            </span>
+            @endforeach
+        </marquee>
     </div>
-    @endforeach
     @endif
 </section>
 <section class="si_sec_text su_height">
@@ -125,8 +131,24 @@
                                 @if(count($states))
                                 @foreach($states as $state)
                                 @if(count(jobsinstate($state->id)))
-                                <a href="{{route('blog_detail_page', $state->id)}}">
+                                <a href="{{route('blog_detail_page', $state->state)}}">
                                     <li class="py-2"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ isset($state->state)?$state->state:'' }}</li>
+                                </a>
+                                @endif
+                                @endforeach
+                                @endif
+                            </ul>
+                        </div>
+                        <div class="si_heading pb-4">
+                            <h5 class="si_border shadow mb-2 mx-auto text-center">Other JOBS</h5>
+                        </div>
+                        <div class="si_left_styling">
+                            <ul class="list-unstyled ul_hover">
+                                @if(count($states))
+                                @foreach($blog_cats as $blog_cat)
+                                @if(count(jobsinblogcat($blog_cat->id)))
+                                <a href="{{route('government_jobs', ['blog_cat' =>$blog_cat->name])}}">
+                                    <li class="py-2"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ isset($blog_cat->name)?$blog_cat->name:'' }}</li>
                                 </a>
                                 @endif
                                 @endforeach

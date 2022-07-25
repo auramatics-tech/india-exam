@@ -16,7 +16,7 @@
 <section class="pt-2">
     @if(count($announcements))
     <div class="content si_announce_style si_marq_style">
-        <marquee behavior="scroll" scrollamount="8" direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="height: 30px;">
+        <marquee behavior="scroll" scrollamount="15" width="100%" direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="height: 30px;line-height:30px">
             @foreach($announcements as $announcement)
             <span><a href="{{route('blog_detail_page', $announcement->get_title->slug)}}" class="slide">
                 {{ $announcement->title}}
@@ -78,7 +78,7 @@
                                     @if(count($states))
                                     @foreach($states as $state)
                                         @if(count(jobsinstate($state->id)))
-                                            <a href="{{route('government_jobs', ['state' =>$state->id])}}">
+                                            <a href="{{route('government_jobs', ['state' =>$state->state])}}">
                                                 <li class="py-2"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ isset($state->state)?$state->state:'' }}</li>
                                             </a>
                                         @endif
@@ -87,16 +87,15 @@
                                 </ul>
                             </div>
                             <div class="si_heading pb-4">
-                                <h5 class="si_border shadow mb-2 mx-auto text-center">STATE JOBS</h5>
-                                <h5 class="py-2 mx-auto text-center border-bottom text-dark">STATES</h5>
+                                <h5 class="si_border shadow mb-2 mx-auto text-center">Other JOBS</h5>
                             </div>
                             <div class="si_left_styling">
                                 <ul class="list-unstyled ul_hover">
                                     @if(count($states))
-                                    @foreach($states as $state)
-                                        @if(count(jobsinstate($state->id)))
-                                            <a href="{{route('government_jobs', ['state' =>$state->id])}}">
-                                                <li class="py-2"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ isset($state->state)?$state->state:'' }}</li>
+                                    @foreach($blog_cats as $blog_cat)
+                                        @if(count(jobsinblogcat($blog_cat->id)))
+                                            <a href="{{route('government_jobs', ['blog_cat' =>$blog_cat->name])}}">
+                                                <li class="py-2"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ isset($blog_cat->name)?$blog_cat->name:'' }}</li>
                                             </a>
                                         @endif
                                     @endforeach

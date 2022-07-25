@@ -11,6 +11,7 @@ use App\Models\Questioncategories;
 use App\Models\ImportantDate;
 use App\Models\Announcement;
 use App\Models\States;
+use App\Models\BlogCategory;
 
 
 class HomeController extends Controller
@@ -28,7 +29,8 @@ class HomeController extends Controller
         $important_dates = ImportantDate::where('active', 1)->orderby('id','desc')->get();
         $announcements = Announcement::where('active', 1)->orderby('id','desc')->get();
         $states= States::all();
-        return view('frontend.home', compact('categories', 'blogs', 'important_dates', 'announcements','states'));
+        $blog_cats= BlogCategory::all();
+        return view('frontend.home', compact('categories', 'blogs', 'important_dates', 'announcements','states','blog_cats'));
     }
 
     public function categories(Request $request)
@@ -88,7 +90,8 @@ class HomeController extends Controller
         $important_dates = ImportantDate::where('active', 1)->orderby('id','desc')->get();
         $announcements = Announcement::where('active', 1)->orderby('id','desc')->get();
         $states= States::all();
-        return view('frontend.blog_detail', compact('categories', 'blogs', 'important_dates', 'announcements','states'));
+        $blog_cats= BlogCategory::all();
+        return view('frontend.blog_detail', compact('categories', 'blogs', 'important_dates', 'announcements','states','blog_cats'));
     }
     public function online_quiz(Request $request)
     {
@@ -98,14 +101,29 @@ class HomeController extends Controller
     }
     public function government_jobs(Request $request)
     {
-        $blogs = Blog::where('active', 1)->when($request->state,function($query) use ($request){
-            $query->where('state', $request->state);
-        })->when($request->q,function($query) use ($request){
-            return $query->where('title', 'like', '%'.$request->q.'%');
-        })->orderby('id','desc')->paginate(20);
+        if(isset($request->state)){
+            $state_id = States::where('state',$request->state)->first()->id;
+        }else{
+            $state_id = '';
+        }
+        if(isset($request->blog_cat)){
+            $blog_cat = BlogCategory::where('name',$request->blog_cat)->first()->id;
+        }else{
+            $blog_cat = '';
+        }
+        $blogs = Blog::where('active', 1)
+                ->when($request->state,function($query) use ($state_id){
+                    $query->where('state', $state_id);
+                })
+                ->when($request->blog_cat,function($query) use ($blog_cat){
+                    $query->where('blog_cat_id', $blog_cat);
+                })->when($request->q,function($query) use ($request){
+                    return $query->where('title', 'like', '%'.$request->q.'%');
+                })->orderby('id','desc')->paginate(20);
         $important_dates = ImportantDate::where('active', 1)->get();
         $announcements = Announcement::where('active', 1)->get();
         $states= States::all();
-        return view('frontend.layouts.government_jobs', compact('blogs', 'important_dates', 'announcements','states'));
+        $blog_cats= BlogCategory::all();
+        return view('frontend.layouts.government_jobs', compact('blogs', 'important_dates', 'announcements','states','blog_cats'));
     }
 }

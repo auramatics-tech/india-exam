@@ -5,6 +5,7 @@ use App\Models\Category;
 use App\Models\Questioncategories;
 use App\Models\Setting;
 use App\Models\MockTest;
+use App\Models\BlogCategory;
 // use App\Models\Category;
 
 function productImagePath($image_name)
@@ -203,6 +204,14 @@ if (!function_exists('jobsinstate')) {
     {
         $blogs = array();
         $blogs = Blog::where('state', $state)->get();
+        return $blogs;
+    }
+}
+if (!function_exists('jobsinblogcat')) {
+    function jobsinblogcat($cat)
+    {
+        $blogs = array();
+        $blogs = Blog::where('blog_cat_id', $cat)->get();
         return $blogs;
     }
 }
