@@ -164,12 +164,7 @@ function next_url($category)
 function navbar()
 {
     $categories = Category::where('type','Category')->where('active',1)->get();
-    $html = '<li class="su_padding_nav_list">
-        <a class="accordion-heading su_a_decoration su_color_Categories" data-toggle="collapse" data-target="#categorymenu1">
-            <i class="fa-solid fa-angles-right su_right_icon"></i>
-                <span class="nav-header-primary ">Categories<span class="pull-right"><b class="caret"></b></span></span>
-            </a>
-            <ul class="nav nav-list collapse" id="categorymenu1">';
+    $html = '';
 
         foreach($categories as $key =>  $category)
         {
@@ -254,8 +249,6 @@ function navbar()
             $html.= '</ul>
         </li>';
         }
-    $html.= '</ul>
-    </li>';
     return $html;
 }
 
