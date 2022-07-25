@@ -94,7 +94,7 @@ class HomeController extends Controller
     {
         $categories = Category::where('active', 1)->get();
         $announcements = Announcement::where('active', 1)->get();
-        return view('Frontend.layouts.online_quiz', compact('categories', 'announcements'));
+        return view('frontend.layouts.online_quiz', compact('categories', 'announcements'));
     }
     public function government_jobs(Request $request)
     {
@@ -106,6 +106,6 @@ class HomeController extends Controller
         $important_dates = ImportantDate::where('active', 1)->get();
         $announcements = Announcement::where('active', 1)->get();
         $states= States::all();
-        return view('Frontend.layouts.government_jobs', compact('blogs', 'important_dates', 'announcements','states'));
+        return view('frontend.layouts.government_jobs', compact('blogs', 'important_dates', 'announcements','states'));
     }
 }
